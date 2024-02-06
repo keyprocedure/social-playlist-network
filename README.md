@@ -19,7 +19,7 @@
 | Student Name | Student Email | GitHub Username | Student's role |
 | :------------------: | :-----------: | :-------------: | :------------: |
 |   Anthony Benjamin   | jdoe@sfsu.edu |      jdoe       |  Team Leader   |
-|     Anna Felipe      | jdoe@sfsu.edu |     VZZVWE0     |   Front-End    |
+|     Anna Felipe      | afelipe@sfsu.edu |     VZZVWE0     |   Front-End    |
 |  Guillermo Alcantara | jdoe@sfsu.edu |      jdoe       |    Back-End    |
 |    Warisha Vahidy    | jdoe@sfsu.edu |      jdoe       |   Git Master   |
 |      Zuby Afzal      | jdoe@sfsu.edu |      jdoe       |  Scrum Master  |
