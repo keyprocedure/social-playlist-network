@@ -1,4 +1,4 @@
-# CSC648-03-sp24-Team03 Repository
+# CSC648-03-sp24-TeamCS Repository
 
 **Application URL: <https://example.com>**
 
