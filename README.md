@@ -20,9 +20,9 @@
 | :------------------: | :-----------: | :-------------: | :------------: |
 |   Anthony Benjamin   | jdoe@sfsu.edu |      jdoe       |  Team Leader   |
 |     Anna Felipe      | afelipe@sfsu.edu |     VZZVWE0     |   Front-End    |
-|  Guillermo Alcantara | jdoe@sfsu.edu |      jdoe       |    Back-End    |
+|  Guillermo Alcantara | jdoe@sfsu.edu |      jdoe       |    Scrum Master    |
 |    Warisha Vahidy    | wvahidy@sfsu.edu |      wvahidy       |   Git Master   |
-|      Zuby Afzal      | jdoe@sfsu.edu |      jdoe       |  Scrum Master  |
+|      Zuby Afzal      | zafzal@sfsu.edu |      KeyProcedure       |  Back-End  |
 |   Yash Bhadiyadra   | ybhadiyadra@sfsu.edu |      yashbhadiyadra       |    Support     |
 
 **NO code should be stored in the root of your repository. You may rename the
