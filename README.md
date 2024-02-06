@@ -21,7 +21,7 @@
 |   Anthony Benjamin   | jdoe@sfsu.edu |      jdoe       |  Team Leader   |
 |     Anna Felipe      | afelipe@sfsu.edu |     VZZVWE0     |   Front-End    |
 |  Guillermo Alcantara | jdoe@sfsu.edu |      jdoe       |    Back-End    |
-|    Warisha Vahidy    | wvahidy@sfsu.edu |      warishav       |   Git Master   |
+|    Warisha Vahidy    | wvahidy@sfsu.edu |      wvahidy       |   Git Master   |
 |      Zuby Afzal      | jdoe@sfsu.edu |      jdoe       |  Scrum Master  |
 |   Yash Jitendrabhai Bhadiyadra   | jdoe@sfsu.edu |      jdoe       |    Support     |
 
