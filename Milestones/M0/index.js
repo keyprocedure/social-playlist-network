@@ -10,10 +10,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // Home Page Route
 
 app.get("/", (req, res) => {
-    res.sendFile("public/home.html", { root: __dirname });
+	res.sendFile("public/home.html", { root: __dirname });
 });
 
-
 app.listen(port, () => {
-    signale.success(`Server is running on localhost:${port}`);
-})
+	signale.success(`Server is running on http://localhost:${port}`);
+});
