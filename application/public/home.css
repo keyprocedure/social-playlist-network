@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  flex-wrap: wrap;
+}
+.container button {
+  margin: 10px;
+}
