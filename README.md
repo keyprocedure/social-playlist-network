@@ -1,6 +1,6 @@
 # CSC648-01-sp24-Team03 Repository
 
-**Application URL: <https://example.com>**
+**Application URL: <http://54.183.235.83/>**
 
 ## Before completing Milestone 0
 
