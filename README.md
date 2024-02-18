@@ -20,7 +20,7 @@
 | :------------------: | :-----------: | :-------------: | :------------: |
 |   Anthony Benjamin   | abenjamin1@mail.sfsu.edu |      stackanthony       |  Team Leader   |
 |     Anna Felipe      | afelipe@sfsu.edu |     VZZVWE0     |   Front-End    |
-|  Guillermo Alcantara | jdoe@sfsu.edu |      jdoe       |    Scrum Master    |
+|  Guillermo Alcantara | galcantaraventura@sfsu.edu |      galcantara99       |    Scrum Master    |
 |    Warisha Vahidy    | wvahidy@sfsu.edu |      wvahidy       |   Git Master   |
 |      Zuby Afzal      | zafzal@sfsu.edu |      KeyProcedure       |  Back-End  |
 |   Yash Bhadiyadra   | ybhadiyadra@sfsu.edu |      yashbhadiyadra       |    Support     |
