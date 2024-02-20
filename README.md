@@ -1,14 +1,30 @@
-# CSC648-01-sp24-Team03 Repository
+# Team 03 Repository - Social Playlist Network
 
-**Application URL: http://13.52.11.86/
+Welcome to the repository for Team 03's project, a social playlist network.
 
-## Team Information
+## Key Features 🌟
 
-| Student Name | Student Email | GitHub Username | Student's role |
-| :------------------: | :-----------: | :-------------: | :------------: |
-|   Anthony Benjamin   | abenjamin1@mail.sfsu.edu |      stackanthony       |  Team Leader   |
-|     Anna Felipe      | afelipe@sfsu.edu |     VZZVWE0     |   Front-End    |
-|  Guillermo Alcantara | galcantaraventura@sfsu.edu |      galcantara99       |    Scrum Master    |
-|    Warisha Vahidy    | wvahidy@sfsu.edu |      wvahidy       |   Git Master   |
-|      Zuby Afzal      | zafzal@sfsu.edu |      KeyProcedure       |  Back-End  |
-|   Yash Bhadiyadra   | ybhadiyadra@sfsu.edu |      yashbhadiyadra       |    Support     |
+- **Import Playlists**: Import your playlists from Spotify, Apple Music, Soundcloud, etc.
+- **Social Interaction**: View and share others' playlists.
+- **Music Discovery**: Get song recommendations based on your music taste.
+- **Playlist Sharing**: Allows others to import your playlists into their music services.
+
+**Live Application:** http://13.52.11.86/
+
+## Quick Links
+
+- [Software Stack](https://github.com/CSC-648-SFSU/csc648-01-sp24-team03/tree/267131044285bf889d5789f5936127013695d5eb/Milestones/M0)
+
+## Team Information 🧑‍🤝‍🧑
+
+Meet the team bringing this project to life:
+
+| Student Name       | Student Email                | GitHub Username | Role         |
+|--------------------|------------------------------|-----------------|--------------|
+| Anthony Benjamin   | abenjamin1@mail.sfsu.edu     | stackanthony    | Team Leader  |
+| Anna Felipe        | afelipe@sfsu.edu             | VZZVWE0         | Front-End    |
+| Guillermo Alcantara| galcantaraventura@sfsu.edu   | galcantara99    | Scrum Master |
+| Warisha Vahidy     | wvahidy@sfsu.edu             | wvahidy         | Git Master   |
+| Zuby Afzal         | zafzal@sfsu.edu              | KeyProcedure    | Back-End     |
+| Yash Bhadiyadra    | ybhadiyadra@sfsu.edu         | yashbhadiyadra  | Support      |
+
