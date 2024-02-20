@@ -1,6 +1,6 @@
 # CSC648-01-sp24-Team03 Repository
 
-**Application URL: http://54.215.61.80/
+**Application URL: http://13.52.11.86/
 
 ## Team Information
 
