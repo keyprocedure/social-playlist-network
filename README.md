@@ -17,8 +17,6 @@ Welcome to the repository for Team 03's project, a social playlist network.
 
 ## Team Information  
 
-Meet the team bringing this project to life:
-
 | Student Name       | Student Email                | GitHub Username | Role         |
 |--------------------|------------------------------|-----------------|--------------|
 | Anthony Benjamin   | abenjamin1@mail.sfsu.edu     | stackanthony    | Team Leader  |
