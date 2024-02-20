@@ -3,8 +3,8 @@
 ## Software Stack Overview
 Below is a snapshot of the key technologies our application uses:  
 
-- ### Server Host: AWS  
-- ### Operating System: Linux  
+- ### Server Host: AWS EC2
+- ### Operating System: Canonical, Ubuntu, 22.04 LTS  
 - ### Database: MongoDB  
 - ### Web Server: Node.js  
 - ### Front-end Framework: React  
