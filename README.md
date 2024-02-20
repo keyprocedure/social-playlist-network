@@ -13,9 +13,9 @@ Welcome to the repository for Team 03's project, a social playlist network.
 
 ## Quick Links
 
-- [Software Stack](https://github.com/CSC-648-SFSU/csc648-01-sp24-team03/tree/267131044285bf889d5789f5936127013695d5eb/Milestones/M0)
+- [Software Stack Overview](https://github.com/CSC-648-SFSU/csc648-01-sp24-team03/tree/267131044285bf889d5789f5936127013695d5eb/Milestones/M0)
 
-## Team Information 🧑‍🤝‍🧑
+## Team Information  
 
 Meet the team bringing this project to life:
 
