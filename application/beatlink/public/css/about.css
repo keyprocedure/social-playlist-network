@@ -1,0 +1,47 @@
+.title {
+  text-align: center;
+  margin-top: 20px;
+  margin: 100px;
+  padding: 30px;
+  background-color: #ffffff;
+  opacity: 0.9;
+  border-radius: 20px;
+  text-shadow: 1px 1px #000000;
+}
+
+.title * {
+  color: black;
+}
+
+body {
+  background-image: url("../images/TEAM.png");
+}
+.container {
+  min-width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 100px;
+  padding: 30px;
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+}
+
+.container * {
+  color: black;
+}
+
+.container button {
+  margin: 25px;
+  padding: 25px 50px;
+  border-radius: 20px;
+  box-shadow: 4px 4px 10px #000000;
+  background-color: #676be4;
+  border: none;
+  font-size: larger;
+  font-family: "Times New Roman", Times, serif;
+  cursor: pointer;
+  opacity: 1;
+}
