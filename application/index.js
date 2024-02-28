@@ -2,7 +2,7 @@ const express = require("express");
 const signale = require("signale");
 const path = require("path");
 const app = express();
-const api = require("./server/api.js");
+const api = require("./beatlink/server/api.js");
 const port = 3000;
 
 // Setup Middleware
@@ -11,11 +11,12 @@ app.use("/api", api);
 
 // Home Page Route
 app.get("/about", (req, res) => {
-	res.sendFile("public/home.html", { root: __dirname });
+	res.sendFile("public/about.html", { root: __dirname });
 });
 
 app.get("/", (req, res) => {
-	res.send("Home Page");
+	res.sendFile("public/home.html", { root: __dirname });
+
 });
 
 app.listen(port, () => {
