@@ -42,3 +42,14 @@ button {
     border-radius: 50px;
     font-size: 15px;
 }
+
+button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color: rgb(51, 134, 53);
+    transition-duration: 1s;
+}
+
+container {
+    align-items: center;
+
+}

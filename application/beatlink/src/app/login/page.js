@@ -9,7 +9,6 @@ export default function Login() {
     <Navbar/>
     <h1>This is the login</h1>
     <button>Login with Spotify</button>
-
     </> 
 
   )
