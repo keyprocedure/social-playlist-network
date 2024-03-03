@@ -6,19 +6,19 @@ export default function Navbar() {
         <div>
         <ul id="navbar">
             <li>
-                <a href="/Home">HOME</a>
+                <a href="/">HOME</a>
             </li>
             <li>
-                <a href="/About">ABOUT</a>
+                <a href="/about">ABOUT</a>
             </li>
             <li>
-                <a href="/Explore">EXPLORE</a>
+                <a href="/explore">EXPLORE</a>
             </li>
             <li>
-                <a href="/Contact">CONTACT</a>
+                <a href="/contact">CONTACT</a>
             </li>
             <li>
-                <a href="/Login">LOGIN</a>
+                <a href="/login">LOGIN</a>
             </li>
         </ul>
         </div>

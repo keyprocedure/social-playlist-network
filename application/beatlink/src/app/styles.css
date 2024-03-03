@@ -1,6 +1,6 @@
 @font-face {
     font-family: navFont;
-    src: url(Taku.ttf);
+    src: url(components/Taku.ttf);
 }
 
 nav {
@@ -32,4 +32,13 @@ nav {
     font-size: larger;
     color: #fff;
     text-shadow: 2px 2px rgb(137, 137, 137);
+}
+
+button {
+    background-color: rgb(35, 206, 38);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 15px;
 }
