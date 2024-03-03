@@ -7,7 +7,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #000;
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(73, 73, 73));
     padding: 20px 80px;
     border-radius: 10px;
   
@@ -31,4 +31,5 @@ nav {
     font-family: navFont;
     font-size: larger;
     color: #fff;
+    text-shadow: 2px 2px rgb(137, 137, 137);
 }
