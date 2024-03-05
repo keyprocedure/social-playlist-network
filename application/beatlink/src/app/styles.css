@@ -53,3 +53,9 @@ container {
     align-items: center;
 
 }
+
+body {
+
+    background-image: url(components/mainBackground.jpg);
+    
+}
