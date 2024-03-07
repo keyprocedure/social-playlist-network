@@ -1,8 +1,15 @@
-const signale = require("signale");
-const axios = require("axios");
-const qs = require("qs");
+// const signale = require("signale");
+// const axios = require("axios");
+// const qs = require("qs");
 
-const { client_id, client_secret } = require("../config/spotifyConfig.json");
+// const { client_id, client_secret } = require("../config/spotifyConfig.json");
+import signale from "signale";
+import axios from "axios";
+import qs from "qs";
+
+import spotifyConfig from "../config/spotifyConfig.json" assert { type: "json" };
+const { client_id, client_secret } = spotifyConfig;
+// import { client_id, client_secret } from "../config/spotifyConfig.json" with {type: "json"};
 const spotifyAPIURL = "https://accounts.spotify.com/api/token";
 let accessToken = "";
 async function getAccessToken() {
@@ -91,7 +98,6 @@ export async function buildPlaylistObject(playlistURL) {
 		const playlistDescription = spotifyPlaylistResponse.description;
 		const playlistAuthor = spotifyPlaylistResponse.owner.display_name;
 
-
 		playlistObject["name"] = playlistName;
 		playlistObject["description"] = playlistDescription;
 		playlistObject["author"] = playlistAuthor;
@@ -122,6 +128,5 @@ export async function buildPlaylistObject(playlistURL) {
 	} catch (error) {
 		signale.error(error);
 		throw error;
-	};
-
+	}
 }
