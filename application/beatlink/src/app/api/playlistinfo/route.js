@@ -1,18 +1,31 @@
 import signale from "signale";
 import { buildPlaylistObject } from "../../../../helpers/spotifyHelper";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 export async function POST(request) {
+	try {
+		const body = await parseJSON(request);
 
-    const body = await request.json();
+		if (!body) {
+			throw new Error("No Body Provided");
+		}
 
-    if (!body) {
-        return Response.json({ "error": "No request body" }, { status: 400 });
-    }
+		const { playlistURL } = body;
 
-    const { playlistURL } = body;
+		const playlistObject = await buildPlaylistObject(playlistURL);
 
-    const playlistObject = await buildPlaylistObject(playlistURL);
+		return Response.json(playlistObject);
+	} catch (e) {
+		return Response.json({ error: e.message }, { status: 500 });
+	}
+}
 
-    return Response.json(playlistObject);
+async function parseJSON(request) {
+	const contentType = request.headers.get("content-type");
+	if (contentType && contentType.includes("application/json")) {
+		const body = await request.json();
+		return body;
+	} else {
+		return null;
+	}
 }
