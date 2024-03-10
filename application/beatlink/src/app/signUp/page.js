@@ -3,34 +3,42 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
 
-export default function Login() {
+export default function SignUp() {
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [birthday, setBirthday] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can implement your authentication logic
-    // For simplicity, I'm just logging the username and password
+    // Here you can implement your sign-up logic
+    // For simplicity, I'm just logging the username, password, and birthday
+    
     console.log("Username:", username);
     console.log("Password:", password);
+    console.log("Birthday:", birthday);
+    console.log("Email:", email);
   };
 
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Sign-Up</title>
       </Head>
-
-      {/*Navigation bar at top of page*/}
       <Navbar />
-
-      {/*Transparent page background/margins*/}
       <div style={{ margin: "20px", backgroundColor: "rgba(255, 255, 255, .75)", padding: "20px", textAlign: "center" }}>
-        <h2>Login</h2>
-
+        <h2>Need an account? Sign up below!</h2>
         <form onSubmit={handleSubmit}>
-
-          {/*Username Form*/}
+        <div>
+            <label htmlFor="email">Email: </label> {/* New email input field */}
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <br></br>
           <div>
             <label htmlFor="username">Username: </label>
             <input
@@ -40,8 +48,7 @@ export default function Login() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <br></br>
-          {/*Password Form*/}
+          <br />
           <div>
             <label htmlFor="password">Password: </label>
             <input
@@ -51,13 +58,18 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
-          {/*Login and Sign Up buttons with CSS*/}
-          <br></br>
-          <button type="submit">Login</button> &nbsp;
-          <p> Don't have an account yet? </p>
-          <button><a href="/signUp" style={{ textDecoration: "none", color: "inherit" }}>Sign Up</a></button>
-
+          <br />
+          <div>
+            <label htmlFor="birthday">Birthday: </label>
+            <input
+              type="date"
+              id="birthday"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+          </div>
+          <br />
+          <button type="submit">Register</button>
         </form>
       </div>
     </>
