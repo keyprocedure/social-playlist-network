@@ -2,17 +2,34 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
+import { useRouter } from 'next/navigation'
+import { route } from '../api/auth/route'
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter()
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     // Here you can implement your authentication logic
     // For simplicity, I'm just logging the username and password
     console.log("Username:", username);
     console.log("Password:", password);
+
+    try {
+      const response = await route({ username, password })
+
+      if (response.success) {
+        router.push('/userprofile')
+      } else {
+        // Handle errors
+        alert('Invalid login credentials. Please try again.')
+      }
+    } catch (error) {
+      // Handle errors
+      console.log('An unexpected error happened', error)
+    }
   };
 
   return (
