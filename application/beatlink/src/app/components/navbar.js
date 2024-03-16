@@ -1,4 +1,8 @@
+"use client";
+import React from "react";
+
 export default function Navbar() {
+    const token = localStorage.getItem('authToken');
 
     return <nav className="nav">
         <a href="/" className="site-title">Beat Link</a>
@@ -18,7 +22,7 @@ export default function Navbar() {
                 <a href="/contact">CONTACT</a>
             </li>
             <li>
-                <a href="/login">LOGIN</a>
+                {token ? <a href="/logout">LOGOUT</a> : <a href="/login">LOGIN</a>}
             </li>
         </ul>
         </div>
