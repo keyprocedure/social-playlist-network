@@ -14,7 +14,9 @@
     "mongoose": "^8.2.1",
     "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "un": "^0.0.0",
+    "uniqid": "^5.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
