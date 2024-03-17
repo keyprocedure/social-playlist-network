@@ -1,24 +1,49 @@
 import Playlist from "../models/Playlist.js";
 import signale from "signale";
 import { connect, disconnect } from "../database.js";
+import uniqid from "uniqid";
 
 export const createPlaylist = async (playlistObject) => {
     try {
         await connect();
-        const newPlaylist = new Playlist({
-            name: playlistObject.name,
-            description: playlistObject.description,
-            author: playlistObject.author,
-            songs: playlistObject.songs,
-        });
-        await newPlaylist.save();
-        signale.success("Playlist Created");
+
+        const playlistName = playlistObject.name;
+        const playlistAuthor = playlistObject.author;
+
+        if (await hasPlaylist(playlistName, playlistAuthor)) {
+            throw new Error("Playlist already exists");
+        } else {
+            const newPlaylist = new Playlist({
+                id: uniqid(),
+                name: playlistName,
+                description: playlistObject.description,
+                author: playlistAuthor,
+                songs: playlistObject.songs,
+            });
+            await newPlaylist.save();
+            signale.success("Playlist Created");
+
+        }
 
         await disconnect();
+
     } catch (error) {
         throw error;
     }
 };
+
+export const hasPlaylist = async (name, author) => {
+    try {
+        await connect();
+        const playlist = await Playlist.findOne({ name, author });
+        await disconnect();
+
+        return playlist ? true : false;
+    } catch (error) {
+        throw error;
+    }
+
+}
 
 export const getAllPlaylists = async () => {
     try {
@@ -30,7 +55,5 @@ export const getAllPlaylists = async () => {
         throw error;
     }
 }
-
-await getAllPlaylists();
 
 // export const getPlaylist = async 
