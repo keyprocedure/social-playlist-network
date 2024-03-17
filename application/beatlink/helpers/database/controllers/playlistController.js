@@ -56,4 +56,22 @@ export const getAllPlaylists = async () => {
     }
 }
 
+export const deletePlaylist = async (playlistId) => {
+    try {
+        await connect();
+
+        if (!await Playlist.findOne({ id: playlistId })) {
+            throw new Error("Playlist does not exist");
+        }
+
+        await Playlist.deleteOne({ id: playlistId }).exec();
+        signale.success("Playlist Deleted");
+
+        await disconnect();
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 // export const getPlaylist = async 
