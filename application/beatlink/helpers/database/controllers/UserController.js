@@ -1,4 +1,4 @@
-import User from "../models/User"; // Adjust the path as necessary
+import User from "../models/user.js"; // Adjust the path as necessary
 import signale from "signale";
 import { connect, disconnect } from "../database.js";
 
