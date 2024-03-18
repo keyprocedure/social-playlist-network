@@ -9,7 +9,7 @@ Welcome to the repository for Team 03's project, a social playlist network.
 - **Music Discovery**: Get song recommendations based on your music taste.
 - **Playlist Sharing**: Allows others to import your playlists into their music services.
 
-**Live Application:** http://13.52.11.86/
+**Live Application:** http://csc648.me
 
 ## Quick Links
 
