@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import signale from "signale";
-import { createUser } from "../../../../helpers/database/controllers/userController";
+import { createUser } from "../../../../helpers/database/controllers/UserController";
 
 export const dynamic = "force-dynamic";
 
