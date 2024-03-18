@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+const bcrypt = require("bcrypt");
 import signale from "signale";
 import { createUser } from "../../../../helpers/database/controllers/UserController";
 
@@ -23,7 +23,7 @@ export async function POST(request) {
         const hashedPassword = await bcrypt.hash(password, 5);
 
         // Create user object
-        const userObject = { username, email, password, birthday: hashedPassword };
+        const userObject = { username, email, password: hashedPassword, birthday };
 
         // Add user to DB
         await createUser(userObject);
