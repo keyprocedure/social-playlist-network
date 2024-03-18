@@ -2,22 +2,42 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
+import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Here you can implement your sign-up logic
     // For simplicity, I'm just logging the username, password, and birthday
-    
-    console.log("Username:", username);
-    console.log("Password:", password);
-    console.log("Birthday:", birthday);
-    console.log("Email:", email);
+
+    if (!username || !email || !password || !birthday) {
+      setError("All fields are necessary.");
+      return;
+    }
+
+    try {
+      const response = await SignUp(email,username, password, birthday);
+
+      if (response.success) {
+        
+        localStorage.setItem('registrationSuccess', 'User created successfully. Please log in.');
+
+        // Redirect to the login page
+        router.push('/login');
+      } else {
+        // Handle registration errors (e.g., user already exists)
+        alert('Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.log('An unexpected error happened', error);
+    }
   };
 
   return (
@@ -29,7 +49,7 @@ export default function SignUp() {
       <div style={{ margin: "20px", backgroundColor: "rgba(255, 255, 255, .75)", padding: "20px", textAlign: "center" }}>
         <h2>Need an account? Sign up below!</h2>
         <form onSubmit={handleSubmit}>
-        <div>
+          <div>
             <label htmlFor="email">Email: </label> {/* New email input field */}
             <input
               type="email"
