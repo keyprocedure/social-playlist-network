@@ -1,6 +1,7 @@
 import signale from "signale";
 import { buildPlaylistObject } from "../../../../helpers/spotifyHelper";
 import { createPlaylist } from "../../../../helpers/database/controllers/playlistController";
+import parseJSON from "../../../../helpers/parseJSON";
 
 export const dynamic = "force-dynamic";
 export async function POST(request) {
@@ -21,15 +22,5 @@ export async function POST(request) {
         return Response.json(playlistObject);
     } catch (e) {
         return Response.json({ error: e.message }, { status: 500 });
-    }
-}
-
-async function parseJSON(request) {
-    const contentType = request.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-        const body = await request.json();
-        return body;
-    } else {
-        return null;
     }
 }

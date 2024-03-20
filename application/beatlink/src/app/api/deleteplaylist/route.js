@@ -1,4 +1,5 @@
 import { deletePlaylist } from "../../../../helpers/database/controllers/playlistController";
+import parseJSON from "../../../../helpers/parseJSON";
 
 export const dynamic = "force-dynamic";
 export async function DELETE(request) {
@@ -16,15 +17,5 @@ export async function DELETE(request) {
         return Response.json({ success: true });
     } catch (e) {
         return Response.json({ error: e.message }, { status: 500 });
-    }
-}
-
-async function parseJSON(request) {
-    const contentType = request.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-        const body = await request.json();
-        return body;
-    } else {
-        return null;
     }
 }
