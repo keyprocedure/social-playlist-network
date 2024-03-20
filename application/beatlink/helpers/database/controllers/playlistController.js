@@ -1,4 +1,4 @@
-import Playlist from "../models/Playlist.js";
+import { Playlist } from "../models/Playlist.js";
 import signale from "signale";
 import { connect, disconnect } from "../database.js";
 import uniqid from "uniqid";
@@ -25,18 +25,19 @@ export const createPlaylist = async (playlistObject) => {
 
         }
 
-        await disconnect();
 
     } catch (error) {
         throw error;
+    } finally {
+        await disconnect();
     }
 };
 
 export const hasPlaylist = async (name, author) => {
     try {
-        await connect();
+        // await connect();
         const playlist = await Playlist.findOne({ name, author });
-        await disconnect();
+        // await disconnect();
 
         return playlist ? true : false;
     } catch (error) {
@@ -49,10 +50,11 @@ export const getAllPlaylists = async () => {
     try {
         await connect();
         const playlists = await Playlist.find({});
-        await disconnect();
         return playlists;
     } catch (error) {
         throw error;
+    } finally {
+        await disconnect();
     }
 }
 
@@ -67,10 +69,10 @@ export const deletePlaylist = async (playlistId) => {
         await Playlist.deleteOne({ id: playlistId }).exec();
         signale.success("Playlist Deleted");
 
-        await disconnect();
-
     } catch (error) {
         throw error;
+    } finally {
+        await disconnect();
     }
 }
 
