@@ -72,7 +72,7 @@ async function getPlaylistInformation(playlistURL) {
 			name: response.data.name,
 			description: response.data.description,
 			author: response.data.owner.display_name,
-		}; // API Response data to pass to handler so we can build the object to be returned to API
+		};
 	} catch (error) {
 		signale.error(error);
 		throw error;
@@ -103,40 +103,6 @@ async function getPlaylistItems(playlistURL) {
 		} while (response.data.next);
 
 		return playlistItems;
-		// signale.info(response.data.tracks);
-		// while (response.data.tracks.next) {
-		// 	response = await axios.get(
-		// 		query,
-		// 		{
-		// 			headers: {
-		// 				Authorization: "Bearer " + accessToken,
-		// 			},
-		// 		}
-		// 	);
-
-		// 	if (response.data.tracks.next) {
-		// 		query = response.data.tracks.next;
-		// 	}
-		// 	playlistItems.push(response.data.tracks);
-		// }
-
-		// return playlistItems;
-		// while (response.tracks.next) {
-		// 	response = await axios.get(
-		// 		query,
-		// 		{
-		// 			headers: {
-		// 				Authorization: "Bearer " + accessToken,
-		// 			},
-		// 		}
-		// 	);
-
-		// 	query = response.tracks.next;
-		// 	playlistItems.push(response.data.tracks);
-		// }
-
-
-		// return playlistItems; // API Response data to pass to handler so we can build the object to be returned to API
 	} catch (error) {
 		signale.error(error);
 		throw error;
@@ -191,19 +157,6 @@ export async function buildPlaylistObject(playlistURL) {
 
 				songs.push(song);
 			}
-			// const song = {};
-			// const trackName = playlistItem.name;
-			// const artistName = playlistItem.artists[0].name;
-			// const albumName = playlistItem.album.name;
-			// const duration = playlistItem.duration_ms;
-			// // const genres = await getAuthorGenres(playlistItem.track.artists[0].id);
-			// song["title"] = trackName;
-			// song["artist"] = artistName;
-			// song["album"] = albumName;
-			// song["duration"] = duration;
-			// // song["genre"] = genres;
-
-			// songs.push(song);
 		}
 
 		playlistObject["songs"] = songs;
@@ -212,43 +165,4 @@ export async function buildPlaylistObject(playlistURL) {
 	} catch (error) {
 		throw error;
 	}
-	// try {
-	// 	const spotifyPlaylistResponse = await importSpotifyPlaylist(playlistURL);
-	// 	const playlistObject = {};
-
-	// 	const playlistName = spotifyPlaylistResponse.name;
-	// 	const playlistDescription = spotifyPlaylistResponse.description;
-	// 	const playlistAuthor = spotifyPlaylistResponse.owner.display_name;
-
-	// 	playlistObject["name"] = playlistName;
-	// 	playlistObject["description"] = playlistDescription;
-	// 	playlistObject["author"] = playlistAuthor;
-
-	// 	const playlistItems = spotifyPlaylistResponse.tracks.items;
-
-	// 	const songs = [];
-
-	// 	for (const playlistItem of playlistItems) {
-	// 		const song = {};
-	// 		const trackName = playlistItem.track.name;
-	// 		const artistName = playlistItem.track.artists[0].name;
-	// 		const albumName = playlistItem.track.album.name;
-	// 		const duration = playlistItem.track.duration_ms;
-	// 		// const genres = await getAuthorGenres(playlistItem.track.artists[0].id);
-	// 		song["title"] = trackName;
-	// 		song["artist"] = artistName;
-	// 		song["album"] = albumName;
-	// 		song["duration"] = duration;
-	// 		// song["genre"] = genres;
-
-	// 		songs.push(song);
-	// 	}
-
-	// 	playlistObject["songs"] = songs;
-
-	// 	return playlistObject;
-	// } catch (error) {
-	// 	signale.error(error);
-	// 	throw error;
-	// }
 }
