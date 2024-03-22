@@ -68,3 +68,20 @@ export const deletePost = async (postId) => {
         await disconnect();
     }
 }
+
+export const addLike = async (postId) => {
+    try {
+        await connect();
+
+        if (!await postExists(postId)) {
+            throw new Error("Post does not exist");
+        }
+
+        await Post.updateOne({ id: postId }, { $inc: { likes: 1 } });
+        signale.success("Like Added");
+    } catch (error) {
+        throw error;
+    } finally {
+        await disconnect();
+    }
+}
