@@ -102,3 +102,20 @@ export const removeLike = async (postId) => {
         await disconnect();
     }
 }
+
+export const addComment = async (postId, { userId, comment }) => {
+    try {
+        await connect();
+
+        if (!await postExists(postId)) {
+            throw new Error("Post does not exist");
+        }
+
+        await Post.updateOne({ id: postId }, { $push: { comments: { userId, comment } } });
+        signale.success("Comment Added");
+    } catch (error) {
+        throw error;
+    } finally {
+        await disconnect();
+    }
+}
