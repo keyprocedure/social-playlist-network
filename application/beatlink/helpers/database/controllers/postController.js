@@ -31,9 +31,9 @@ export const createPost = async (postObject) => {
     }
 }
 
-const postExists = async (postTitle, playlistId) => {
+const postExists = async (postId) => {
     try {
-        const post = await Post.findOne({ postTitle, playlistId });
+        const post = await Post.findOne({ id: postId });
         return post ? true : false;
     } catch (error) {
         throw error;
