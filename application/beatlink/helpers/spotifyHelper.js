@@ -1,15 +1,9 @@
-// const signale = require("signale");
-// const axios = require("axios");
-// const qs = require("qs");
-
-// const { client_id, client_secret } = require("../config/spotifyConfig.json");
 import signale from "signale";
 import axios from "axios";
 import qs from "qs";
 
 import spotifyConfig from "../config/spotifyConfig.json" assert { type: "json" };
 const { client_id, client_secret } = spotifyConfig;
-// import { client_id, client_secret } from "../config/spotifyConfig.json" with {type: "json"};
 const spotifyAPIURL = "https://accounts.spotify.com/api/token";
 let accessToken = "";
 async function getAccessToken() {
@@ -44,6 +38,7 @@ async function getAccessToken() {
 
 async function getPlaylistID(playlistURL) {
 	try {
+		signale.info("Getting Playlist ID...");
 		const playlistID = playlistURL.split("/playlist/")[1].split("?")[0];
 		return playlistID;
 	} catch (error) {
@@ -108,8 +103,6 @@ async function getPlaylistItems(playlistURL) {
 		throw error;
 	}
 }
-
-await buildPlaylistObject("https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn?si=e810e5b153204bfc");
 
 async function getAuthorGenres(authorID) {
 	try {
