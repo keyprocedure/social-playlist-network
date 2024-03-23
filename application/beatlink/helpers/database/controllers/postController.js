@@ -26,8 +26,6 @@ export const createPost = async (postObject) => {
         }
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }
 
@@ -47,8 +45,6 @@ export const getAllPosts = async () => {
         return posts;
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }
 
@@ -64,8 +60,6 @@ export const deletePost = async (postId) => {
         signale.success("Post Deleted");
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }
 
@@ -81,8 +75,6 @@ export const addLike = async (postId) => {
         signale.success("Like Added");
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }
 
@@ -98,8 +90,6 @@ export const removeLike = async (postId) => {
         signale.success("Like Removed");
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }
 
@@ -115,7 +105,5 @@ export const addComment = async (postId, { userId, comment }) => {
         signale.success("Comment Added");
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }

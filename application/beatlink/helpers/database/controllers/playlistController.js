@@ -28,16 +28,12 @@ export const createPlaylist = async (playlistObject) => {
 
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 };
 
 export const hasPlaylist = async (name, author) => {
     try {
-        // await connect();
         const playlist = await Playlist.findOne({ name, author });
-        // await disconnect();
 
         return playlist ? true : false;
     } catch (error) {
@@ -53,8 +49,6 @@ export const getAllPlaylists = async () => {
         return playlists;
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }
 
@@ -71,9 +65,15 @@ export const deletePlaylist = async (playlistId) => {
 
     } catch (error) {
         throw error;
-    } finally {
-        await disconnect();
     }
 }
 
-// export const getPlaylist = async 
+export const getPlaylist = async (playlistId) => {
+    try {
+        await connect();
+        const playlist = await Playlist.findOne({ id: playlistId });
+        return playlist;
+    } catch (error) {
+        throw error;
+    }
+}
