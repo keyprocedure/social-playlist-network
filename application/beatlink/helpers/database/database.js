@@ -23,6 +23,7 @@ mongoose.connection.on('reconnected', () => {
 
 export async function connect() {
     if (isConnected) {
+        signale.info("Already established DB connection.");
         return;
     }
 
