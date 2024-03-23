@@ -16,6 +16,7 @@
     "openai": "^4.29.2",
     "react": "^18",
     "react-dom": "^18",
+    "signale": "^1.4.0",
     "un": "^0.0.0",
     "uniqid": "^5.4.0"
   },
@@ -25,5 +26,9 @@
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
+  },
+  "signale": {
+    "displayTimestamp": true,
+    "displayFilename": true
   }
 }
