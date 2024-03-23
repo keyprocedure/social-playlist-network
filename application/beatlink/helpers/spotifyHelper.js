@@ -136,19 +136,26 @@ export async function buildPlaylistObject(playlistURL) {
 		for (const playlistItem of playlistItems) {
 
 			for (const item of playlistItem) {
-				const song = {};
-				const trackName = item.track.name;
-				const artistName = item.track.artists[0].name;
-				const albumName = item.track.album.name;
-				const duration = item.track.duration_ms;
-				// const genres = await getAuthorGenres(playlistItem.track.artists[0].id);
-				song["title"] = trackName;
-				song["artist"] = artistName;
-				song["album"] = albumName;
-				song["duration"] = duration;
-				// song["genre"] = genres;
+				try {
+					const song = {};
 
-				songs.push(song);
+					const trackName = item.track.name;
+					const artistName = item.track.artists[0].name;
+					const albumName = item.track.album.name;
+					const duration = item.track.duration_ms;
+					// const genres = await getAuthorGenres(playlistItem.track.artists[0].id);
+
+					song["title"] = trackName;
+					song["artist"] = artistName;
+					song["album"] = albumName;
+					song["duration"] = duration;
+					// song["genre"] = genres;
+					songs.push(song);
+				} catch (error) {
+					signale.warn("Couldn't read playlist item... Skipping...");
+					continue;
+				}
+
 			}
 		}
 
@@ -156,6 +163,7 @@ export async function buildPlaylistObject(playlistURL) {
 
 		return playlistObject;
 	} catch (error) {
+		signale.error(error);
 		throw error;
 	}
 }
