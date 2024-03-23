@@ -67,6 +67,7 @@ async function getPlaylistInformation(playlistURL) {
 			name: response.data.name,
 			description: response.data.description,
 			author: response.data.owner.display_name,
+			image: response.data.images[0].url,
 		};
 	} catch (error) {
 		signale.error(error);
@@ -130,6 +131,7 @@ export async function buildPlaylistObject(playlistURL) {
 		playlistObject["name"] = playlistInformation.name;
 		playlistObject["description"] = playlistInformation.description;
 		playlistObject["author"] = playlistInformation.author;
+		playlistObject["image"] = playlistInformation.image;
 
 		const songs = [];
 

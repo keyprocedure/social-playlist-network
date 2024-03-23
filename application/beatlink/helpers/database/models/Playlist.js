@@ -16,6 +16,9 @@ const playlistSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	image: {
+		type: String,
+	},
 	songs: {
 		type: Array,
 		required: true,

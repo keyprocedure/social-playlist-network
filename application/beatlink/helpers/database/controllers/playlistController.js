@@ -9,6 +9,9 @@ export const createPlaylist = async (playlistObject) => {
 
         const playlistName = playlistObject.name;
         const playlistAuthor = playlistObject.author;
+        const playlistDescription = playlistObject.description;
+        const playlistImage = playlistObject.image;
+        const playlistSongs = playlistObject.songs;
 
         if (await hasPlaylist(playlistName, playlistAuthor)) {
             throw new Error("Playlist already exists");
@@ -16,9 +19,10 @@ export const createPlaylist = async (playlistObject) => {
             const newPlaylist = new Playlist({
                 id: uniqid(),
                 name: playlistName,
-                description: playlistObject.description,
+                description: playlistDescription,
                 author: playlistAuthor,
-                songs: playlistObject.songs,
+                image: playlistImage,
+                songs: playlistSongs,
             });
             await newPlaylist.save();
             signale.success("Playlist Created");
