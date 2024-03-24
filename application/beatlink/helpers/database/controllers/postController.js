@@ -93,7 +93,7 @@ export const removeLike = async (postId) => {
     }
 }
 
-export const addComment = async (postId, { userId, comment }) => {
+export const addComment = async ({ postId, userId, comment }) => {
     try {
         await connect();
 

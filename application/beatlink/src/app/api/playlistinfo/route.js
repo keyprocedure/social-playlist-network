@@ -8,10 +8,6 @@ export async function POST(request) {
     try {
         const body = await parseJSON(request);
 
-        if (!body) {
-            throw new Error("No Body Provided");
-        }
-
         const { playlistURL } = body;
 
         const playlistObject = await buildPlaylistObject(playlistURL);

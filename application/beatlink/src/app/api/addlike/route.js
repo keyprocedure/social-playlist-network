@@ -6,10 +6,6 @@ export async function POST(request) {
     try {
         const body = await parseJSON(request);
 
-        if (!body) {
-            throw new Error("No Body Provided");
-        }
-
         const { postId } = body;
 
         // Add like to post

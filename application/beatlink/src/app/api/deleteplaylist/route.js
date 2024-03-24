@@ -5,11 +5,7 @@ export const dynamic = "force-dynamic";
 export async function DELETE(request) {
     try {
         const body = await parseJSON(request);
-
-        if (!body) {
-            throw new Error("No Body Provided");
-        }
-
+        
         const { playlistId } = body;
 
         await deletePlaylist(playlistId);
