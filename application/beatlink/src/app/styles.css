@@ -34,7 +34,7 @@ nav {
     text-shadow: 2px 2px rgb(137, 137, 137);
 }
 
-button {
+/* button {
     background-image: linear-gradient(to bottom right, rgb(90, 40, 150), rgb(180, 55, 170));
     color: rgb(255, 255, 255);
     border: none;
@@ -48,7 +48,7 @@ button:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.3);
     padding: 20px 40px;
     transition-duration: .3s;
-}
+} */
 
 container {
     align-items: center;
