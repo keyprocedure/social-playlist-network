@@ -1,13 +1,10 @@
 import { getAllComments } from "../../../../../helpers/database/controllers/postController";
-import parseJSON from "../../../../../helpers/parseJSON";
 
 export const dynamic = "force-dynamic";
 export async function GET(request, context) {
     try {
-        // const body = await parseJSON(request);
-
-        // const { postId } = body;
         const postId = context.params.postId;
+        
         // Get all comments for post
         const comments = await getAllComments(postId);
 
