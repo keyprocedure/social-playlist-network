@@ -107,3 +107,18 @@ export const addComment = async ({ postId, userId, comment }) => {
         throw error;
     }
 }
+
+export const getAllComments = async (postId) => {
+    try {
+        await connect();
+
+        if (!await postExists(postId)) {
+            throw new Error("Post does not exist");
+        }
+
+        const post = await Post.findOne({ id: postId });
+        return post.comments || null;
+    } catch (error) {
+        throw error;
+    }
+}
