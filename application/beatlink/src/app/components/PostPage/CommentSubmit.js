@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { IconButton } from "./IconButton";
+import { IconButton } from "../IconButton";
 // import { LuMessageSquarePlus } from "react-icons/lu";
-import { SendButton } from "./SendButton";
-import "./css/CommentSubmit.css";
+import { SendButton } from "../SendButton";
+import "../css/CommentSubmit.css";
 
 export function CommentSubmit({ params }) {
 

@@ -1,0 +1,12 @@
+.like-button {
+  display: inline-block;
+}
+
+.like-button svg {
+  transition: fill 0.5s ease;
+  /* fill: black; */
+}
+
+.like-button:hover svg {
+  fill: red;
+}
