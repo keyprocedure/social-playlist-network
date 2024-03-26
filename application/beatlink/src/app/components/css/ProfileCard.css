@@ -9,20 +9,20 @@
     grid-template-rows: 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
-        "profile-picture posted-by"
-        "profile-picture username";
+        "profile-picture primary-text"
+        "profile-picture secondary-text";
 }
 
 .profile-picture {
     grid-area: profile-picture;
 }
 
-.posted-by {
-    grid-area: posted-by;
+.primary-text {
+    grid-area: primary-text;
 }
 
-.username {
-    grid-area: username;
+.secondary-text {
+    grid-area: secondary-text;
 }
 
 .small-text {
