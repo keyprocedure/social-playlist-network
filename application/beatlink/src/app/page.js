@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import Navbar from "./components/navbar";
-import { LikeFillContext } from "./context/LikeFillContext";
 import PostPage from "./post/[id]/page";
 
 
 export default function Home() {
-  const [likeFill, setLikeFill] = useState("none");
   return (
     <>
       <Navbar />

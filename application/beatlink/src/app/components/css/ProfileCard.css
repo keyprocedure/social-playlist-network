@@ -5,7 +5,7 @@
 .grid-container {
     display: grid;
     grid-auto-flow: row dense;
-    grid-template-columns: 0.01fr  1fr;
+    grid-template-columns: 0.03fr  1fr;
     grid-template-rows: 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
@@ -14,6 +14,7 @@
 }
 
 .profile-picture {
+    display: inline-block;
     grid-area: profile-picture;
 }
 
