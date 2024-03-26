@@ -1,0 +1,30 @@
+.new-line {
+    display: block;
+}
+
+.grid-container {
+    display: grid;
+    grid-auto-flow: row dense;
+    grid-template-columns: 0.01fr  1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "profile-picture posted-by"
+        "profile-picture username";
+}
+
+.profile-picture {
+    grid-area: profile-picture;
+}
+
+.posted-by {
+    grid-area: posted-by;
+}
+
+.username {
+    grid-area: username;
+}
+
+.small-text {
+    font-size: 1em;
+}
