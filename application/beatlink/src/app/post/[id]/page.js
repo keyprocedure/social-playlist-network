@@ -11,16 +11,27 @@ import { ProfilePicture } from "../../components/ProfilePicture";
 import { LikeButton } from "../../components/PostPage/LikeButton";
 import { ProfileCard } from "../../components/PostPage/ProfileCard";
 import { CommentCard } from "../../components/PostPage/CommentCard";
+import { AIRecommendation } from "../../components/PostPage/AIRecommendation";
+//import { getPlaylistFromPost } from "../../../../helpers/database/controllers/postController";
+//import { getPlaylist } from "../../../../helpers/database/controllers/playlistController";
 
 export default function PostPage({ params }) {
+  //const postId = params.id;
+  //const playlistId = await getPlaylistFromPost(postId);
+  //const playlist = await getPlaylist(playlistId);
+
+  //console.log("PlaylistID: ", playlistId);
+  //console.log("Playlist: ", playlist);
   return (
     // <CustomButton variant="outline" text={"Follow"}></CustomButton>
     // <IconButton icon={<PiMagicWand />} onClick={() => console.log("clicked")} contextValues={{ style: { height: "30px", width: "30px" } }} />
     <div>
-      <CommentCard username={"Elon Musk"} comment={"Test"} />
+      <AIRecommendation />
+      {/* <LikeButton width={"50px"} height={"50px"} params={params} /> */}
       {/* <CommentSubmit params={params} /> */}
       {/* <LikeButton height={"50px"} width={"50px"} params={params} />i( */}
       {/* <ProfilePicture /> 
+      <LikeButton width={"50px"} height={"50px"} />
             <ProfilePicture src={"https://imageio.forbes.com/specials-images/imageserve/62d700cd6094d2c180f269b9/0x0.jpg?format=jpg&crop=959,959,x0,y0,safe&height=416&width=416&fit=bounds"}/> */}
     </div>
 
