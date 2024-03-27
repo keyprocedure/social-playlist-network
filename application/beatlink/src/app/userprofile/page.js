@@ -1,9 +1,25 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Navbar from "../components/navbar";
-
+import { useEffect } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if there's an auth token
+    const token = localStorage.getItem('authToken');
+    
+    // If not, redirect to the login page
+    if (!token) {
+      alert('Log in to access this page.')
+      router.push('/login');
+    }
+  }, [router]);
+
+/*export default function Login() {
   return (
     <>
       <Navbar />
@@ -30,5 +46,5 @@ export default function Login() {
         </div>
       </div>
     </>
-  );
+  );*/
 }

@@ -12,6 +12,7 @@ export async function route({username, password}) {
     // }
 
     if (username == 'user' && password == 'user') {
+        localStorage.setItem('authToken', 'simulated_token');
         return { success: true }
     }
     else {
