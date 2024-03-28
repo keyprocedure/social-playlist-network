@@ -1,22 +1,27 @@
 "use client";
-
-import React from "react";
-import { CustomButton } from "../../components/CustomButton";
-import { IconButton } from "../../components/IconButton";
-import { FiHeart } from "react-icons/fi";
-import { FaRegShareSquare } from "react-icons/fa";
-import { PiMagicWand } from "react-icons/pi";
-import { CommentSubmit } from "../../components/PostPage/CommentSubmit";
-import { ProfilePicture } from "../../components/ProfilePicture";
-import { LikeButton } from "../../components/PostPage/LikeButton";
-import { ProfileCard } from "../../components/PostPage/ProfileCard";
-import { CommentCard } from "../../components/PostPage/CommentCard";
-import { AIRecommendation } from "../../components/PostPage/AIRecommendation";
-//import { getPlaylistFromPost } from "../../../../helpers/database/controllers/postController";
-//import { getPlaylist } from "../../../../helpers/database/controllers/playlistController";
+import React, { useState, useEffect } from "react";
+// import { CustomButton } from "../../components/CustomButton";
+// import { IconButton } from "../../components/IconButton";
+// import { CommentSubmit } from "../../components/PostPage/CommentSubmit";
+// import { ProfilePicture } from "../../components/ProfilePicture";
+// import { LikeButton } from "../../components/PostPage/LikeButton";
+// import { ProfileCard } from "../../components/PostPage/ProfileCard";
+// import { CommentCard } from "../../components/PostPage/CommentCard";
+// import { AIRecommendation } from "../../components/PostPage/AIRecommendation";
+// import { Playlist } from "../../components/PostPage/Playlist";
 
 export default function PostPage({ params }) {
-  //const postId = params.id;
+  const postId = params.id;
+
+  const [playlist, setPlaylist] = useState(null);
+
+  useEffect(() => {
+    fetchPlaylistFromPostId(postId).then((playlist) => {
+      setPlaylist(playlist);
+      console.log("Playlist: ", playlist);
+    });
+  }, []);
+
   //const playlistId = await getPlaylistFromPost(postId);
   //const playlist = await getPlaylist(playlistId);
 
@@ -26,7 +31,9 @@ export default function PostPage({ params }) {
     // <CustomButton variant="outline" text={"Follow"}></CustomButton>
     // <IconButton icon={<PiMagicWand />} onClick={() => console.log("clicked")} contextValues={{ style: { height: "30px", width: "30px" } }} />
     <div>
-      <AIRecommendation />
+      <h1>Test</h1>
+      {/* <Playlist postId={postId} /> */}
+      {/* <AIRecommendation playlist={} /> */}
       {/* <LikeButton width={"50px"} height={"50px"} params={params} /> */}
       {/* <CommentSubmit params={params} /> */}
       {/* <LikeButton height={"50px"} width={"50px"} params={params} />i( */}
@@ -37,4 +44,14 @@ export default function PostPage({ params }) {
 
     // <IconButton icon={<SendButton />} />
   );
+}
+
+async function fetchPlaylistFromPostId(postId) {
+  const response = await fetch(`/api/getplaylist/post/${postId}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch playlist");
+  }
+
+  return response.json(); // responseJSON;
 }
