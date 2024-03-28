@@ -7,9 +7,10 @@ import React, { useState, useEffect, Suspense } from "react";
 // import { LikeButton } from "../../components/PostPage/LikeButton";
 // import { ProfileCard } from "../../components/PostPage/ProfileCard";
 // import { CommentCard } from "../../components/PostPage/CommentCard";
-import { AIRecommendation } from "../../components/PostPage/AIRecommendation";
+// import { AIRecommendation } from "../../components/PostPage/AIRecommendation";
 // import { Playlist } from "../../components/PostPage/Playlist";
-import { Spinner } from "react-bootstrap";
+// import { Spinner } from "react-bootstrap";
+import PostPageLayout from "../../components/PostPage/PostPageLayout";
 
 export default function PostPage({ params }) {
   const postId = params.id;
@@ -32,9 +33,9 @@ export default function PostPage({ params }) {
     // <CustomButton variant="outline" text={"Follow"}></CustomButton>
     // <IconButton icon={<PiMagicWand />} onClick={() => console.log("clicked")} contextValues={{ style: { height: "30px", width: "30px" } }} />
     <div>
-      <h1>Test</h1>
+      {/* <h1>Test</h1> */}
       {/* <Playlist postId={postId} /> */}
-      {playlist ? <AIRecommendation playlist={playlist} /> : <Spinner animation="border" role="status" />}
+      {playlist ? <PostPageLayout playlist={playlist} /> : <p>Loading...</p>}
 
       {/* {playlist && <AIRecommendation playlist={playlist} />} */}
       {/* <LikeButton width={"50px"} height={"50px"} params={params} /> */}
