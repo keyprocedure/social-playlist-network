@@ -122,7 +122,7 @@ async function getAuthorGenres(authorID) {
 	}
 }
 
-async function getAuthorList(playlistObject) {
+export async function getAuthorList(playlistObject) {
 	try {
 		const authors = [];
 		for (const song of playlistObject.songs) {
@@ -136,7 +136,7 @@ async function getAuthorList(playlistObject) {
 	}
 }
 
-async function getSongs(playlistObject) {
+export async function getSongs(playlistObject) {
 	try {
 		const songs = [];
 		for (const song of playlistObject.songs) {
