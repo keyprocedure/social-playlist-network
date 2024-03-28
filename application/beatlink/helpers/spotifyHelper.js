@@ -49,7 +49,7 @@ async function getPlaylistID(playlistURL) {
 
 async function getPlaylistInformation(playlistURL) {
 	try {
-		accessToken = await getAccessToken();
+		accessToken = accessToken ? accessToken : await getAccessToken();
 
 		signale.info("Getting Playlist Information...");
 		const playlistID = await getPlaylistID(playlistURL);
@@ -78,7 +78,7 @@ async function getPlaylistInformation(playlistURL) {
 
 async function getPlaylistItems(playlistURL) {
 	try {
-		accessToken = await getAccessToken();
+		accessToken = accessToken ? accessToken : await getAccessToken();
 		signale.info("Getting Playlist Items...");
 
 		const playlistID = await getPlaylistID(playlistURL);
@@ -120,6 +120,33 @@ async function getAuthorGenres(authorID) {
 		signale.error(error);
 		throw error;
 	}
+}
+
+async function getAuthorList(playlistObject) {
+	try {
+		const authors = [];
+		for (const song of playlistObject.songs) {
+			if (!authors.includes(song.artist)) {
+				authors.push(song.artist);
+			}
+		}
+		return authors;
+	} catch (error) {
+		throw error;
+	}
+}
+
+async function getSongs(playlistObject) {
+	try {
+		const songs = [];
+		for (const song of playlistObject.songs) {
+			songs.push(song.title);
+		}
+		return songs;
+	} catch (error) {
+		throw error;
+	}
+
 }
 
 export async function buildPlaylistObject(playlistURL) {
