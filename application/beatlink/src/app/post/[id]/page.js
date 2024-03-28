@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 // import { CustomButton } from "../../components/CustomButton";
 // import { IconButton } from "../../components/IconButton";
 // import { CommentSubmit } from "../../components/PostPage/CommentSubmit";
@@ -7,8 +7,9 @@ import React, { useState, useEffect } from "react";
 // import { LikeButton } from "../../components/PostPage/LikeButton";
 // import { ProfileCard } from "../../components/PostPage/ProfileCard";
 // import { CommentCard } from "../../components/PostPage/CommentCard";
-// import { AIRecommendation } from "../../components/PostPage/AIRecommendation";
+import { AIRecommendation } from "../../components/PostPage/AIRecommendation";
 // import { Playlist } from "../../components/PostPage/Playlist";
+import { Spinner } from "react-bootstrap";
 
 export default function PostPage({ params }) {
   const postId = params.id;
@@ -33,7 +34,9 @@ export default function PostPage({ params }) {
     <div>
       <h1>Test</h1>
       {/* <Playlist postId={postId} /> */}
-      {/* <AIRecommendation playlist={} /> */}
+      {playlist ? <AIRecommendation playlist={playlist} /> : <Spinner animation="border" role="status" />}
+
+      {/* {playlist && <AIRecommendation playlist={playlist} />} */}
       {/* <LikeButton width={"50px"} height={"50px"} params={params} /> */}
       {/* <CommentSubmit params={params} /> */}
       {/* <LikeButton height={"50px"} width={"50px"} params={params} />i( */}
