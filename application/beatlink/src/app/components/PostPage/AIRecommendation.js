@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { IconButton } from "../IconButton";
 import Modal from "react-bootstrap/Modal";
 import { CustomButton } from "../CustomButton";
+import { AIMusicList } from "./AIMusicList";
+import { Spinner } from "react-bootstrap";
 
-export function AIRecommendation() {
+export function AIRecommendation({ playlist }) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
-
   return (
     <div>
       <IconButton icon={<MagicWandIcon />} onClick={handleShow} />
@@ -20,8 +23,7 @@ export function AIRecommendation() {
             Here are some recommendations based on your interests and
             preferences:
           </p>
-
-          {/*ADD Suspense logic here that calls that MusicList component */}
+          <AIMusicList playlist={playlist} />
         </Modal.Body>
         <Modal.Footer>
           <CustomButton text={"Close"} onClick={handleClose} />
