@@ -2,6 +2,7 @@ import makeSongRecommendation from "../../../../../helpers/aiSongRecommendation"
 import parseJSON from "../../../../../helpers/parseJSON";
 import { getSongs, getAuthorList } from "../../../../../helpers/spotifyHelper";
 import { getPlaylist } from "../../../../../helpers/database/controllers/playlistController";
+import uniqid from "uniqid";
 
 export const dynamic = "force-dynamic";
 export async function GET(request, { params }) {
@@ -27,13 +28,14 @@ export async function GET(request, { params }) {
 
             const cleanedSongName = songName.replace(/\\/g, "").replace(/\"/g, "").replace(/\d+\./g, "").trim();
             return {
+                id: uniqid(),
                 artist,
                 songName: cleanedSongName,
             };
         });
 
         return Response.json({
-            recommendations: songRecommendations
+            songRecommendations,
         });
     } catch (e) {
         return Response.json({ error: e.message }, { status: 500 });
