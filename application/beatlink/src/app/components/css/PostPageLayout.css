@@ -1,0 +1,52 @@
+.page-grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 0.8fr 2.2fr 0.4fr 2.2fr 1fr;
+  grid-template-rows: 0.5fr 2.1fr 0.4fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    "back-button posted-by . . . ."
+    ". . post-area vertical-line comment-section ."
+    ". . . . comment-submission ."
+    ". . . . . .";
+}
+
+.back-button {
+  grid-area: back-button;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 44px;
+}
+
+.posted-by {
+  grid-area: posted-by;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-area {
+  grid-area: post-area;
+}
+
+.post-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.follow-btn {
+  margin-right: 23px;
+}
+
+.vertical-line {
+  grid-area: vertical-line;
+}
+
+.comment-section {
+  grid-area: comment-section;
+}
+
+.comment-submission {
+  grid-area: comment-submission;
+}
