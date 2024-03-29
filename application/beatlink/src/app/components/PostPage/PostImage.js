@@ -5,7 +5,7 @@ import { CustomButton } from "../CustomButton";
 import Modal from "react-bootstrap/Modal";
 import { ListGroup } from "react-bootstrap";
 
-export default function ImageBlur({ playlist }) {
+export default function PostImage({ playlist }) {
 
     const [isHovered, setIsHovered] = useState(false);
     const [show, setShow] = useState(false);
