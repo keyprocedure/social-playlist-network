@@ -29,6 +29,16 @@ export const createPost = async (postObject) => {
   }
 };
 
+export const getPost = async (postId) => {
+  try {
+    await connect();
+    const post = await Post.findOne({ id: postId });
+    return post;
+  } catch (error) {
+    throw error;
+  }
+}
+
 const postExists = async (postId) => {
   try {
     const post = await Post.findOne({ id: postId });
