@@ -5,7 +5,7 @@ import { CustomButton } from "../CustomButton";
 import { AIMusicList } from "./AIMusicList";
 import { Spinner } from "react-bootstrap";
 
-export function AIRecommendation({ playlist }) {
+export function AIRecommendation({ playlist, width, height }) {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -13,7 +13,7 @@ export function AIRecommendation({ playlist }) {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <IconButton icon={<MagicWandIcon />} onClick={handleShow} />
+      <IconButton icon={<MagicWandIcon width={width} height={height} />} onClick={handleShow} />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>AI Recommendation</Modal.Title>
@@ -33,11 +33,11 @@ export function AIRecommendation({ playlist }) {
   );
 }
 
-function MagicWandIcon() {
+function MagicWandIcon({ width, height }) {
   return (
     <svg
-      width="50"
-      height="50"
+      width={width}
+      height={height}
       viewBox="0 0 27 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
