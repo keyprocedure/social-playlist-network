@@ -4,13 +4,13 @@ import { IconButton } from "../IconButton";
 import { SendButton } from "../SendButton";
 import "../css/CommentSubmit.css";
 
-export function CommentSubmit({ params }) {
+export function CommentSubmit({ post }) {
 
     const [comment, setComment] = useState("");
     async function handleSubmit(event) {
         event.preventDefault();
 
-        const postId = params.id;
+        const postId = post.postId;
         const userId = "root"; // Hardcoded for now
 
         // Sample API Request
@@ -31,7 +31,7 @@ export function CommentSubmit({ params }) {
         <div className="comment-container">
             <form>
                 <input type="text" placeholder="Add a comment..." onChange={handleChange} />
-                <IconButton icon={<SendButton />} onClick={handleSubmit} contextValues={{ style: { height: "30px", width: "30px" } }} />
+                <IconButton icon={<SendButton width={"30px"} height={"30px"} />} onClick={handleSubmit} contextValues={{ style: { height: "40px", width: "40px" } }} />
             </form>
         </div>
         // <div>

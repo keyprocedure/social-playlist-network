@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { IconButton } from "../IconButton";
 import "../css/LikeButton.css";
 
-export function LikeButton({ width, height, params }) {
+export function LikeButton({ width, height, post }) {
 
     const [fill, setFill] = useState("none");
 
     async function handleClick() {
-        const postId = params.id;
+        const postId = post.id;
 
         if (fill === "none") {
             setFill("red");
