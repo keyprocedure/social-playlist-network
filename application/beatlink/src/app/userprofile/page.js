@@ -14,7 +14,7 @@ export default function Login() {
     
     // If not, redirect to the login page
     if (!token) {
-      alert('Log in to access this page.')
+      //alert('Log in to access this page.')
       router.push('/login');
     }
   }, [router]);

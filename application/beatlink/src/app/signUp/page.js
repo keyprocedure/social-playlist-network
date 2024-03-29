@@ -5,6 +5,33 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
+async function signUpApi(email, username, password, birthday) {
+  try {
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        username,
+        password,
+        birthday
+      }),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Signup failed');
+    }
+
+    const data = await response.json();
+    return { success: true, data };
+  } catch (error) {
+    console.error('An error occurred during the signup process', error);
+    return { success: false, error: error.message };
+  }
+}
+
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -23,7 +50,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await SignUp(email,username, password, birthday);
+      const response = await signUpApi(email,username, password, birthday);
 
       if (response.success) {
         
