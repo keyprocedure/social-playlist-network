@@ -1,11 +1,14 @@
+// app/api/registration/route.js
+
 const bcrypt = require("bcrypt");
 import signale from "signale";
-import { createUser } from "../../../../helpers/database/controllers/UserController";
+import { createUser } from "../../../../helpers/database/controllers/userController";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request) {
     try {
+        console.log('in route try');
         const body = await parseJSON(request);
 
         if (!body) {
@@ -33,7 +36,7 @@ export async function POST(request) {
     } catch (e) {
         signale.error(e);
         return Response.json({ error: e.message }, { status: 500 });
-    }
+    } 
 }
 
 async function parseJSON(request) {

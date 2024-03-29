@@ -1,3 +1,5 @@
+// app/signUp/page.js
+
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
@@ -7,7 +9,8 @@ import { useRouter } from 'next/navigation';
 
 async function signUpApi(email, username, password, birthday) {
   try {
-    const response = await fetch('/api/signup', {
+    console.log('in signUpApi');
+    const response = await fetch('/api/registration', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,6 +24,7 @@ async function signUpApi(email, username, password, birthday) {
     });
     
     if (!response.ok) {
+      console.log('response not ok');
       throw new Error('Signup failed');
     }
 
@@ -44,13 +48,14 @@ export default function SignUp() {
     // Here you can implement your sign-up logic
     // For simplicity, I'm just logging the username, password, and birthday
 
-    if (!username || !email || !password || !birthday) {
-      setError("All fields are necessary.");
-      return;
-    }
+    //if (!username || !email || !password || !birthday) {
+     // setError("All fields are necessary.");
+     // return;
+   // }
 
     try {
-      const response = await signUpApi(email,username, password, birthday);
+      const response = await signUpApi("a@a.com","a", "a", "2021-01-01");
+      //const response = await signUpApi(email,username, password, birthday);
 
       if (response.success) {
         
