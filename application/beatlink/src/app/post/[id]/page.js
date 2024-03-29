@@ -20,7 +20,6 @@ export default function PostPage({ params }) {
   useEffect(() => {
     fetchPlaylistFromPostId(postId).then((playlist) => {
       setPlaylist(playlist);
-      console.log("Playlist: ", playlist);
     });
   }, []);
 
