@@ -1,9 +1,9 @@
+// app/login/page.js
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
 import { useRouter } from 'next/navigation'
-import { route } from '../api/auth/route'
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -12,25 +12,28 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // Here you can implement your authentication logic
-    // For simplicity, I'm just logging the username and password
     console.log("Username:", username);
     console.log("Password:", password);
-
+    
     try {
-      const response = await route({ username, password })
+      const response = await fetch('/api/auth', {
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      
+      const data = await response.json();
 
-      if (response.success) {
-        router.push('/userprofile')
+      if (data.success) {
+        localStorage.setItem('authToken', data.token); 
+        router.push('/userprofile');
       } else {
-        // Handle errors
-        alert('Invalid login credentials. Please try again.')
+        alert('Invalid login credentials. Please try again.');
       }
     } catch (error) {
-      // Handle errors
-      console.log('An unexpected error happened', error)
+      console.log('An unexpected error happened', error);
     }
-  };
+};
 
   return (
     <>

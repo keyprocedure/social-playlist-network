@@ -1,22 +1,29 @@
-export async function route({username, password}) {
-    // const response = await fetch(' ', { // data point from database
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(credentials), // username and password info
-    // })
+// app/api/auth/route.js
+import { findUser } from "../../../../helpers/database/controllers/userController";
 
-    // if (response.ok) {
-    //     return response.json() // { success: true }
-    // } else {
-    //     throw new Error('Failed to sign in') // { success: true }
-    // }
-
-    if (username == 'user' && password == 'user') {
-        localStorage.setItem('authToken', 'simulated_token');
-        return { success: true }
-    }
-    else {
-        return { success: false }
-        console.log('Invalid login credentials. Please try again.')
+export async function POST(request) {
+    try {
+        const { username, password } = await request.json();
+        const user = await findUser(username, password);
+        
+        if (user) {
+           // console.log(response);
+            return new Response(JSON.stringify({ success: true, token: "simulated_token" }), {
+                headers: { 'Content-Type': 'application/json' },
+                status: 200, // HTTP 200 OK
+            });
+        } else {
+            // console.log(response);
+            return new Response(JSON.stringify({ success: false, error: "Invalid login credentials" }), {
+                headers: { 'Content-Type': 'application/json' },
+                status: 401, // HTTP 401 Unauthorized
+            });
+        }
+    } catch (e) {
+        // console.log(response);
+        return new Response(JSON.stringify({ success: false, error: e.message }), {
+            headers: { 'Content-Type': 'application/json' },
+            status: 500, // HTTP 500 Internal Server Error
+        });
     }
 }
