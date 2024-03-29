@@ -4,22 +4,38 @@ import databaseConfig from "../../config/databaseConfig.json" assert { type: "js
 
 const { connection_url } = databaseConfig;
 
+let isConnected = false;
+
+mongoose.connection.on('connected', () => {
+    isConnected = true;
+    signale.success("Connected to the database");
+});
+
+mongoose.connection.on('disconnected', () => {
+    isConnected = false;
+    signale.warn("Disconnected from the database");
+});
+
+mongoose.connection.on('reconnected', () => {
+    isConnected = true;
+    signale.success("Reconnected to the database");
+});
+
 export async function connect() {
-    try {
-        await mongoose.connect(connection_url, {
-            serverSelectionTimeoutMS: 2000,
-        });
-        signale.success("Connected to the database");
-    } catch (error) {
-        throw error;
+    if (isConnected) {
+        signale.info("Already established DB connection.");
+        return;
     }
+
+    await mongoose.connect(connection_url, {
+        serverSelectionTimeoutMS: 2000,
+    });
 }
 
 export async function disconnect() {
-    try {
-        await mongoose.disconnect();
-        signale.success("Disconnected from the database");
-    } catch (error) {
-        throw error;
+    if (!isConnected) {
+        return;
     }
+
+    await mongoose.disconnect();
 }

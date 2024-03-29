@@ -8,7 +8,7 @@ export default function Contact() {
     <>
       <Navbar />
       <div style={{ margin: "20px", backgroundColor: "rgba(255, 255, 255, 0.75)", padding: "20px" }}>
-        <h1>This is the contact</h1>
+        <h1>TContact page is under construction.</h1>
         {/* Add your other content here */}
       </div>
     </>

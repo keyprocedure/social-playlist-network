@@ -1,15 +1,9 @@
-// const signale = require("signale");
-// const axios = require("axios");
-// const qs = require("qs");
-
-// const { client_id, client_secret } = require("../config/spotifyConfig.json");
 import signale from "signale";
 import axios from "axios";
 import qs from "qs";
 
 import spotifyConfig from "../config/spotifyConfig.json" assert { type: "json" };
 const { client_id, client_secret } = spotifyConfig;
-// import { client_id, client_secret } from "../config/spotifyConfig.json" with {type: "json"};
 const spotifyAPIURL = "https://accounts.spotify.com/api/token";
 let accessToken = "";
 async function getAccessToken() {
@@ -44,6 +38,7 @@ async function getAccessToken() {
 
 async function getPlaylistID(playlistURL) {
 	try {
+		signale.info("Getting Playlist ID...");
 		const playlistID = playlistURL.split("/playlist/")[1].split("?")[0];
 		return playlistID;
 	} catch (error) {
@@ -52,9 +47,11 @@ async function getPlaylistID(playlistURL) {
 	}
 }
 
-async function importSpotifyPlaylist(playlistURL) {
+async function getPlaylistInformation(playlistURL) {
 	try {
 		accessToken = await getAccessToken();
+
+		signale.info("Getting Playlist Information...");
 		const playlistID = await getPlaylistID(playlistURL);
 
 		const response = await axios.get(
@@ -65,7 +62,43 @@ async function importSpotifyPlaylist(playlistURL) {
 				},
 			}
 		);
-		return response.data; // API Response data to pass to handler so we can build the object to be returned to API
+		return {
+			id: response.data.id,
+			name: response.data.name,
+			description: response.data.description,
+			author: response.data.owner.display_name,
+			image: response.data.images[0].url,
+		};
+	} catch (error) {
+		signale.error(error);
+		throw error;
+	}
+
+}
+
+async function getPlaylistItems(playlistURL) {
+	try {
+		accessToken = await getAccessToken();
+		signale.info("Getting Playlist Items...");
+
+		const playlistID = await getPlaylistID(playlistURL);
+
+		const playlistItems = [];
+
+		// let offset = 0;
+		let query = `https://api.spotify.com/v1/playlists/` + playlistID + `/tracks?offset=0&limit=100`;
+		let response;
+		do {
+			response = await axios.get(query, {
+				headers: {
+					Authorization: "Bearer " + accessToken,
+				},
+			});
+			playlistItems.push(response.data.items);
+			query = response.data.next;
+		} while (response.data.next);
+
+		return playlistItems;
 	} catch (error) {
 		signale.error(error);
 		throw error;
@@ -91,35 +124,41 @@ async function getAuthorGenres(authorID) {
 
 export async function buildPlaylistObject(playlistURL) {
 	try {
-		const spotifyPlaylistResponse = await importSpotifyPlaylist(playlistURL);
+		const playlistInformation = await getPlaylistInformation(playlistURL);
+		const playlistItems = await getPlaylistItems(playlistURL);
 		const playlistObject = {};
 
-		const playlistName = spotifyPlaylistResponse.name;
-		const playlistDescription = spotifyPlaylistResponse.description;
-		const playlistAuthor = spotifyPlaylistResponse.owner.display_name;
-
-		playlistObject["name"] = playlistName;
-		playlistObject["description"] = playlistDescription;
-		playlistObject["author"] = playlistAuthor;
-
-		const playlistItems = spotifyPlaylistResponse.tracks.items;
+		playlistObject["name"] = playlistInformation.name;
+		playlistObject["description"] = playlistInformation.description;
+		playlistObject["author"] = playlistInformation.author;
+		playlistObject["image"] = playlistInformation.image;
 
 		const songs = [];
 
 		for (const playlistItem of playlistItems) {
-			const song = {};
-			const trackName = playlistItem.track.name;
-			const artistName = playlistItem.track.artists[0].name;
-			const albumName = playlistItem.track.album.name;
-			const duration = playlistItem.track.duration_ms;
-			// const genres = await getAuthorGenres(playlistItem.track.artists[0].id);
-			song["title"] = trackName;
-			song["artist"] = artistName;
-			song["album"] = albumName;
-			song["duration"] = duration;
-			// song["genre"] = genres;
 
-			songs.push(song);
+			for (const item of playlistItem) {
+				try {
+					const song = {};
+
+					const trackName = item.track.name;
+					const artistName = item.track.artists[0].name;
+					const albumName = item.track.album.name;
+					const duration = item.track.duration_ms;
+					// const genres = await getAuthorGenres(playlistItem.track.artists[0].id);
+
+					song["title"] = trackName;
+					song["artist"] = artistName;
+					song["album"] = albumName;
+					song["duration"] = duration;
+					// song["genre"] = genres;
+					songs.push(song);
+				} catch (error) {
+					signale.warn("Couldn't read playlist item... Skipping...");
+					continue;
+				}
+
+			}
 		}
 
 		playlistObject["songs"] = songs;
