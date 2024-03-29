@@ -4,7 +4,7 @@ import { Alert } from "react-bootstrap";
 import "../css/ShareButton.css";
 import { IconButton } from "../IconButton";
 
-export default function ShareButton() {
+export default function ShareButton({ width, height }) {
 
     const [show, setShow] = React.useState(false);
 
@@ -31,7 +31,7 @@ export default function ShareButton() {
 
     return (
         <div>
-            <IconButton icon={<ShareIcon width={"38px"} height={"38px"} />} onClick={handleClick} />
+            <IconButton icon={<ShareIcon width={width} height={height} />} onClick={handleClick} />
             <div className="alert-container">
 
                 {show && <Alert className="alert alert-dark" variant="success" transition={true} dismissible={true} onClick={handleClick}>URL copied to clipboard</Alert>}
