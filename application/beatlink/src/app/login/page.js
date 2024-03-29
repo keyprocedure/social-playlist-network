@@ -1,32 +1,62 @@
 // app/login/page.js
+
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+
+async function loginApi(username, password) {
+  try {
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password
+      }),
+    });
+
+    if (!response.ok) {
+      console.log('response not ok');
+      throw new Error('Login failed');
+    }
+
+    const data = await response.json();
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('An error occurred during the login process', error);
+    return { success: false, error: error.message };
+  }
+}
 
 export default function Login() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter()
+  const [error, setError] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
+    
+    if (!username || !password) {
+      setError("All fields are necessary.");
+      return;
+    }
+
     console.log("Username:", username);
     console.log("Password:", password);
-    
-    try {
-      const response = await fetch('/api/auth', {
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
-      
-      const data = await response.json();
 
-      if (data.success) {
-        localStorage.setItem('authToken', data.token); 
-        router.push('/userprofile');
+    try {
+      const response = await loginApi(username, password);
+      if (response.success) {
+        Cookies.set('session', 'token');
+        console.log('Login successful'); 
+        router.push('/');
       } else {
         alert('Invalid login credentials. Please try again.');
       }

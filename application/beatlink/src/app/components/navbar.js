@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
+import Cookies from 'js-cookie';
 
 export default function Navbar() {
-    const token = localStorage.getItem('authToken');
-
     return <nav className="nav">
         <a href="/" className="site-title">
                 <img src="images/logo.png.png" alt="Site Logo" className="site-logo" style={{ width: "100px", height: "auto" }}/></a>
@@ -23,7 +22,7 @@ export default function Navbar() {
                 <a href="/contact">CONTACT</a>
             </li>
             <li>
-                {token ? <a href="/logout">LOGOUT</a> : <a href="/login">LOGIN</a>}
+             {Cookies.get('session') ? <a href="/logout">LOGOUT</a> : <a href="/login">LOGIN</a>} 
             </li>
         </ul>
         </div>

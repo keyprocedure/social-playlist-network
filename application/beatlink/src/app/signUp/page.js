@@ -29,6 +29,7 @@ async function signUpApi(email, username, password, birthday) {
     }
 
     const data = await response.json();
+    
     return { success: true, data };
   } catch (error) {
     console.error('An error occurred during the signup process', error);
@@ -37,6 +38,7 @@ async function signUpApi(email, username, password, birthday) {
 }
 
 export default function SignUp() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -45,20 +47,16 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can implement your sign-up logic
-    // For simplicity, I'm just logging the username, password, and birthday
 
-    //if (!username || !email || !password || !birthday) {
-     // setError("All fields are necessary.");
-     // return;
-   // }
+    if (!username || !email || !password || !birthday) {
+      setError("All fields are necessary.");
+      return;
+   }
 
     try {
-      const response = await signUpApi("a@a.com","a", "a", "2021-01-01");
-      //const response = await signUpApi(email,username, password, birthday);
+      const response = await signUpApi(email,username, password, birthday);
 
       if (response.success) {
-        
         localStorage.setItem('registrationSuccess', 'User created successfully. Please log in.');
 
         // Redirect to the login page

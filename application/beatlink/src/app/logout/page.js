@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 export default function Logout() {
     const router = useRouter();
 
     useEffect(() => {
-        localStorage.removeItem('authToken');
+        Cookies.remove('session');
+        console.log('Logged out');
         router.push('/');
     }, [router]);
 

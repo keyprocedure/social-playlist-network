@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request) {
     try {
-        console.log('in route try');
         const body = await parseJSON(request);
 
         if (!body) {
@@ -23,7 +22,7 @@ export async function POST(request) {
         }
 
         // Hash password
-        const hashedPassword = await bcrypt.hash(password, 5);
+        const hashedPassword = password;//await bcrypt.hash(password, 10);
 
         // Create user object
         const userObject = { username, email, password: hashedPassword, birthday };

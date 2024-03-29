@@ -1,29 +1,54 @@
-// app/api/auth/route.js
+// app/api/login/route.js
+
+const bcrypt = require("bcrypt");
+import signale from "signale";
 import { findUser } from "../../../../helpers/database/controllers/userController";
+
+export const dynamic = "force-dynamic";
 
 export async function POST(request) {
     try {
-        const { username, password } = await request.json();
-        const user = await findUser(username, password);
+        const body = await parseJSON(request);
         
-        if (user) {
-           // console.log(response);
-            return new Response(JSON.stringify({ success: true, token: "simulated_token" }), {
-                headers: { 'Content-Type': 'application/json' },
-                status: 200, // HTTP 200 OK
-            });
-        } else {
-            // console.log(response);
-            return new Response(JSON.stringify({ success: false, error: "Invalid login credentials" }), {
-                headers: { 'Content-Type': 'application/json' },
-                status: 401, // HTTP 401 Unauthorized
-            });
+        if (!body) {
+            throw new Error("No body provided");
         }
+
+        const { username, password } = body;
+
+        // Validate input
+        if (!username || !password) {
+            throw new Error("Username and password are required");
+        }
+
+        // Find user in DB
+        const user = await findUser(username);
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        // Verify password
+        console.log("password", password);
+        console.log("user.password", user.password);
+        const passwordMatch = (password == user.password);//await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            console.log("Incorrect password");
+            throw new Error("Incorrect password");
+        }
+
+        // Respond with success message
+        return Response.json({ message: "Login successful" });
     } catch (e) {
-        // console.log(response);
-        return new Response(JSON.stringify({ success: false, error: e.message }), {
-            headers: { 'Content-Type': 'application/json' },
-            status: 500, // HTTP 500 Internal Server Error
-        });
+        signale.error(e);
+        return Response.json({ error: e.message }, { status: 500 });
+    }
+}
+
+async function parseJSON(request) {
+    const contentType = request.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+        return request.json();
+    } else {
+        return null;
     }
 }
