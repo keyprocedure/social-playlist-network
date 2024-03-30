@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import Navbar from "./components/navbar";
-
+import PostPage from "./post/[id]/page";
 
 
 export default function Home() {
-
   return (
     <>
       <Navbar />
@@ -15,5 +14,5 @@ export default function Home() {
       </div>
     </>
   );
- 
+
 }
