@@ -8,13 +8,14 @@ export function ProfileCard({
   secondaryText,
   primaryTextColor,
   secondaryTextColor,
+  className,
 }) {
   return (
     <div className="grid-container">
       <div className="profile-picture">
-        <ProfilePicture width={50} height={50} src={imageSrc} />
+        <ProfilePicture className={className} width={50} height={50} src={imageSrc} />
       </div>
-
+    
       <div
         className="primary-text small-text"
         style={{ color: primaryTextColor }}

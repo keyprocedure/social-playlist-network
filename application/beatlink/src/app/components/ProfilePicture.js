@@ -2,10 +2,10 @@ import React from "react";
 import "./css/ProfilePicture.css";
 import Image from "next/image";
 
-export function ProfilePicture({ src, width, height }) {
+export function ProfilePicture({ src, width, height, className }) {
   if (src) {
     return (
-      <Image src={src} alt={"Profile Picture"} width={width} height={height} />
+      <Image className={className} src={src} alt={"Profile Picture"} width={width} height={height} />
     );
   } else {
     return <DefaultProfilePicture width={width} height={height} />;

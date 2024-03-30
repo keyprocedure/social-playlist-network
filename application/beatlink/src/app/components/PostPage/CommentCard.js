@@ -1,6 +1,8 @@
 import React from "react";
 import { ProfilePicture } from "../ProfilePicture";
 import { ProfileCard } from "../PostPage/ProfileCard";
+import '../css/CommentCard.css';
+
 
 export function CommentCard({ username, comment }) {
   return (
@@ -13,6 +15,7 @@ export function CommentCard({ username, comment }) {
         secondaryText={comment}
         primaryTextColor={"grey"}
         secondaryTextColor={"black"}
+        className={"comment-profile-picture"}
       />
       <LineSeparator />
     </div>
@@ -28,7 +31,7 @@ function LineSeparator() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <line y1="0.5" x2="298" y2="0.5" stroke="#7D7D7D" stroke-opacity="0.5" />
+      <line y1="0.5" x2="298" y2="0.5" stroke="#D3D3D3" stroke-opacity="0.5" />
     </svg>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AIRecommendation } from "./AIRecommendation";
 import PostImage from "./PostImage";
 import ShareButton from "./ShareButton";
@@ -10,8 +10,17 @@ import { VerticalLine } from "./VerticalLine";
 import { CustomButton } from "../CustomButton";
 
 import "../css/PostPageLayout.css";
+import { CommentCard } from "./CommentCard";
 
 export default function PostPageLayout({ playlist, post }) {
+
+    const [comments, setComments] = useState(post.comments);
+
+    useEffect(() => {
+        fetchCommentsFromPostId(post.id).then((comments) => {
+            setComments(comments);
+        });
+    }, [comments]);
     return (
         <div className="page-grid-container">
             <div className="back-button">
@@ -46,6 +55,14 @@ export default function PostPageLayout({ playlist, post }) {
             </div>
             <div className="comment-section">
                 {/* add section for comments */}
+                {comments.map((comment) => {
+                    return (
+                        <div>
+                            <CommentCard username={comment.userId} comment={comment.comment} />
+                        </div>
+                    );
+                })
+                }
             </div>
             <div className="comment-submission">
                 <CommentSubmit post={post} />
@@ -53,4 +70,14 @@ export default function PostPageLayout({ playlist, post }) {
             {/* <div class */}
         </div>
     );
+}
+
+async function fetchCommentsFromPostId(postId) {
+    const response = await fetch(`/api/viewcomments/${postId}`);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch comments");
+    }
+
+    return response.json();
 }

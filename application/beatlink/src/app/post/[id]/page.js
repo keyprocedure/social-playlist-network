@@ -17,6 +17,7 @@ export default function PostPage({ params }) {
 
   const [playlist, setPlaylist] = useState(null);
   const [post, setPost] = useState(null);
+  const [comments, setComments] = useState(null);
 
   useEffect(() => {
     fetchPlaylistFromPostId(postId).then((playlist) => {
@@ -25,6 +26,7 @@ export default function PostPage({ params }) {
     fetchPostFromPostId(postId).then((post) => {
       setPost(post);
     });
+
   }, []);
 
   //const playlistId = await getPlaylistFromPost(postId);
@@ -38,7 +40,7 @@ export default function PostPage({ params }) {
     <div>
       {/* <h1>Test</h1> */}
       {/* <Playlist postId={postId} /> */}
-      {playlist && post ? <PostPageLayout playlist={playlist} post={post} /> : <p>Loading...</p>}
+      {playlist && post ? <PostPageLayout playlist={playlist} post={post} comments={comments} /> : <p>Loading...</p>}
 
       {/* {playlist && <AIRecommendation playlist={playlist} />} */}
       {/* <LikeButton width={"50px"} height={"50px"} params={params} /> */}

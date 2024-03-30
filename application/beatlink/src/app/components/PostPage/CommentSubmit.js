@@ -4,13 +4,13 @@ import { IconButton } from "../IconButton";
 import { SendButton } from "../SendButton";
 import "../css/CommentSubmit.css";
 
-export function CommentSubmit({ post }) {
+export function CommentSubmit({ post, onCommentSubmit }) {
 
     const [comment, setComment] = useState("");
     async function handleSubmit(event) {
         event.preventDefault();
 
-        const postId = post.postId;
+        const postId = post.id;
         const userId = "root"; // Hardcoded for now
 
         // Sample API Request

@@ -77,6 +77,8 @@
 .comment-section {
   grid-area: comment-section;
   width: 100%;
+  height: 600px;
+  overflow-y: auto;
 }
 
 .comment-submission {

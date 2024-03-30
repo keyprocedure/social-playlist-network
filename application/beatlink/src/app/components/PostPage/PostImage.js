@@ -13,7 +13,9 @@ export default function PostImage({ playlist }) {
         setShow(false);
         setIsHovered(false);
     }
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+    };
     // return (
     //     <div className="img-container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
     //         <Image className="img" src={playlist.image} width={300} height={300} />
@@ -23,7 +25,7 @@ export default function PostImage({ playlist }) {
     //     </div>
     // );
     return (
-        <div className="image-container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <div className="image-container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} >
             <Image className="playlist-img" src={playlist.image} width={400} height={400} alt="description" />
 
             {isHovered && (

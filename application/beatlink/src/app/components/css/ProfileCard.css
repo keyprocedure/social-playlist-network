@@ -1,31 +1,32 @@
 .new-line {
-    display: block;
+  display: block;
 }
 
 .grid-container {
-    display: grid;
-    grid-auto-flow: row dense;
-    grid-template-columns: 0.03fr  1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "profile-picture primary-text"
-        "profile-picture secondary-text";
+  display: grid;
+  grid-auto-flow: row dense;
+  grid-template-columns: 0.12fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "profile-picture primary-text"
+    "profile-picture secondary-text";
 }
 
 .profile-picture {
-    display: inline-block;
-    grid-area: profile-picture;
+  display: inline-block;
+  grid-area: profile-picture;
+  border-radius: 50%;
 }
 
 .primary-text {
-    grid-area: primary-text;
+  grid-area: primary-text;
 }
 
 .secondary-text {
-    grid-area: secondary-text;
+  grid-area: secondary-text;
 }
 
 .small-text {
-    font-size: 1em;
+  font-size: 1em;
 }
