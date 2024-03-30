@@ -15,6 +15,15 @@ import { CommentCard } from "./CommentCard";
 export default function PostPageLayout({ playlist, post }) {
 
     const [comments, setComments] = useState(post.comments);
+    const [follow, setFollow] = useState("Follow");
+
+    async function handleFollow() {
+        if (follow === "Followed") {
+            return setFollow("Follow");
+        }
+
+        setFollow("Followed");
+    }
 
     useEffect(() => {
         fetchCommentsFromPostId(post.id).then((comments) => {
@@ -32,7 +41,7 @@ export default function PostPageLayout({ playlist, post }) {
             <div className="post-area">
                 <div className="post-title">
                     {post.postTitle}
-                    <CustomButton className={"btn btn-dark follow-btn"} text={"Follow"} onClick={() => window.open(playlist.external_urls.spotify)} />
+                    <CustomButton className={"btn btn-dark follow-btn"} text={follow} onClick={handleFollow} />
                 </div>
                 <div className="post-content">
                     <PostImage playlist={playlist} />
