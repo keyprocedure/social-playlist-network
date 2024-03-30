@@ -5,6 +5,9 @@ import "../css/LikeButton.css";
 export function LikeButton({ width, height, post }) {
 
     const [fill, setFill] = useState("none");
+    const [likes, setLikes] = useState(post.likes);
+
+
 
     async function handleClick() {
         const postId = post.id;
@@ -18,7 +21,9 @@ export function LikeButton({ width, height, post }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ postId }),
-            })
+            });
+
+            setLikes(likes + 1);
         } else {
             setFill("none");
 
@@ -28,14 +33,19 @@ export function LikeButton({ width, height, post }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ postId }),
-            })
+            });
+            setLikes(likes - 1);
         }
 
     }
 
     return (
         <div className="like-button">
-            <IconButton icon={likeSVG({ width, height, fill })} onClick={handleClick} />
+            <div className="flex-container">
+                <IconButton icon={likeSVG({ width, height, fill })} onClick={handleClick} />
+                <p>{likes}</p>
+            </div>
+
         </div>
     );
 }

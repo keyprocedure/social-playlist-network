@@ -30,8 +30,11 @@ export function CommentSubmit({ post }) {
     return (
         <div className="comment-container">
             <form>
-                <input type="text" placeholder="Add a comment..." onChange={handleChange} />
-                <IconButton icon={<SendButton width={"30px"} height={"30px"} />} onClick={handleSubmit} contextValues={{ style: { height: "40px", width: "40px" } }} />
+                <div className="flex-container">
+
+                    <input className="comment-input" type="text" placeholder="Add a comment..." onChange={handleChange} />
+                    <IconButton className={"send-button"} icon={<SendButton width={"30px"} height={"30px"} />} onClick={handleSubmit} />
+                </div>
             </form>
         </div>
         // <div>

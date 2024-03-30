@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import "../css/ImageBlur.css";
+import "../css/PostImage.css";
 import { CustomButton } from "../CustomButton";
 import Modal from "react-bootstrap/Modal";
 import { ListGroup } from "react-bootstrap";
@@ -24,11 +24,11 @@ export default function PostImage({ playlist }) {
     // );
     return (
         <div className="image-container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <Image className="img" src={playlist.image} width={400} height={400} alt="description" />
+            <Image className="playlist-img" src={playlist.image} width={400} height={400} alt="description" />
 
             {isHovered && (
                 <div>
-                    <CustomButton className="overlay-button btn btn-dark" text={"Open Playlist"} onClick={handleShow} />
+                    <CustomButton className="overlay-button btn btn-dark" text={"View Playlist"} onClick={handleShow} />
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>{playlist.name}</Modal.Title>

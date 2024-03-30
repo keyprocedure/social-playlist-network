@@ -10,3 +10,16 @@
 .like-button:hover svg {
   fill: red;
 }
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-container p {
+  align-items: center;
+  justify-content: center;
+  margin-top: 26%;
+}

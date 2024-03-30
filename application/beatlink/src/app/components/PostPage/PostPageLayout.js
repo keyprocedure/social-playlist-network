@@ -14,9 +14,6 @@ import "../css/PostPageLayout.css";
 export default function PostPageLayout({ playlist, post }) {
     return (
         <div className="page-grid-container">
-            {/* <AIRecommendation playlist={playlist} /> */}
-            {/* <PostImage playlist={playlist} /> */}
-            {/* <ShareButton /> */}
             <div className="back-button">
                 <BackButton width={"40px"} height={"40px"} />
             </div>
@@ -32,19 +29,20 @@ export default function PostPageLayout({ playlist, post }) {
                     <PostImage playlist={playlist} />
                 </div>
                 <div className="post-interactions">
-                    <div className="like-button">
-                        <LikeButton post={post} width={"30px"} height={"30px"} />
+                    <div className="ai-button">
+                        <AIRecommendation playlist={playlist} width={"40px"} height={"40px"} />
                     </div>
                     <div className="share-button">
                         <ShareButton width={"30px"} height={"30px"} />
                     </div>
-                    <div className="ai-button">
-                        <AIRecommendation playlist={playlist} width={"40px"} height={"40px"} />
+                    <div className="like-button">
+                        <LikeButton width={"33px"} height={"33px"} post={post} />
                     </div>
                 </div>
+
             </div>
             <div className="vertical-line">
-                <VerticalLine width={"1px"} height={"550px"} />
+                <VerticalLine />
             </div>
             <div className="comment-section">
                 {/* add section for comments */}
