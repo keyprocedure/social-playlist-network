@@ -29,7 +29,7 @@ export default function PostPageLayout({ playlist, post }) {
         fetchCommentsFromPostId(post.id).then((comments) => {
             setComments(comments);
         });
-    }, [comments]);
+    }, [post.id]);
     return (
         <div className="page-grid-container">
             <div className="back-button">
