@@ -43,7 +43,7 @@ export function LikeButton({ width, height, post }) {
         <div className="like-button">
             <div className="flex-container">
                 <IconButton icon={likeSVG({ width, height, fill })} onClick={handleClick} />
-                <p>{likes}</p>
+                <p className="like-counter">{likes}</p>
             </div>
 
         </div>
