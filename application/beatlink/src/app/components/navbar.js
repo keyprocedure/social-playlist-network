@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
+import Image from "next/image"
 
 export default function Navbar() {
     const token = localStorage.getItem('authToken');
 
     return <nav className="nav">
         <a href="/" className="site-title">
-                <img src="images/logo.png.png" alt="Site Logo" className="site-logo" style={{ width: "100px", height: "auto" }}/></a>
+            <Image src="images/logo.png.png" alt="Site Logo" className="site-logo" style={{ width: "100px", height: "auto" }} /></a>
 
         <div>
         <ul id="navbar">

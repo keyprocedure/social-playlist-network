@@ -1,13 +1,12 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Spinner } from 'react-bootstrap';
 
 export function AIMusicList({ playlist }) {
-
+  let ignore = useRef(false); // Flag to prevent duplicate fetches in dev mode
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  let ignore = false; // Flag to prevent duplicate fetches in dev mode
 
   useEffect(() => {
     if (!ignore && loading && recommendations.length === 0) {
