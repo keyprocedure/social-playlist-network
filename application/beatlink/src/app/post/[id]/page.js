@@ -39,7 +39,7 @@ export default function PostPage({ params }) {
     <div>
       {/* <h1>Test</h1> */}
       {/* <Playlist postId={postId} /> */}
-      {playlist && post ? <PostPageLayout playlist={playlist} post={post} comments={comments} /> : <p>Loading...</p>}
+      {playlist && post ? <PostPageLayout playlist={playlist} post={post} /> : <p>Loading...</p>}
 
       {/* {playlist && <AIRecommendation playlist={playlist} />} */}
       {/* <LikeButton width={"50px"} height={"50px"} params={params} /> */}
