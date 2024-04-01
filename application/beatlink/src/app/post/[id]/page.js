@@ -17,7 +17,6 @@ export default function PostPage({ params }) {
 
   const [playlist, setPlaylist] = useState(null);
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState(null);
 
   useEffect(() => {
     fetchPlaylistFromPostId(postId).then((playlist) => {
@@ -27,7 +26,7 @@ export default function PostPage({ params }) {
       setPost(post);
     });
 
-  }, []);
+  }, [postId]);
 
   //const playlistId = await getPlaylistFromPost(postId);
   //const playlist = await getPlaylist(playlistId);

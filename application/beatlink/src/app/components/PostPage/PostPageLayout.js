@@ -64,9 +64,9 @@ export default function PostPageLayout({ playlist, post }) {
             </div>
             <div className="comment-section">
                 {/* add section for comments */}
-                {comments.map((comment) => {
+                {comments.map((comment, id) => {
                     return (
-                        <div>
+                        <div key={id}>
                             <CommentCard username={comment.userId} comment={comment.comment} />
                         </div>
                     );

@@ -55,7 +55,7 @@ export default function Login() {
           {/*Login and Sign Up buttons with CSS*/}
           <br></br>
           <button type="submit">Login</button> &nbsp;
-          <p> Don't have an account yet? </p>
+          <p> Don&apos;t have an account yet? </p>
           <button><a href="/signUp" style={{ textDecoration: "none", color: "inherit" }}>Sign Up</a></button>
 
         </form>
