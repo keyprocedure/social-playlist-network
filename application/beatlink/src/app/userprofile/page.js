@@ -8,16 +8,16 @@ import { useRouter } from 'next/navigation';
 export default function Login() {
   const router = useRouter();
 
-  useEffect(() => {
-    // Check if there's an auth token
-    const token = localStorage.getItem('authToken');
+  // useEffect(() => {
+  //   // Check if there's an auth token
+  //   const token = localStorage.getItem('authToken');
     
-    // If not, redirect to the login page
-    if (!token) {
-      //alert('Log in to access this page.')
-      router.push('/login');
-    }
-  }, [router]);
+  //   // If not, redirect to the login page
+  //   if (!token) {
+  //     //alert('Log in to access this page.')
+  //     router.push('/login');
+  //   }
+  // }, [router]);
 
   return (
     <>

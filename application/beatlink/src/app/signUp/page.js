@@ -54,7 +54,7 @@ export default function SignUp() {
 
       if (response.success) {
         
-        localStorage.setItem('registrationSuccess', 'User created successfully. Please log in.');
+        // localStorage.setItem('registrationSuccess', 'User created successfully. Please log in.');
 
         // Redirect to the login page
         router.push('/login');
