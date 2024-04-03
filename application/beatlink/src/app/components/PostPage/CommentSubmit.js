@@ -23,6 +23,7 @@ export function CommentSubmit({ post, handleCommentSubmission }) {
 			body: JSON.stringify(commentObject),
 		});
 
+		setComment("");
 		handleCommentSubmission(commentObject); // re-renders page
 	}
 
@@ -38,6 +39,7 @@ export function CommentSubmit({ post, handleCommentSubmission }) {
 						className="comment-input"
 						type="text"
 						placeholder="Add a comment..."
+						value={comment}
 						onChange={handleChange}
 					/>
 					<IconButton
