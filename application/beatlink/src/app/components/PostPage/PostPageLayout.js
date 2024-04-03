@@ -25,11 +25,19 @@ export default function PostPageLayout({ playlist, post }) {
         setFollow("Followed");
     }
 
+    function handleCommentSubmission(comment) {
+        setComments([...comments, comment]);
+    }
+
+    // rere
     useEffect(() => {
-        fetchCommentsFromPostId(post.id).then((comments) => {
-            setComments(comments);
-        });
-    }, [post.id]);
+
+    })
+    // useEffect(() => {
+    //     fetchCommentsFromPostId(post.id).then((comments) => {
+    //         setComments(comments);
+    //     });
+    // }, [post.id]);
     return (
         <div className="page-grid-container">
             <div className="back-button">
@@ -74,7 +82,7 @@ export default function PostPageLayout({ playlist, post }) {
                 }
             </div>
             <div className="comment-submission">
-                <CommentSubmit post={post} />
+                <CommentSubmit post={post} handleCommentSubmission={handleCommentSubmission} />
             </div>
             {/* <div class */}
         </div>

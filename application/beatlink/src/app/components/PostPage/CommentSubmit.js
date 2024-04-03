@@ -4,7 +4,7 @@ import { IconButton } from "../IconButton";
 import { SendButton } from "../SendButton";
 import "../css/CommentSubmit.css";
 
-export function CommentSubmit({ post, onCommentSubmit }) {
+export function CommentSubmit({ post, handleCommentSubmission }) {
 
     const [comment, setComment] = useState("");
     async function handleSubmit(event) {
@@ -21,6 +21,8 @@ export function CommentSubmit({ post, onCommentSubmit }) {
             },
             body: JSON.stringify({ postId, userId, comment })
         });
+
+        handleCommentSubmission(comment); // re-renders page
     }
 
     function handleChange(event) {
