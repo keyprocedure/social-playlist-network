@@ -1,37 +1,39 @@
 @font-face {
-    font-family: navFont;
-    src: url(components/Taku.ttf);
+	font-family: navFont;
+	src: url(components/Taku.ttf);
 }
 
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-image: linear-gradient(rgb(0, 0, 0), rgb(73, 73, 73));
-    padding: 5px 80px;
-    border-radius: 10px;
-  
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-image: linear-gradient(rgb(0, 0, 0), rgb(73, 73, 73));
+	padding: 5px 80px;
+	border-radius: 10px;
 }
 
 #navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #navbar li {
-    list-style: none;
-    padding: 0 20px;
-    position: relative;
+	list-style: none;
+	padding: 0 20px;
+	position: relative;
 }
 
 #navbar li a {
-    text-decoration: none;
-    font-family: navFont;
-    font-size: larger;
-    color: #fff;
-    text-shadow: 2px 2px rgb(137, 137, 137);
+	text-decoration: none;
+	font-family: navFont;
+	font-size: larger;
+	color: #fff;
+	text-shadow: 2px 2px rgb(137, 137, 137);
+}
+
+html {
+	overflow: hidden;
 }
 
 /* button {
@@ -51,8 +53,7 @@ button:hover {
 } */
 
 container {
-    align-items: center;
-
+	align-items: center;
 }
 
 /* body {
