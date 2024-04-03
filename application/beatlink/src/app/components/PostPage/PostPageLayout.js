@@ -13,88 +13,95 @@ import "../css/PostPageLayout.css";
 import { CommentCard } from "./CommentCard";
 
 export default function PostPageLayout({ playlist, post }) {
+	const [comments, setComments] = useState(post.comments);
+	const [follow, setFollow] = useState("Follow");
 
-    const [comments, setComments] = useState(post.comments);
-    const [follow, setFollow] = useState("Follow");
+	async function handleFollow() {
+		if (follow === "Followed") {
+			return setFollow("Follow");
+		}
 
-    async function handleFollow() {
-        if (follow === "Followed") {
-            return setFollow("Follow");
-        }
+		setFollow("Followed");
+	}
 
-        setFollow("Followed");
-    }
+	function handleCommentSubmission(comment) {
+		setComments([...comments, comment]);
+	}
 
-    function handleCommentSubmission(comment) {
-        setComments([...comments, comment]);
-    }
-
-    // rere
-    useEffect(() => {
-
-    })
-    // useEffect(() => {
-    //     fetchCommentsFromPostId(post.id).then((comments) => {
-    //         setComments(comments);
-    //     });
-    // }, [post.id]);
-    return (
-        <div className="page-grid-container">
-            <div className="back-button">
-                <BackButton width={"40px"} height={"40px"} />
-            </div>
-            <div className="posted-by">
-                <ProfileCard primaryText={"Posted by:"} primaryTextColor={"grey"} secondaryText={post.user_id} secondaryTextColor={"grey"} />
-            </div>
-            <div className="post-area">
-                <div className="post-title">
-                    {post.postTitle}
-                    <CustomButton className={"btn btn-dark follow-btn"} text={follow} onClick={handleFollow} />
-                </div>
-                <div className="post-content">
-                    <PostImage playlist={playlist} />
-                </div>
-                <div className="post-interactions">
-                    <div className="ai-button">
-                        <AIRecommendation playlist={playlist} width={"40px"} height={"40px"} />
-                    </div>
-                    <div className="share-button">
-                        <ShareButton width={"30px"} height={"30px"} />
-                    </div>
-                    <div className="like-button">
-                        <LikeButton width={"33px"} height={"33px"} post={post} />
-                    </div>
-                </div>
-
-            </div>
-            <div className="vertical-line">
-                <VerticalLine />
-            </div>
-            <div className="comment-section">
-                {/* add section for comments */}
-                {comments.map((comment, id) => {
-                    return (
-                        <div key={id}>
-                            <CommentCard username={comment.userId} comment={comment.comment} />
-                        </div>
-                    );
-                })
-                }
-            </div>
-            <div className="comment-submission">
-                <CommentSubmit post={post} handleCommentSubmission={handleCommentSubmission} />
-            </div>
-            {/* <div class */}
-        </div>
-    );
+	return (
+		<div className="page-grid-container">
+			<div className="back-button">
+				<BackButton width={"40px"} height={"40px"} />
+			</div>
+			<div className="posted-by">
+				<ProfileCard
+					primaryText={"Posted by:"}
+					primaryTextColor={"grey"}
+					secondaryText={post.user_id}
+					secondaryTextColor={"grey"}
+				/>
+			</div>
+			<div className="post-area">
+				<div className="post-title">
+					{post.postTitle}
+					<CustomButton
+						className={"btn btn-dark follow-btn"}
+						text={follow}
+						onClick={handleFollow}
+					/>
+				</div>
+				<div className="post-content">
+					<PostImage playlist={playlist} />
+				</div>
+				<div className="post-interactions">
+					<div className="ai-button">
+						<AIRecommendation
+							playlist={playlist}
+							width={"40px"}
+							height={"40px"}
+						/>
+					</div>
+					<div className="share-button">
+						<ShareButton width={"30px"} height={"30px"} />
+					</div>
+					<div className="like-button">
+						<LikeButton width={"33px"} height={"33px"} post={post} />
+					</div>
+				</div>
+			</div>
+			<div className="vertical-line">
+				<VerticalLine />
+			</div>
+			<div className="comment-section">
+				{/* add section for comments */}
+				{comments.map((comment, id) => {
+					return (
+						<div key={id}>
+							<CommentCard
+								username={comment.userId}
+								comment={comment.comment}
+							/>
+						</div>
+					);
+				})}
+			</div>
+			<div className="comment-submission">
+				<CommentSubmit
+					post={post}
+					handleCommentSubmission={handleCommentSubmission}
+				/>
+			</div>
+			{/* <div class */}
+		</div>
+	);
 }
 
 async function fetchCommentsFromPostId(postId) {
-    const response = await fetch(`/api/viewcomments/${postId}`);
+	const response = await fetch(`/api/viewcomments/${postId}`);
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch comments");
-    }
+	if (!response.ok) {
+		throw new Error("Failed to fetch comments");
+	}
 
-    return response.json();
+	return response.json();
 }
