@@ -31,7 +31,7 @@ function LineSeparator() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <line y1="0.5" x2="298" y2="0.5" stroke="#D3D3D3" stroke-opacity="0.5" />
+      <line y1="0.5" x2="298" y2="0.5" stroke="#D3D3D3" strokeOpacity="0.5" />
     </svg>
   );
 }
