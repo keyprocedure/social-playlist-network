@@ -91,17 +91,6 @@ export default function PostPageLayout({ playlist, post }) {
 					handleCommentSubmission={handleCommentSubmission}
 				/>
 			</div>
-			{/* <div class */}
 		</div>
 	);
-}
-
-async function fetchCommentsFromPostId(postId) {
-	const response = await fetch(`/api/viewcomments/${postId}`);
-
-	if (!response.ok) {
-		throw new Error("Failed to fetch comments");
-	}
-
-	return response.json();
 }
