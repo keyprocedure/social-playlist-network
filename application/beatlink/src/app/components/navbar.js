@@ -9,7 +9,7 @@ export default function Navbar() {
         const timer = setTimeout(() => {
             const session = Cookies.get('session');
             setIsLogged(!!session); // true for logged in, false for not logged in
-        }, 80); // Delays the check
+        }, 90); // Delays the check
 
         return () => clearTimeout(timer);
     }, []);
