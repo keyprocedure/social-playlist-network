@@ -50,6 +50,7 @@ export default function SignUp() {
 
     if (!username || !email || !password || !birthday) {
       setError("All fields are necessary.");
+      alert(error);
       return;
    }
 
