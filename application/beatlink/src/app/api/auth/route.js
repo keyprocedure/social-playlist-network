@@ -30,7 +30,9 @@ export async function POST(request) {
         // Verify password
         console.log("password", password);
         console.log("user.password", user.password);
-        const passwordMatch = (password == user.password);//await bcrypt.compare(password, user.password);
+        
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
         if (!passwordMatch) {
             console.log("Incorrect password");
             throw new Error("Incorrect password");

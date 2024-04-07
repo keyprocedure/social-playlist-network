@@ -42,7 +42,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    
+
     if (!username || !password) {
       setError("All fields are necessary.");
       return;
@@ -55,7 +55,7 @@ export default function Login() {
       const response = await loginApi(username, password);
       if (response.success) {
         Cookies.set('session', 'token');
-        console.log('Login successful'); 
+        console.log('Login successful');
         router.push('/');
       } else {
         alert('Invalid login credentials. Please try again.');
@@ -63,7 +63,7 @@ export default function Login() {
     } catch (error) {
       console.log('An unexpected error happened', error);
     }
-};
+  };
 
   return (
     <>

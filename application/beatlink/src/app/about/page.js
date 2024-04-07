@@ -1,7 +1,15 @@
+"use client";
 import Image from "next/image";
 import "../../../public/css/about.css";
+import checkSessionCookie from '../../../helpers/hooks/checkSessionCookie';
 
 export default function About() {
+    const isLoading = checkSessionCookie();
+
+    if (isLoading) {
+        return <div></div>;
+    }
+
     return (
         <div>
             <div className="title">
