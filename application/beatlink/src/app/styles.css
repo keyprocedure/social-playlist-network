@@ -59,4 +59,10 @@ container {
 
     background-image: url(components/mainBackground.jpg);
     
-} */
+}
+
+.nav-link-auth {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+  }

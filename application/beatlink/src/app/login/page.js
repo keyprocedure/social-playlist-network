@@ -1,34 +1,67 @@
+// app/login/page.js
+
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
-import { useRouter } from 'next/navigation'
-import { route } from '../api/auth/route'
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+
+async function loginApi(username, password) {
+  try {
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password
+      }),
+    });
+
+    if (!response.ok) {
+      console.log('response not ok');
+      throw new Error('Login failed');
+    }
+
+    const data = await response.json();
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('An error occurred during the login process', error);
+    return { success: false, error: error.message };
+  }
+}
 
 export default function Login() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter()
+  const [error, setError] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // Here you can implement your authentication logic
-    // For simplicity, I'm just logging the username and password
+
+    if (!username || !password) {
+      setError("All fields are necessary.");
+      return;
+    }
+
     console.log("Username:", username);
     console.log("Password:", password);
 
     try {
-      const response = await route({ username, password })
-
+      const response = await loginApi(username, password);
       if (response.success) {
-        router.push('/userprofile')
+        Cookies.set('session', 'token');
+        console.log('Login successful');
+        router.push('/');
       } else {
-        // Handle errors
-        alert('Invalid login credentials. Please try again.')
+        alert('Invalid login credentials. Please try again.');
       }
     } catch (error) {
-      // Handle errors
-      console.log('An unexpected error happened', error)
+      console.log('An unexpected error happened', error);
     }
   };
 

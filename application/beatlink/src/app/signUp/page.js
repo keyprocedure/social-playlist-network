@@ -1,3 +1,5 @@
+// app/signUp/page.js
+
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
@@ -7,7 +9,8 @@ import { useRouter } from 'next/navigation';
 
 async function signUpApi(email, username, password, birthday) {
   try {
-    const response = await fetch('/api/signup', {
+    console.log('in signUpApi');
+    const response = await fetch('/api/registration', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,10 +24,12 @@ async function signUpApi(email, username, password, birthday) {
     });
     
     if (!response.ok) {
+      console.log('response not ok');
       throw new Error('Signup failed');
     }
 
     const data = await response.json();
+    
     return { success: true, data };
   } catch (error) {
     console.error('An error occurred during the signup process', error);
@@ -33,28 +38,31 @@ async function signUpApi(email, username, password, birthday) {
 }
 
 export default function SignUp() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [bio, setBio] = useState("");
+  const [status, setStatus] = useState("");
+  const [userImage, setUserImage] = useState("");
+
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can implement your sign-up logic
-    // For simplicity, I'm just logging the username, password, and birthday
 
     if (!username || !email || !password || !birthday) {
       setError("All fields are necessary.");
+      alert(error);
       return;
-    }
+   }
 
     try {
       const response = await signUpApi(email,username, password, birthday);
 
       if (response.success) {
-        
-        // localStorage.setItem('registrationSuccess', 'User created successfully. Please log in.');
+        localStorage.setItem('registrationSuccess', 'User created successfully. Please log in.');
 
         // Redirect to the login page
         router.push('/login');
@@ -83,6 +91,16 @@ export default function SignUp() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <br></br>
+          <div>
+            <label htmlFor="userImage">User Image: </label>
+            <input
+              type="file"
+              id="userimage"
+              value={userImage}
+              onChange={(e) => setUserImage(e.target.value)}
             />
           </div>
           <br></br>

@@ -2,34 +2,22 @@
 import React from "react";
 import Image from "next/image";
 import Navbar from "../components/navbar";
-import { useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import checkSessionCookie from '../../helpers/hooks/checkSessionCookie';
 
-export default function Login() {
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   // Check if there's an auth token
-  //   const token = localStorage.getItem('authToken');
-    
-  //   // If not, redirect to the login page
-  //   if (!token) {
-  //     //alert('Log in to access this page.')
-  //     router.push('/login');
-  //   }
-  // }, [router]);
+export default function Profile() {
+  const isLoading = checkSessionCookie();
 
   return (
     <>
-    <Navbar/>
-    <h1>This is the user profile</h1>
-    <button>Import</button>
-    </> 
-
+      <Navbar />
+      {isLoading ? (
+        <div></div>
+      ) : (
+        <div style={{ margin: "20px", backgroundColor: "rgba(255, 255, 255, 0.75)", padding: "20px" }}>
+          <h1>This is the user profile</h1>
+          <button>Import</button>
+        </div>
+      )}
+    </>
   )
-  
-
-  
-  
-  
 }
