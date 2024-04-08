@@ -20,6 +20,30 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        bio: {
+            type: String,
+            required: false,
+        },
+        status: {
+            type: String,
+            required: false,
+        },
+        userImage: {
+            type: String,
+            required: false,
+        },
+        following:{
+            type: Array,
+            required: false,
+        },
+        followers:{
+            type: Array,
+            required: false,
+        },
+        playlists:{
+            type: Array,
+            required: false,
+        },
 
     },
     { timestamps: true }
