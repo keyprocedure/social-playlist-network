@@ -49,16 +49,38 @@ export default function SignUp() {
     e.preventDefault();
 
     if (!username || !email || !password || !birthday) {
-      setError("All fields are necessary.");
-      alert(error);
+      alert("All fields are necessary.");
       return;
    }
+
+    // Check if birthday is less than 13 years ago
+    const birthDate = new Date(birthday + 'T00:00:00'); // This sets the time part to midnight
+    const timezoneOffset = birthDate.getTimezoneOffset() * 60000; // Convert offset to milliseconds
+    const adjustedBirthDate = new Date(birthDate.getTime() - timezoneOffset);
+
+    const currentDate = new Date();
+    const adjustedCurrentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+
+    let age = adjustedCurrentDate.getFullYear() - adjustedBirthDate.getFullYear();
+    const m = adjustedCurrentDate.getMonth() - adjustedBirthDate.getMonth();
+
+    // if the current month is before the birth month or
+    // if the current month is the same as the birth month and the current day is before the birth day
+    // +1 because birthdate is 1 day behind the entered date
+    if (m < 0 || (m === 0 && adjustedCurrentDate.getDate() < adjustedBirthDate.getDate() + 1)) {
+      age--;
+    }
+
+    if (age < 13) {
+      alert("You must be at least 13 years old to sign up.");
+      return;
+    }
 
     try {
       const response = await signUpApi(email,username, password, birthday);
 
       if (response.success) {
-        localStorage.setItem('registrationSuccess', 'User created successfully. Please log in.');
+        alert('User created successfully. Please log in.');
 
         // Redirect to the login page
         router.push('/login');
