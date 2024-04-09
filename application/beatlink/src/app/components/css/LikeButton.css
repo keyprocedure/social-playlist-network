@@ -1,0 +1,29 @@
+.like-button {
+  display: inline-block;
+}
+
+.like-button svg {
+  transition: fill 0.5s ease;
+  /* fill: black; */
+}
+
+.like-button:hover svg {
+  fill: red;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-container p {
+  align-items: center;
+  justify-content: center;
+  margin-top: 26%;
+}
+
+.like-counter {
+  margin-left: 6%;
+}
