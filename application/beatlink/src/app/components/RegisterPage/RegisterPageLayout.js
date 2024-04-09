@@ -27,38 +27,41 @@ export default function RegisterPageLayout() {
 	return (
 		<>
 			<h1>Register</h1>
-			<div className="d-flex flex-column form-container">
-				<div className="input-group mb-3">
-					<CustomInput
-						type={"email"}
-						placeholderText={"Email"}
-						className={"form-control"}
-						onChange={handleEmailChange}></CustomInput>
-				</div>
+      <div className="form-container">
 
-				<div className="input-group mb-3">
-					<CustomInput
-						type={"text"}
-						placeholderText={"Username"}
-						className={"form-control"}
-						onChange={handleUsernameChange}></CustomInput>
-				</div>
+        <div className="d-flex flex-column justify-content-center">
+          <div className="input-group mb-3">
+            <CustomInput
+              type={"email"}
+              placeholderText={"Email"}
+              className={"form-control"}
+              onChange={handleEmailChange}></CustomInput>
+          </div>
 
-				<div className="input-group mb-3">
-					<CustomInput
-						type={"password"}
-						placeholderText={"Password"}
-						className={"form-control"}
-						onChange={handlePasswordChange}></CustomInput>
-				</div>
+          <div className="input-group mb-3">
+            <CustomInput
+              type={"text"}
+              placeholderText={"Username"}
+              className={"form-control"}
+              onChange={handleUsernameChange}></CustomInput>
+          </div>
 
-				<div className="input-group mb-3">
-					<CustomInput
-						type={"date"}
-						placeholderText={"Birthday"}
-						className={"form-control"}
-						onChange={handleBirthdayChange}></CustomInput>
-				</div>
+          <div className="input-group mb-3">
+            <CustomInput
+              type={"password"}
+              placeholderText={"Password"}
+              className={"form-control"}
+              onChange={handlePasswordChange}></CustomInput>
+          </div>
+
+          <div className="input-group mb-3">
+            <CustomInput
+              type={"date"}
+              placeholderText={"Birthday"}
+              className={"form-control"}
+              onChange={handleBirthdayChange}></CustomInput>
+          </div>
+        </div>
 			</div>
 		</>
 	);
