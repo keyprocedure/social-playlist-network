@@ -63,7 +63,8 @@ export default function SignUp() {
     const adjustedBirthDate = new Date(birthDate.getTime() - timezoneOffset);
 
     const currentDate = new Date();
-    const adjustedCurrentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    // Default time to midnight to ignore time comparison
+    const adjustedCurrentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()); 
 
     let age = adjustedCurrentDate.getFullYear() - adjustedBirthDate.getFullYear();
     const m = adjustedCurrentDate.getMonth() - adjustedBirthDate.getMonth();
