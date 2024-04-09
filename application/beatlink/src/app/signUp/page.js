@@ -43,6 +43,10 @@ export default function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [bio, setBio] = useState("");
+  const [status, setStatus] = useState("");
+  const [userImage, setUserImage] = useState("");
+
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -109,6 +113,16 @@ export default function SignUp() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <br></br>
+          <div>
+            <label htmlFor="userImage">User Image: </label>
+            <input
+              type="file"
+              id="userimage"
+              value={userImage}
+              onChange={(e) => setUserImage(e.target.value)}
             />
           </div>
           <br></br>
