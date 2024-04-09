@@ -7,7 +7,7 @@ export default function Navbar() {
     const token = false;
     return <nav className="nav">
         <a href="/" className="site-title">
-            <Image src="images/logo.png.png" alt="Site Logo" className="site-logo" style={{ width: "100px", height: "auto" }} /></a>
+            </a>
 
         <div>
             <ul id="navbar">
