@@ -29,7 +29,7 @@ export default function RegisterPageLayout() {
 			<h1>Register</h1>
       <div className="form-container">
 
-        <div className="d-flex flex-column justify-content-center">
+        <div className="d-flex flex-column">
           <div className="input-group mb-3">
             <CustomInput
               type={"email"}
