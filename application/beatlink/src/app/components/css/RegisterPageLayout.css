@@ -22,13 +22,13 @@
 
 .form-container {
   width: 20rem;
-  height: 20rem;
-  display: inline-block;
+  height: 25rem;
+  display: flex;
+  justify-content: center;
   border-radius: 3%;
   box-shadow: 0px 10px 17px rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
   outline: solid rgba(0, 0, 0, .25);
-  margin-left: 10px;
 }
 
 .flex-column {
@@ -41,6 +41,10 @@
   width: 75%;
 }
 
+.form-control {
+  border-color: rgb(171, 171, 171);
+}
+
 .register-btn {
-  margin-top: 5%;
+  margin-top: 9%;
 }
