@@ -24,7 +24,7 @@ export default function LoginPageLayout() {
     <>
       <Navbar />
       <div className="login-grid-container">
-        <div className="login-title d-flex justify-content-center align-items-center">
+        <div className="login-title d-flex justify-content-center align-items-start">
           <h1>Login</h1>
         </div>
 
