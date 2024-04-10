@@ -3,6 +3,7 @@ import { CustomInput } from "../CustomInput";
 import "../css/RegisterPageLayout.css";
 import CustomTextWithLink from "../CustomTextWithLink.js";
 import { CustomButton } from "../CustomButton.js";
+import Navbar from "../navbar.js";
 
 export default function RegisterPageLayout() {
   const [email, setEmail] = useState("");
@@ -31,57 +32,94 @@ export default function RegisterPageLayout() {
 
   return (
     <>
-      <h1>Register</h1>
-      <div className="form-container">
-        <div className="d-flex flex-column">
-          <div className="input-group mb-3">
-            <CustomInput
-              type={"email"}
-              placeholderText={"Email"}
-              className={"form-control"}
-              onChange={handleEmailChange}
-            ></CustomInput>
+      <Navbar />
+      <div className="register-grid-container">
+        <div className="register-title d-flex justify-content-center align-items-start">
+          <h1>Register</h1>
+        </div>
+
+        <div className="register-form d-flex justify-content-center">
+          <div className="form-container">
+            <div className="d-flex flex-column">
+              <div className="input-group mb-3">
+                <CustomInput
+                  type={"email"}
+                  placeholderText={"Email"}
+                  className={"form-control"}
+                  onChange={handleEmailChange}
+                ></CustomInput>
+              </div>
+
+              <div className="input-group mb-3">
+                <CustomInput
+                  type={"text"}
+                  placeholderText={"Username"}
+                  className={"form-control"}
+                  onChange={handleUsernameChange}
+                ></CustomInput>
+              </div>
+
+              <div className="input-group mb-3">
+                <CustomInput
+                  type={"password"}
+                  placeholderText={"Password"}
+                  className={"form-control"}
+                  onChange={handlePasswordChange}
+                ></CustomInput>
+              </div>
+
+              <div className="input-group mb-3">
+                <CustomInput
+                  type={"date"}
+                  placeholderText={"Birthday"}
+                  className={"form-control"}
+                  onChange={handleBirthdayChange}
+                ></CustomInput>
+              </div>
+
+              <CustomTextWithLink
+                labelText={"Already have an account? "}
+                href={"/login"}
+                linkText={"Login!"}
+              ></CustomTextWithLink>
+
+              {/* TODO: Add onChange prop for CustomButton that makes API request */}
+              <CustomButton
+                text={"Register"}
+                className={"btn btn-dark register-btn"}
+              ></CustomButton>
+            </div>
           </div>
-
-          <div className="input-group mb-3">
-            <CustomInput
-              type={"text"}
-              placeholderText={"Username"}
-              className={"form-control"}
-              onChange={handleUsernameChange}
-            ></CustomInput>
-          </div>
-
-          <div className="input-group mb-3">
-            <CustomInput
-              type={"password"}
-              placeholderText={"Password"}
-              className={"form-control"}
-              onChange={handlePasswordChange}
-            ></CustomInput>
-          </div>
-
-          <div className="input-group mb-3">
-            <CustomInput
-              type={"date"}
-              placeholderText={"Birthday"}
-              className={"form-control"}
-              onChange={handleBirthdayChange}
-            ></CustomInput>
-          </div>
-
-          <CustomTextWithLink
-            labelText={"Already have an account? "}
-            href={"/login"}
-            linkText={"Login!"}
-          ></CustomTextWithLink>
-
-          <CustomButton
-            text={"Register"}
-            className={"btn btn-dark register-btn"}
-          ></CustomButton>
         </div>
       </div>
     </>
   );
+}
+
+async function fetchSignUpResponse(email, username, password, birthday) {
+  try {
+    const response = await fetch("/api/registration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        username,
+        password,
+        birthday,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Signup failed");
+    }
+
+    const data = await response.json();
+
+    return { success: true, data };
+  } catch (error) {
+    console.error("An error occurred during the signup process", error);
+    return { success: false, error: error.message };
+  }
 }
