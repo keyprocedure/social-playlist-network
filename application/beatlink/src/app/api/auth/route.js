@@ -3,6 +3,7 @@
 const bcrypt = require("bcrypt");
 import signale from "signale";
 import { findUser } from "../../../../helpers/database/controllers/userController";
+import parseJSON from "../../../../helpers/parseJSON";
 
 export const dynamic = "force-dynamic";
 
@@ -28,13 +29,9 @@ export async function POST(request) {
         }
 
         // Verify password
-        console.log("password", password);
-        console.log("user.password", user.password);
-        
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            console.log("Incorrect password");
             throw new Error("Incorrect password");
         }
 
@@ -43,14 +40,5 @@ export async function POST(request) {
     } catch (e) {
         signale.error(e);
         return Response.json({ error: e.message }, { status: 500 });
-    }
-}
-
-async function parseJSON(request) {
-    const contentType = request.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-        return request.json();
-    } else {
-        return null;
     }
 }
