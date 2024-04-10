@@ -1,14 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image"
-import dynamic from 'next/dynamic';
+import Cookies from 'js-cookie';
 
-// Dynamically import AuthLink with SSR disabled
-const AuthLinkWithNoSSR = dynamic(() => import('./AuthLink'), {
-    ssr: false,
-  });
-  
 export default function Navbar() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        // Check the session cookie when the component mounts in the client
+        const session = Cookies.get('session');
+        setIsLoggedIn(!!session);
+    }, []);
+
     return (
         <nav className="nav">
             <a href="/" className="site-title">
@@ -21,7 +24,11 @@ export default function Navbar() {
                     <li><a href="/about">ABOUT</a></li>
                     <li><a href="/explore">EXPLORE</a></li>
                     <li><a href="/contact">CONTACT</a></li>
-                    <li><AuthLinkWithNoSSR /></li>
+                    <li>
+                        {isLoggedIn
+                            ? <a href="/logout" className="nav-link-auth">LOGOUT</a>
+                            : <a href="/login" className="nav-link-auth">LOGIN</a>}
+                    </li>
                 </ul>
             </div>
         </nav>
