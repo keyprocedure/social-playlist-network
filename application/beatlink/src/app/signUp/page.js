@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 
 async function signUpApi(email, username, password, birthday) {
   try {
-    console.log('in signUpApi');
     const response = await fetch('/api/registration', {
       method: 'POST',
       headers: {
@@ -24,7 +23,6 @@ async function signUpApi(email, username, password, birthday) {
     });
     
     if (!response.ok) {
-      console.log('response not ok');
       throw new Error('Signup failed');
     }
 
