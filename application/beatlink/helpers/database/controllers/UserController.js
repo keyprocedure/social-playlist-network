@@ -20,6 +20,22 @@ export const findUser = async (username) => {
   }
 };
 
+export const findUserById = async (userId) => {
+  try {
+      await connect();
+      const user = await User.findById(userId);
+    
+      if (!user) {
+          throw new Error('No user found with this userId');
+      }
+
+      return user; 
+  } catch (error) {
+      signale.error("Authentication Error:", error);
+      throw error;
+  }
+};
+
 export const createUser = async (userObject) => {
     try {
       await connect();

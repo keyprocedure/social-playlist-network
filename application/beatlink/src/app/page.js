@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import Navbar from "./components/navbar";
+import PostPage from "./post/[id]/page";
 import checkSessionCookie from '../../helpers/hooks/checkSessionCookie';
 
 export default function Home() {

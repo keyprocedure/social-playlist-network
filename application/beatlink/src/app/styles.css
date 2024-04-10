@@ -32,6 +32,10 @@ nav {
 	text-shadow: 2px 2px rgb(137, 137, 137);
 }
 
+html {
+	overflow: hidden;
+}
+
 /* button {
     background-image: linear-gradient(to bottom right, rgb(90, 40, 150), rgb(180, 55, 170));
     color: rgb(255, 255, 255);
@@ -56,11 +60,20 @@ container {
 
     background-image: url(components/mainBackground.jpg);
     
+<<<<<<< HEAD
 }
+=======
+} */
+
+>>>>>>> bb89468bef113a0bfd028ca837fe7b86ad6edd2e
 
 .nav-link-auth {
     display: inline-block;
     width: 50px;
     text-align: center;
+<<<<<<< HEAD
 }
   */
+=======
+  }
+>>>>>>> bb89468bef113a0bfd028ca837fe7b86ad6edd2e
