@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Navbar from "../components/navbar.js";
-import checkSessionCookie from "../../helpers/hooks/checkSessionCookie.js";
+import checkSessionCookie from "../../../helpers/hooks/checkSessionCookie.js";
 
 export default function Profile() {
   const isLoading = checkSessionCookie();
