@@ -60,20 +60,10 @@ container {
 
     background-image: url(components/mainBackground.jpg);
     
-<<<<<<< HEAD
-}
-=======
 } */
 
->>>>>>> bb89468bef113a0bfd028ca837fe7b86ad6edd2e
-
 .nav-link-auth {
-    display: inline-block;
-    width: 50px;
-    text-align: center;
-<<<<<<< HEAD
+	display: inline-block;
+	width: 50px;
+	text-align: center;
 }
-  */
-=======
-  }
->>>>>>> bb89468bef113a0bfd028ca837fe7b86ad6edd2e
