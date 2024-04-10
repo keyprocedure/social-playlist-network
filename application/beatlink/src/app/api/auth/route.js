@@ -1,22 +1,45 @@
-export async function route({username, password}) {
-    // const response = await fetch(' ', { // data point from database
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(credentials), // username and password info
-    // })
+// app/api/login/route.js
 
-    // if (response.ok) {
-    //     return response.json() // { success: true }
-    // } else {
-    //     throw new Error('Failed to sign in') // { success: true }
-    // }
+const bcrypt = require("bcrypt");
+import signale from "signale";
+import { findUser } from "../../../../helpers/database/controllers/UserController.js";
+import parseJSON from "../../../../helpers/parseJSON.js";
 
-    if (username == 'user' && password == 'user') {
-        // localStorage.setItem('authToken', 'simulated_token');
-        return { success: true }
+export const dynamic = "force-dynamic";
+
+export async function POST(request) {
+  try {
+    const body = await parseJSON(request);
+
+    if (!body) {
+      throw new Error("No body provided");
     }
-    else {
-        return { success: false }
-        console.log('Invalid login credentials. Please try again.')
+
+    const { username, password } = body;
+
+    // Validate input
+    if (!username || !password) {
+      throw new Error("Username and password are required");
     }
+
+    // Find user in DB
+    const user = await findUser(username);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Verify password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      throw new Error("Incorrect password");
+    }
+
+    // Respond with success message
+    return Response.json({ message: "Login successful" });
+  } catch (e) {
+    signale.error(e);
+    return Response.json({ error: e.message }, { status: 500 });
+  }
 }
+
