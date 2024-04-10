@@ -61,7 +61,6 @@ export default function RegisterPageLayout() {
 		setBirthday(event.target.value);
 	}
 
-	//TODO: Make it so a alert message is conditionally rendered based on the content's of the error state
 	return (
 		<>
 			<div className="register-grid-container">
