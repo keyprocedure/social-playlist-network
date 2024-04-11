@@ -4,32 +4,34 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "../components/navbar";
-import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+
+//TODO: Connect API to front-end
 
 async function loginApi(username, password) {
   try {
-    const response = await fetch('/api/auth', {
-      method: 'POST',
+    const response = await fetch("/api/auth", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username,
-        password
+        password,
       }),
     });
 
     if (!response.ok) {
-      console.log('response not ok');
-      throw new Error('Login failed');
+      console.log("response not ok");
+      throw new Error("Login failed");
     }
 
     const data = await response.json();
 
     return { success: true, data };
   } catch (error) {
-    console.error('An error occurred during the login process', error);
+    console.error("An error occurred during the login process", error);
     return { success: false, error: error.message };
   }
 }
@@ -54,16 +56,16 @@ export default function Login() {
     try {
       const response = await loginApi(username, password);
       if (response.success) {
-        Cookies.set('session', 'token');
-        console.log('Login successful');
-        router.push('/');
+        Cookies.set("session", "token");
+        console.log("Login successful");
+        router.push("/");
       } else {
-        alert('Invalid login credentials. Please try again.');
+        alert("Invalid login credentials. Please try again.");
       }
     } catch (error) {
-      console.log('An unexpected error happened', error);
+      console.log("An unexpected error happened", error);
     }
-  };
+  }
 
   return (
     <>
@@ -71,15 +73,18 @@ export default function Login() {
         <title>Login</title>
       </Head>
 
-      {/*Navigation bar at top of page*/}
-      <Navbar />
-
       {/*Transparent page background/margins*/}
-      <div style={{ margin: "20px", backgroundColor: "rgba(255, 255, 255, .75)", padding: "20px", textAlign: "center" }}>
+      <div
+        style={{
+          margin: "20px",
+          backgroundColor: "rgba(255, 255, 255, .75)",
+          padding: "20px",
+          textAlign: "center",
+        }}
+      >
         <h2>Login</h2>
 
         <form onSubmit={handleSubmit}>
-
           {/*Username Form*/}
           <div>
             <label htmlFor="username">Username: </label>
@@ -101,13 +106,18 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
           {/*Login and Sign Up buttons with CSS*/}
           <br></br>
           <button type="submit">Login</button> &nbsp;
           <p> Don&apos;t have an account yet? </p>
-          <button><a href="/signUp" style={{ textDecoration: "none", color: "inherit" }}>Sign Up</a></button>
-
+          <button>
+            <a
+              href="/signUp"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Sign Up
+            </a>
+          </button>
         </form>
       </div>
     </>
