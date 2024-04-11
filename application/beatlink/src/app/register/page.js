@@ -4,6 +4,7 @@
 import React from "react";
 import Head from "next/head";
 import RegisterPageLayout from "../components/RegisterPage/RegisterPageLayout";
+import Navbar from "../components/navbar";
 
 export default function Register() {
   return (
@@ -17,6 +18,7 @@ export default function Register() {
         ></meta>
       </Head>
       <div>
+        <Navbar />
         <RegisterPageLayout></RegisterPageLayout>
       </div>
     </>
