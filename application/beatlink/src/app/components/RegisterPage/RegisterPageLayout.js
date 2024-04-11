@@ -155,7 +155,8 @@ async function fetchSignUpResponse(email, username, password, birthday) {
       throw new Error("Register Failed");
     }
     const data = await response.json();
-    return data;
+
+    return { success: true, data };
   } catch (error) {
     return { success: false, error: error.message };
   }
