@@ -1,29 +1,49 @@
-// import React, { useState } from "react";
-import React from "react";
-// import { CustomInput } from "../CustomInput.js";
+import React, { useState } from "react";
+import { CustomInput } from "../CustomInput.js";
 import CustomTextWithLink from "../CustomTextWithLink.js";
 import { CustomButton } from "../CustomButton.js";
-import Navbar from "../navbar.js";
 import "../css/LoginPageLayout.css";
+import { useRouter } from "next/navigation";
+import CustomAlert from "../CustomAlert.js";
 
 export default function LoginPageLayout() {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  // function handleUsernameChange(event) {
-  //   setUsername(event.target.value);
-  // }
+  function handleUsernameChange(event) {
+    setUsername(event.target.value);
+  }
 
-  // function handlePasswordChange(event) {
-  //   setPassword(event.target.value);
-  // }
+  function handlePasswordChange(event) {
+    setPassword(event.target.value);
+  }
 
-  // TODO: Add logic for sending a login API request
-  // function handleButtonClick() {}
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!username || !password) {
+      return setError("All fields are necessary.");
+    }
+
+    try {
+      const response = await fetchLoginResponse(username, password);
+
+      if (response.success) {
+        Cookies.set("session", "token");
+        return router.push("/"); // Redirect to home page on successful login
+      }
+
+      // If the response isn't successful, then it's in an error state
+      setError("Invalid login credentials. Try again.");
+    } catch (error) {
+      setError(error.error);
+    }
+  }
 
   return (
     <>
-      <Navbar />
       <div className="login-grid-container">
         <div className="login-title d-flex justify-content-center align-items-start">
           <h1>Login</h1>
@@ -33,21 +53,21 @@ export default function LoginPageLayout() {
           <div className="form-container">
             <div className="d-flex flex-column">
               <div className="input-group mb-3">
-                {/* <CustomInput
+                <CustomInput
                   type={"text"}
                   placeholderText={"Username"}
                   className={"form-control"}
                   onChange={handleUsernameChange}
-                ></CustomInput> */}
+                ></CustomInput>
               </div>
 
               <div className="input-group mb-3">
-                {/* <CustomInput
+                <CustomInput
                   type={"password"}
                   placeholderText={"Password"}
                   className={"form-control"}
                   onChange={handlePasswordChange}
-                ></CustomInput> */}
+                ></CustomInput>
               </div>
 
               <CustomTextWithLink
@@ -62,6 +82,10 @@ export default function LoginPageLayout() {
                 className={"btn btn-dark login-btn"}
               ></CustomButton>
             </div>
+
+            {error && (
+              <CustomAlert text={error} type={"danger"} className="mt-3" />
+            )}
           </div>
         </div>
       </div>
@@ -83,7 +107,6 @@ async function fetchLoginResponse(username, password) {
     });
 
     if (!response.ok) {
-      console.log("response not ok");
       throw new Error("Login failed");
     }
 
@@ -91,7 +114,6 @@ async function fetchLoginResponse(username, password) {
 
     return { success: true, data };
   } catch (error) {
-    console.error("An error occurred during the login process", error);
-    return { success: false, error: error.message };
+    throw { success: false, error: error.message };
   }
 }
