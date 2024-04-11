@@ -5,6 +5,7 @@ import { CustomButton } from "../CustomButton.js";
 import "../css/LoginPageLayout.css";
 import { useRouter } from "next/navigation";
 import CustomAlert from "../CustomAlert.js";
+import Cookies from "js-cookie";
 
 export default function LoginPageLayout() {
   const router = useRouter();
@@ -30,18 +31,14 @@ export default function LoginPageLayout() {
     try {
       const response = await fetchLoginResponse(username, password);
 
-      if (response.success) {
+      if (response.ok) {
         Cookies.set("session", "token");
-        return router.push("/"); // Redirect to home page on successful login
+        router.push("/"); // Redirect to home page on successful login
       }
-
-      // If the response isn't successful, then it's in an error state
-      setError("Invalid login credentials. Try again.");
     } catch (error) {
       setError(error.error);
     }
   }
-
   return (
     <>
       <div className="login-grid-container">
@@ -80,12 +77,13 @@ export default function LoginPageLayout() {
               <CustomButton
                 text={"Login"}
                 className={"btn btn-dark login-btn"}
+                onClick={handleSubmit}
               ></CustomButton>
-            </div>
 
-            {error && (
-              <CustomAlert text={error} type={"danger"} className="mt-3" />
-            )}
+              {error && (
+                <CustomAlert text={error} type={"danger"} className="mt-3" />
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -112,8 +110,8 @@ async function fetchLoginResponse(username, password) {
 
     const data = await response.json();
 
-    return { success: true, data };
+    return data;
   } catch (error) {
-    throw { success: false, error: error.message };
+    throw { error: error.message };
   }
 }
