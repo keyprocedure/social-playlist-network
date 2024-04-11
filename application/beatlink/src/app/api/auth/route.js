@@ -36,9 +36,12 @@ export async function POST(request) {
     }
 
     // Respond with success message
-    return Response.json({ message: "Login successful" });
+    return Response.json({
+      message: "Login successful",
+      status: 200,
+      ok: true,
+    });
   } catch (e) {
-    signale.error(e);
     return Response.json({ error: e.message }, { status: 500 });
   }
 }
