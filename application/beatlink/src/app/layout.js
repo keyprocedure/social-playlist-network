@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.css";
 // import BootstrapClient from "./components/BootstrapClient";
-import Navbar from "./components/navbar.js";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -18,10 +17,7 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
