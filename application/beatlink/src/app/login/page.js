@@ -3,7 +3,6 @@
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
-import Navbar from "../components/navbar";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 

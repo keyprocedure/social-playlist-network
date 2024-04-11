@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import "../../../../public/css/zuby.css"
 import yashPic from "../../../../public/images/yash_image.jpg"
 import Profile from '../Profile';

@@ -1,7 +1,6 @@
-import signale from "signale";
 import { getAllPlaylists } from "../../../../helpers/database/controllers/playlistController.js";
 
-export async function GET(request) {
+export async function GET() {
     try {
         const playlists = await getAllPlaylists();
         return Response.json(playlists);
