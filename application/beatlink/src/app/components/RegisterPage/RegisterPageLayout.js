@@ -31,18 +31,22 @@ export default function RegisterPageLayout() {
       return setError("Must be 13 years or older.");
     }
 
-    const response = await fetchSignUpResponse(
-      email,
-      username,
-      password,
-      birthday,
-    );
+    try {
+      const response = await fetchSignUpResponse(
+        email,
+        username,
+        password,
+        birthday,
+      );
 
-    if (response.error) {
-      return setError(response.error);
+      if (response.success) {
+        return router.push("/login");
+      }
+      // Redirect to login page on successful register
+      setError(response.error);
+    } catch (error) {
+      setError(error.error);
     }
-    // Redirect to login page on successful register
-    router.push("/login");
   }
 
   function handleEmailChange(event) {
@@ -158,7 +162,7 @@ async function fetchSignUpResponse(email, username, password, birthday) {
 
     return { success: true, data };
   } catch (error) {
-    return { success: false, error: error.message };
+    throw { success: false, error: error.message };
   }
 }
 
