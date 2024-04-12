@@ -21,7 +21,7 @@ async function signUpApi(email, username, password, birthday) {
         birthday
       }),
     });
-    
+
     if (!response.ok) {
       throw new Error('Signup failed');
     }

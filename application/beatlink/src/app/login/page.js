@@ -54,7 +54,7 @@ export default function Login() {
     try {
       const response = await loginApi(username, password);
       if (response.success) {
-        Cookies.set('session', 'token');
+        Cookies.set('username', username);
         console.log('Login successful');
         router.push('/');
       } else {

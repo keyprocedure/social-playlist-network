@@ -8,7 +8,7 @@ export default function Navbar() {
 
     useEffect(() => {
         // Check the session cookie when the component mounts in the client
-        const session = Cookies.get('session');
+        const session = Cookies.get('username');
         setIsLoggedIn(!!session);
     }, []);
 
