@@ -1,12 +1,13 @@
 import { createPost } from "../../../../helpers/database/controllers/postController";
 import { requestWrapper } from "../../../../helpers/requestWrapper";
+import parseJSON from "../../../../helpers/parseJSON";
 
 export const dynamic = "force-dynamic";
 export async function POST(request) {
     try {
         const body = await parseJSON(request);
 
-        const { postTitle, user_id, playlist_id } = body;
+        const { postTitle,user_id, playlist_id,  } = body;
 
         // Add post to DB
         await createPost({ postTitle, user_id, playlist_id });

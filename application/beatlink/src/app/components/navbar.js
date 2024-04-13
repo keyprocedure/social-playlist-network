@@ -24,6 +24,9 @@ export default function Navbar() {
                     <li><a href="/about">ABOUT</a></li>
                     <li><a href="/explore">EXPLORE</a></li>
                     <li><a href="/contact">CONTACT</a></li>
+                    {isLoggedIn && (
+                        <li><a href="/create-post">CREATE POST</a></li>
+                    )}
                     <li>
                         {isLoggedIn
                             ? <a href="/logout" className="nav-link-auth">LOGOUT</a>
