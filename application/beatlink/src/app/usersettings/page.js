@@ -4,15 +4,17 @@ import Navbar from "../components/navbar";
 import BackButton from "../components/UserSettings/BackButton";
 import "../components/css/UserSettings.css";
 import Cookies from 'js-cookie';
+import { useRouter } from "next/navigation"
 
 export default function SettingsPage() {
     const [user, setUser] = useState(null);
     const [bio, setBio] = useState('');
     const [status, setStatus] = useState('');
+    const router = useRouter();
 
     useEffect(() => {
         const userid = Cookies.get('userid');
-
+        
         if (!userid) {
             //console.log("userid is not available.");
             return;
@@ -55,6 +57,7 @@ export default function SettingsPage() {
         const payload = {
             bio: bio !== '' ? bio : user.bio,
             status: status !== '' ? status : user.status,
+           // userImage: userImage !== '' ? userImage : user.userImage,
         };
 
         try {
@@ -78,6 +81,29 @@ export default function SettingsPage() {
 
         } catch (error) {
             console.error("Error updating user:", error);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+            await deleteAccount();
+        }
+    };
+
+    const deleteAccount = async () => {
+        const userid = Cookies.get('userid');
+        try {
+            const response = await fetch(`/api/deleteuser/${userid}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                console.log("Account deleted successfully.");
+                router.push('/logout');
+            } else {
+                throw new Error("Failed to delete user");
+            }
+        } catch (error) {
+            console.error("Error deleting account:", error);
         }
     };
 
@@ -125,7 +151,7 @@ export default function SettingsPage() {
                     </label>
                     <button className="button button-center" type="submit">Submit Changes</button>
                 </form>
-
+                <button className="delete-button" onClick={handleDelete}>Delete Account</button>
             </div>
         </>
     );

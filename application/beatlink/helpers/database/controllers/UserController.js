@@ -75,6 +75,7 @@ export const createUser = async (userObject) => {
 export const updateUser = async (userid, updates) => {
   try {
     await connect();
+    
     const user = await User.findById(userid);
     if (!user) {
       throw new Error('No user found with this userid');
@@ -87,6 +88,9 @@ export const updateUser = async (userid, updates) => {
     if (updates.status !== undefined) {
       user.status = updates.status;
     }
+    //if (updates.userImage !== undefined) {
+    //  user.userImage = updates.userImage;
+   // }
 
     // Save the updated user object
     await user.save();
@@ -94,6 +98,25 @@ export const updateUser = async (userid, updates) => {
     return user;
   } catch (error) {
     signale.error("Error updating user:", error);
+    throw error;
+  }
+};
+
+export const deleteUser = async (userId) => {
+  try {
+    await connect();
+
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error('No user found with this userId');
+    }
+
+    await User.deleteOne({ _id: userId });
+    signale.success("User deleted successfully");
+
+    return { message: "User deleted successfully" };
+  } catch (error) {
+    signale.error("Error deleting user:", error);
     throw error;
   }
 };

@@ -11,6 +11,7 @@ export async function POST(request, { params }) {
         const updates = {
             bio: body.bio,
             status: body.status
+          //  userImage: body.userImage
         };
 
         const user = await findUserById(userid);
