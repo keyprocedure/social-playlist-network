@@ -1,5 +1,4 @@
 import React from "react";
-import { ProfilePicture } from "../ProfilePicture";
 import { ProfileCard } from "../PostPage/ProfileCard";
 import '../css/CommentCard.css';
 

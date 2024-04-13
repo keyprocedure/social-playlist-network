@@ -62,9 +62,8 @@ container {
     
 } */
 
-
 .nav-link-auth {
-    display: inline-block;
-    width: 50px;
-    text-align: center;
-  }
+	display: inline-block;
+	width: 50px;
+	text-align: center;
+}

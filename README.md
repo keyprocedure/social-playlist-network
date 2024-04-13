@@ -1,6 +1,6 @@
-# Team 03 Repository - Beatlink
+# Team 03 Repository - Social Playlist Network
 
-Welcome to the repository for Team 03's project, a social playlist network - Beatlink.
+Welcome to the repository for Team 03's project, a social playlist network.
 
 ## Key Features 🌟
 
@@ -9,7 +9,7 @@ Welcome to the repository for Team 03's project, a social playlist network - Bea
 - **Music Discovery**: Get song recommendations based on your music taste.
 - **Playlist Sharing**: Allows others to import your playlists into their music services.
 
-**Live Application:** https://csc648.me
+**Live Application:** http://csc648.me
 
 ## Quick Links
 
