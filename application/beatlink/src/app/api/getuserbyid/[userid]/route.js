@@ -1,11 +1,11 @@
-// app/api/getuser/[username].js
-import { findUser } from "../../../../../helpers/database/controllers/userController";
+// app/api/getuserbyid/[userid].js
+import { findUserById } from "../../../../../helpers/database/controllers/userController";
 
 export const dynamic = "force-dynamic";
 export async function GET(request, { params }) {
     try {
-        const username = params.username;
-        const user = await findUser(username);
+        const userid = params.userid;
+        const user = await findUserById(userid);
 
         if (!user) {
             return Response.json({ error: "User not found" }, { status: 400 });

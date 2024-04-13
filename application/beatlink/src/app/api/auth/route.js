@@ -5,6 +5,7 @@ import signale from "signale";
 import { findUser } from "../../../../helpers/database/controllers/UserController.js";
 import parseJSON from "../../../../helpers/parseJSON.js";
 
+
 export const dynamic = "force-dynamic";
 
 export async function POST(request) {

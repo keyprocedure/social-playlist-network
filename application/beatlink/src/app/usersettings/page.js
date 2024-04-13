@@ -10,23 +10,25 @@ export default function SettingsPage() {
     const [status, setStatus] = useState('');
 
     useEffect(() => {
-        // Fetch the username only once or when necessary if it changes.
-        const username = Cookies.get('username');
-        if (!username) {
-            console.log("Username is not available.");
-            return; // Exit the effect if no username is found.
+        const userid = Cookies.get('userid');
+
+        if (!userid) {
+            console.log("userid is not available.");
+            return; 
         }
 
         const fetchUser = async () => {
             try {
-                const response = await fetch(`/api/getuser/${username}`);
+                const response = await fetch(`/api/getuserbyid/${userid}`);
+
                 if (!response.ok) {
                     throw new Error("Failed to fetch user");
                 }
+
                 const userData = await response.json();
-                setUser(userData); // Set user data which should only change if the response changes
-                //console.log(user.username);
-                console.log("Fetched User:", userData); // Log the fetched user data
+                setUser(userData);
+                //console.log(user.userid);
+                console.log("Fetched User:", userData); 
             } catch (error) {
                 console.error("Error fetching user:", error);
             }
@@ -45,10 +47,10 @@ export default function SettingsPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const username = Cookies.get('username');
-        console.log(username);
+        const userid = Cookies.get('userid');
+        console.log(userid);
         try {
-            const response = await fetch(`/api/updateuser/${username}`, {
+            const response = await fetch(`/api/updateuser/${userid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

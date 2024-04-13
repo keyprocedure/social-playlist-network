@@ -72,12 +72,12 @@ export const createUser = async (userObject) => {
   }
 };
 
-export const updateUser = async (username, updates) => {
+export const updateUser = async (userid, updates) => {
   try {
     await connect();
-    const user = await User.findOne({ username: username });
+    const user = await User.findById(userid);
     if (!user) {
-      throw new Error('No user found with this username');
+      throw new Error('No user found with this userid');
     }
 
     // Update fields if provided in the updates object

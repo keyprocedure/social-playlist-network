@@ -21,7 +21,6 @@ async function loginApi(username, password) {
     });
 
     if (!response.ok) {
-      console.log('response not ok');
       throw new Error('Login failed');
     }
 
@@ -29,7 +28,7 @@ async function loginApi(username, password) {
 
     return { success: true, data };
   } catch (error) {
-    console.error('An error occurred during the login process', error);
+    //console.error('An error occurred during the login process', error);
     return { success: false, error: error.message };
   }
 }
@@ -48,20 +47,25 @@ export default function Login() {
       return;
     }
 
-    console.log("Username:", username);
-    console.log("Password:", password);
-
     try {
       const response = await loginApi(username, password);
+
       if (response.success) {
-        Cookies.set('username', username);
-        console.log('Login successful');
+        const response = await fetch(`/api/getuser/${username}`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user");
+        }
+
+        const userData = await response.json();
+        Cookies.set('userid', userData._id);
+
         router.push('/');
       } else {
         alert('Invalid login credentials. Please try again.');
       }
     } catch (error) {
-      console.log('An unexpected error happened', error);
+      //console.log('An unexpected error happened', error);
     }
   };
 
