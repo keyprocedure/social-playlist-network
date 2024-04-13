@@ -68,7 +68,7 @@ export default function SettingsPage() {
 
             if (response.ok) {
                 const updatedUser = await response.json();
-                setUser(updatedUser);  // Update local user state with new data
+                setUser(updatedUser); 
                 //console.log('Update successful');
                 setBio('');
                 setStatus('');
@@ -96,7 +96,6 @@ export default function SettingsPage() {
 
                 <button className="button">Update Profile Image</button>
 
-                {/* Display labels and the current bio and status */}
                 <div className="current-info">
                     <p className="info-label">Status:</p>
                     <p className="current-status">{user?.status || "Your status goes here."}</p>
