@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
-import { ProfileCard } from "../components/UserSettings/ProfileCard";
-import "../components/css/ProfileCard.css";
+import BackButton from "../components/UserSettings/BackButton";
 import "../components/css/UserSettings.css";
 import Cookies from 'js-cookie';
 
@@ -82,47 +81,53 @@ export default function SettingsPage() {
         }
     };
 
-
     return (
         <>
-        <Navbar />
-        <div className="container">
-            <div className="header">User Settings</div>
-    
-            <button className="button">Update Profile Image</button>
-            
-            {/* Display labels and the current bio and status */}
-            <div className="current-info">
-                <p className="info-label">Status:</p>
-                <p className="current-status">{user?.status || "Your status goes here."}</p>
-                <p className="info-label">Bio:</p>
-                <p className="current-bio">{user?.bio || "Your bio goes here."}</p>
+            <Navbar />
+            <BackButton width="24" height="24" />
+            <div className="container">
+                <div className="header">User Settings</div>
+
+                <img
+                    src={user?.userImage || "/images/default_image.jpg"}
+                    alt="Profile"
+                    className="profile-image"
+                />
+
+                <button className="button">Update Profile Image</button>
+
+                {/* Display labels and the current bio and status */}
+                <div className="current-info">
+                    <p className="info-label">Status:</p>
+                    <p className="current-status">{user?.status || "Your status goes here."}</p>
+                    <p className="info-label">Bio:</p>
+                    <p className="current-bio">{user?.bio || "Your bio goes here."}</p>
+                </div>
+
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                    <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        Status:
+                        <input
+                            className="input"
+                            type="text"
+                            placeholder="Update Status"
+                            value={status}
+                            onChange={handleStatusChange}
+                        />
+                    </label>
+                    <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        Bio:
+                        <textarea
+                            className="textarea"
+                            placeholder="Update Bio"
+                            value={bio}
+                            onChange={handleBioChange}
+                        />
+                    </label>
+                    <button className="button button-center" type="submit">Submit Changes</button>
+                </form>
+
             </div>
-    
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-            <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    Status:
-                    <input
-                        className="input"
-                        type="text"
-                        placeholder="Update Status"
-                        value={status}
-                        onChange={handleStatusChange}
-                    />
-                </label>
-                <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    Bio:
-                    <textarea
-                        className="textarea"
-                        placeholder="Update Bio"
-                        value={bio}
-                        onChange={handleBioChange}
-                    />
-                </label>
-                <button className="button button-center" type="submit">Submit Changes</button>
-            </form>
-        
-        </div>
         </>
     );
 }

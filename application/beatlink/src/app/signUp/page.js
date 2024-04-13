@@ -116,16 +116,6 @@ export default function SignUp() {
           </div>
           <br></br>
           <div>
-            <label htmlFor="userImage">User Image: </label>
-            <input
-              type="file"
-              id="userimage"
-              value={userImage}
-              onChange={(e) => setUserImage(e.target.value)}
-            />
-          </div>
-          <br></br>
-          <div>
             <label htmlFor="username">Username: </label>
             <input
               type="text"
