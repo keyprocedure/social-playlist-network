@@ -5,7 +5,7 @@ export default function BackButton({ width, height }) {
     const router = useRouter();
 
     function handleClick() {
-        router.push("/");
+        router.back();
     }
 
     return (
