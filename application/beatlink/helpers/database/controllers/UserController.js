@@ -60,7 +60,7 @@ export const createUser = async (userObject) => {
       username: userObject.username,
       password: userObject.password,
       birthday: userObject.birthday,
-
+      userImage: ""
     });
 
     await newUser.save();
@@ -81,18 +81,13 @@ export const updateUser = async (userid, updates) => {
       throw new Error('No user found with this userid');
     }
 
-    // Update fields if provided in the updates object
     if (updates.bio !== undefined) {
       user.bio = updates.bio;
     }
     if (updates.status !== undefined) {
       user.status = updates.status;
     }
-    //if (updates.userImage !== undefined) {
-    //  user.userImage = updates.userImage;
-   // }
 
-    // Save the updated user object
     await user.save();
     signale.success("User updated successfully");
     return user;
@@ -117,6 +112,27 @@ export const deleteUser = async (userId) => {
     return { message: "User deleted successfully" };
   } catch (error) {
     signale.error("Error deleting user:", error);
+    throw error;
+  }
+};
+
+export const updateUserImage = async (userid, updates) => {
+  try {
+    await connect();
+    const user = await User.findById(userid);
+    if (!user) {
+      throw new Error('No user found with this userid');
+    }
+
+    if (updates.userImage !== undefined) {
+      user.userImage = updates.userImage;
+    }
+
+    await user.save();
+    signale.success("User updated successfully");
+    return user;
+  } catch (error) {
+    signale.error("Error updating user:", error);
     throw error;
   }
 };
