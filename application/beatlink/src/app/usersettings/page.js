@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Navbar from "../components/navbar";
 import { ProfileCard } from "../components/UserSettings/ProfileCard";
 import "../components/css/ProfileCard.css";
+import "../components/css/UserSettings.css";
 import Cookies from 'js-cookie';
 
 export default function SettingsPage() {
@@ -13,8 +15,8 @@ export default function SettingsPage() {
         const userid = Cookies.get('userid');
 
         if (!userid) {
-            console.log("userid is not available.");
-            return; 
+            //console.log("userid is not available.");
+            return;
         }
 
         const fetchUser = async () => {
@@ -28,7 +30,7 @@ export default function SettingsPage() {
                 const userData = await response.json();
                 setUser(userData);
                 //console.log(user.userid);
-                console.log("Fetched User:", userData); 
+                //console.log("Fetched User:", userData);
             } catch (error) {
                 console.error("Error fetching user:", error);
             }
@@ -48,24 +50,33 @@ export default function SettingsPage() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const userid = Cookies.get('userid');
-        console.log(userid);
+        //console.log(userid);
+
+        // Use the existing user data if new data is not provided
+        const payload = {
+            bio: bio !== '' ? bio : user.bio,
+            status: status !== '' ? status : user.status,
+        };
+
         try {
             const response = await fetch(`/api/updateuser/${userid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ bio, status }),
+                body: JSON.stringify(payload),
             });
 
             if (response.ok) {
                 const updatedUser = await response.json();
                 setUser(updatedUser);  // Update local user state with new data
-                console.log('Update successful');
+                //console.log('Update successful');
+                setBio('');
+                setStatus('');
             } else {
                 throw new Error("Failed to update user");
             }
-            
+
         } catch (error) {
             console.error("Error updating user:", error);
         }
@@ -73,32 +84,45 @@ export default function SettingsPage() {
 
 
     return (
-        <div style={{ padding: "20px", maxWidth: "300px", margin: "auto" }}>
-            {user ? (
-                <>
-                    <ProfileCard 
-                        imageSrc={user.userImage}
-                        primaryText={user.status || "Status"}
-                        secondaryText={user.bio || "Bio"}
-                        primaryTextColor="#333333"
-                        secondaryTextColor="#666666"
-                        className=""
+        <>
+        <Navbar />
+        <div className="container">
+            <div className="header">User Settings</div>
+    
+            <button className="button">Update Profile Image</button>
+            
+            {/* Display labels and the current bio and status */}
+            <div className="current-info">
+                <p className="info-label">Status:</p>
+                <p className="current-status">{user?.status || "Your status goes here."}</p>
+                <p className="info-label">Bio:</p>
+                <p className="current-bio">{user?.bio || "Your bio goes here."}</p>
+            </div>
+    
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+            <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    Status:
+                    <input
+                        className="input"
+                        type="text"
+                        placeholder="Update Status"
+                        value={status}
+                        onChange={handleStatusChange}
                     />
-                    <form onSubmit={handleSubmit}>
-                        <label>
-                            Bio:
-                            <textarea value={bio} onChange={handleBioChange} />
-                        </label>
-                        <label>
-                            Status:
-                            <input type="text" value={status} onChange={handleStatusChange} />
-                        </label>
-                        <button type="submit">Submit Changes</button>
-                    </form>
-                </>
-            ) : (
-                <p>Loading user data...</p>
-            )}
+                </label>
+                <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    Bio:
+                    <textarea
+                        className="textarea"
+                        placeholder="Update Bio"
+                        value={bio}
+                        onChange={handleBioChange}
+                    />
+                </label>
+                <button className="button button-center" type="submit">Submit Changes</button>
+            </form>
+        
         </div>
+        </>
     );
 }
