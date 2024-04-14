@@ -7,7 +7,6 @@ export default function CreatePost() {
   const router = useRouter();
   const [postTitle, setPostTitle] = useState("");
   const [spotifyLink, setSpotifyLink] = useState("");
-  const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
   //TODO: Fix this when auth is done
@@ -17,15 +16,13 @@ export default function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!postTitle || !spotifyLink || !description) {
-      setError("All fields are necessary to create a post.");
-      return;
+    if (!postTitle || !spotifyLink) {
+      return setError("All fields are necessary to create a post.");
     }
 
     const response = await CreatePostApi(
       postTitle,
       spotifyLink,
-      description,
       userId,
       playlistId,
     );
@@ -69,15 +66,6 @@ export default function CreatePost() {
             />
           </div>
           <br />
-          <div>
-            <label htmlFor="description">Description: </label>
-            <input
-              type="text"
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
           <br />
           <button type="submit">Create Post</button>
         </form>
@@ -86,13 +74,7 @@ export default function CreatePost() {
   );
 }
 
-async function CreatePostApi(
-  postTitle,
-  spotifyLink,
-  description,
-  userId,
-  playlistId,
-) {
+async function CreatePostApi(postTitle, spotifyLink, userId, playlistId) {
   try {
     const response = await fetch("/api/createpost", {
       method: "POST",
@@ -102,7 +84,6 @@ async function CreatePostApi(
       body: JSON.stringify({
         postTitle,
         spotifyLink,
-        description,
         user_id: userId,
         playlist_id: playlistId,
       }),
