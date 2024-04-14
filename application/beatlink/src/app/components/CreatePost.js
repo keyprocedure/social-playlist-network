@@ -34,7 +34,7 @@ export default function CreatePost() {
     );
 
     if (response.success) {
-      router.push("/home"); // Redirect
+      router.push(`post/${response.data.postId}`); // Redirect
     } else {
       setError(response.error || "Creating Post failed. Try again.");
     }
