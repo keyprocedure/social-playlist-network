@@ -3,7 +3,6 @@ import signale from "signale";
 import { connect, disconnect } from "../database.js";
 import uniqid from "uniqid";
 
-// TODO: Change ID to the spotify ID instead of a randomly generated ID
 export const createPlaylist = async (playlistObject) => {
   try {
     await connect();
@@ -78,4 +77,3 @@ export const getPlaylist = async (playlistId) => {
     throw error;
   }
 };
-
