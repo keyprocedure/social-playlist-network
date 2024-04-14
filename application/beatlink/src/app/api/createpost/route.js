@@ -1,5 +1,5 @@
 import { createPost } from "../../../../helpers/database/controllers/postController";
-import { requestWrapper } from "../../../../helpers/requestWrapper";
+import parseJSON from "../../../../helpers/parseJSON";
 
 export const dynamic = "force-dynamic";
 export async function POST(request) {

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { CustomButton } from "../CustomButton";
 import { Alert } from "react-bootstrap";
 import "../css/ShareButton.css";
 import { IconButton } from "../IconButton";

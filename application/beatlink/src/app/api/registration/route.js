@@ -1,7 +1,6 @@
 // app/api/registration/route.js
 
 const bcrypt = require("bcrypt");
-import signale from "signale";
 import { createUser } from "../../../../helpers/database/controllers/UserController.js";
 import parseJSON from "../../../../helpers/parseJSON.js";
 
@@ -34,7 +33,6 @@ export async function POST(request) {
     // Respond with success message (omit sensitive info)
     return Response.json({ message: "User registered successfully" });
   } catch (e) {
-    signale.error(e);
     return Response.json({ error: e.message }, { status: 500 });
   }
 }

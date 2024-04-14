@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function Logout() {
-    const router = useRouter();
+	const router = useRouter();
 
     useEffect(() => {
         Cookies.remove('userid');
@@ -12,5 +12,5 @@ export default function Logout() {
         router.push('/');
     }, [router]);
 
-    return null;
+	return null;
 }

@@ -1,5 +1,4 @@
 import makeSongRecommendation from "../../../../../helpers/aiSongRecommendation";
-import parseJSON from "../../../../../helpers/parseJSON";
 import { getSongs, getAuthorList } from "../../../../../helpers/spotifyHelper";
 import { getPlaylist } from "../../../../../helpers/database/controllers/playlistController";
 import uniqid from "uniqid";
@@ -26,7 +25,7 @@ export async function GET(request, { params }) {
         const songRecommendations = rawSongRecommendationsString.split("\n").map((song) => {
             const [songName, artist] = song.split(" by");
 
-            const cleanedSongName = songName.replace(/\\/g, "").replace(/\"/g, "").replace(/\d+\./g, "").trim();
+            const cleanedSongName = songName.replace(/\\/g, "").replace(/"/g, "").replace(/\d+\./g, "").trim();
             return {
                 id: uniqid(),
                 artist,

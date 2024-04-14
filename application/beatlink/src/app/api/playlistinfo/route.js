@@ -1,4 +1,3 @@
-import signale from "signale";
 import { buildPlaylistObject } from "../../../../helpers/spotifyHelper";
 import { createPlaylist } from "../../../../helpers/database/controllers/playlistController";
 import parseJSON from "../../../../helpers/parseJSON";

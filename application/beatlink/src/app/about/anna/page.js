@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import "../../../../public/css/zuby.css"
 import defaultPic from "../../../../public/images/default.jpg";
 import Profile from '../Profile';
