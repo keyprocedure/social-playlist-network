@@ -21,8 +21,8 @@ export default function PostPageLayout({ playlist, post }) {
 			return setFollow("Follow");
 		}
 
-		setFollow("Followed");
-	}
+    setFollow("Followed");
+  }
 
 	function handleCommentSubmission(comment) {
 		setComments([...comments, comment]);
