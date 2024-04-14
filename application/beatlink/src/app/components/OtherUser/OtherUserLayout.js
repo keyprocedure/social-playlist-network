@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../css/profile.module.scss";
-import Editprofile from "../Profile/EditProfile";
 import BackButton from "../PostPage/BackButton";
-import Link from "next/link";
-// import apiClient from "../../../helpers/libs/app.js";
-import apiClient from "../../../../helpers/libs/app";
+
 const OtherUserPageLayout = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [followersCount, setFollowersCount] = useState(21);

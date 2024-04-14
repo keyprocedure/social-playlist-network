@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../css/profile.module.scss";
-import Editprofile from "./EditProfile";
 import BackButton from "../PostPage/BackButton";
 import Link from "next/link";
-// import apiClient from "../../../helpers/libs/app.js";
 import apiClient from "../../../../helpers/libs/app";
 import { useRouter } from "next/navigation";
 import { Spinner } from '@chakra-ui/react'
@@ -31,19 +29,6 @@ const ProfilePageLayout = () => {
   useEffect(() => {
     getData();
   }, []);
-
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-  };
-
-  const renderSelectedComponent = () => {
-    switch (selectedOption) {
-      case "editprofile":
-        return <Editprofile />;
-      default:
-        return null;
-    }
-  };
 
   const handleImageClick = () => {
     router.push("/post/jfjhasfbhasbf")
@@ -89,21 +74,18 @@ const ProfilePageLayout = () => {
               <div className={styles.profileTopRightMain}>
                 <div className={styles.profileTopRight}>
                   <div>
-                    {/* <h2>9</h2> */}
                     <h2>
                       {(userData.playlists && userData.playlists.length) || 0}
                     </h2>
                     <p>Posts</p>
                   </div>
                   <div>
-                    {/* <h2>21</h2> */}
                     <h2>
                       {(userData.followers && userData.followers.length) || 0}
                     </h2>
                     <p>Followers</p>
                   </div>
                   <div>
-                    {/* <h2>10</h2> */}
                     <h2>
                       {(userData.following && userData.following.length) || 0}
                     </h2>
@@ -111,17 +93,10 @@ const ProfilePageLayout = () => {
                   </div>
                 </div>
                 <div className={styles.profileFollow}>
-                  {/* <p>Follow</p> */}
-                  {/* <p>Message</p> */}
                   <div className={styles.profileCenterOpt}>
                     <Link href="">
                       <p
-                        // onClick={() => handleOptionClick("editprofile")}
-                        // className={
-                        //   selectedOption === "editprofile"
-                        //     ? styles.selectedOption
-                        //     : ""
-                        // }
+                       
                       >
                         Edit Profile
                       </p>
@@ -130,7 +105,6 @@ const ProfilePageLayout = () => {
                 </div>
               </div>
             </div>
-            {/* <div className={styles.profileCategory}> */}
             <div className={styles.profileCenterMain}></div>
             <div className={styles.profileBottomMain}>
               <div
@@ -141,7 +115,6 @@ const ProfilePageLayout = () => {
                   <img src="/play.png" alt="image" onClick={handleImageClick} />
                 </div>
               </div>
-              {/* {renderSelectedComponent()} */}
             </div>
           </div>
         </div>
