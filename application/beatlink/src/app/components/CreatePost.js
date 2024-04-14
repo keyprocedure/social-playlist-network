@@ -2,42 +2,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
-import "./css/CreatePostButton.css";
-
-async function CreatePostApi(
-  postTitle,
-  spotifyLink,
-  description,
-  userId,
-  playlistId,
-) {
-  try {
-    const response = await fetch("/api/createpost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        postTitle,
-        spotifyLink,
-        description,
-        user_id: userId,
-        playlist_id: playlistId,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error("Create Post failed. Try again");
-    }
-
-    return { success: true, data };
-  } catch (error) {
-    console.error("An error occurred during the creating process", error);
-    return { success: false, error: error.message };
-  }
-}
 
 export default function CreatePost() {
   const router = useRouter();
@@ -46,7 +10,8 @@ export default function CreatePost() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
-  const userId = "";
+  //TODO: Fix this when auth is done
+  const userId = ""; // hard-coded values for now since our app can't distinguish who's logged in yet
   const playlistId = "";
 
   const handleSubmit = async (e) => {
@@ -119,4 +84,39 @@ export default function CreatePost() {
       </div>
     </>
   );
+}
+
+async function CreatePostApi(
+  postTitle,
+  spotifyLink,
+  description,
+  userId,
+  playlistId,
+) {
+  try {
+    const response = await fetch("/api/createpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postTitle,
+        spotifyLink,
+        description,
+        user_id: userId,
+        playlist_id: playlistId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Create Post failed. Try again");
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error("An error occurred during the creating process", error);
+    return { success: false, error: error.message };
+  }
 }
