@@ -150,6 +150,10 @@ export async function getSongs(playlistObject) {
   }
 }
 
+export async function buildPlaylistURL(playlistID) {
+  return "https://open.spotify.com/playlist/" + playlistID + "?si=12301i4914";
+}
+
 export async function buildPlaylistObject(playlistURL) {
   try {
     const playlistInformation = await getPlaylistInformation(playlistURL);
@@ -196,4 +200,3 @@ export async function buildPlaylistObject(playlistURL) {
     throw error;
   }
 }
-
