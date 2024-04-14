@@ -102,7 +102,7 @@ export default function SettingsPage() {
             });
 
             if (response.ok) {
-                console.log("Account deleted successfully.");
+                //console.log("Account deleted successfully.");
                 router.push('/logout');
             } else {
                 throw new Error("Failed to delete user");
@@ -114,7 +114,7 @@ export default function SettingsPage() {
 
     const handleImageUpdate = async () => {
 
-        console.log("Updated image URL: ", imageURL);
+        //console.log("Updated image URL: ", imageURL);
         const userid = Cookies.get('userid');
         try {
             const response = await fetch(`/api/updateuserimage/${userid}`, {
@@ -130,7 +130,7 @@ export default function SettingsPage() {
             if (response.ok) {
                 const updatedUser = await response.json();
                 setUser(updatedUser);
-                console.log("Image updated successfully.");
+                //console.log("Image updated successfully.");
                 //router.push('/logout');
             } else {
                 throw new Error("Failed to update user image");
@@ -143,7 +143,7 @@ export default function SettingsPage() {
     };
 
     const openModal = () => {
-        console.log("Opening modal...");
+        //console.log("Opening modal...");
         setShowModal(true);
     };
     const closeModal = () => setShowModal(false);
