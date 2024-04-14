@@ -20,11 +20,11 @@ export default function CreatePost() {
     }
     // https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn?si=205f55c17ce94a28
 
-    //TODO: Add a input validation checking if valid spotify URL
-
     if (!spotifyLink.startsWith("https://open.spotify.com/playlist")) {
       return setError("Not a valid Spotify Playlist URL");
     }
+
+    const playlistId = spotifyLink.split("/playlist/")[1].split("?")[0];
 
     const response = await CreatePostApi(
       postTitle,
