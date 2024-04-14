@@ -1,7 +1,6 @@
 import { Playlist } from "../models/Playlist.js";
 import signale from "signale";
-import { connect, disconnect } from "../database.js";
-import uniqid from "uniqid";
+import { connect } from "../database.js";
 
 export const createPlaylist = async (playlistObject) => {
   try {
