@@ -22,18 +22,9 @@ export default function Login() {
 
     try {
       const response = await loginApi(username, password);
-
       if (response.success) {
-        const response = await fetch(`/api/getuser/${username}`);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user");
-        }
-
-        const userData = await response.json();
-        Cookies.set('userid', userData._id);
-
-        router.push('/');
+        Cookies.set("session", "token");
+        router.push("/");
       } else {
         alert("Invalid login credentials. Please try again.");
       }
