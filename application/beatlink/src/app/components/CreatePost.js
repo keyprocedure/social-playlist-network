@@ -10,14 +10,20 @@ export default function CreatePost() {
   const [error, setError] = useState("");
 
   //TODO: Fix this when auth is done
-  const userId = ""; // hard-coded values for now since our app can't distinguish who's logged in yet
-  const playlistId = "";
+  const userId = "6616e868a3e695cd57e3a223"; // hard-coded values for now since our app can't distinguish who's logged in yet
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!postTitle || !spotifyLink) {
       return setError("All fields are necessary to create a post.");
+    }
+    // https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn?si=205f55c17ce94a28
+
+    //TODO: Add a input validation checking if valid spotify URL
+
+    if (!spotifyLink.startsWith("https://open.spotify.com/playlist")) {
+      return setError("Not a valid Spotify Playlist URL");
     }
 
     const response = await CreatePostApi(
