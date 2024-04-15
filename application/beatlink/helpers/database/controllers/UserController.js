@@ -8,7 +8,7 @@ export const findUser = async (username) => {
   try {
     await connect();
     const user = await User.findOne({ username: username });
-
+ 
     if (!user) {
       throw new Error('No user found with this username');
     }
