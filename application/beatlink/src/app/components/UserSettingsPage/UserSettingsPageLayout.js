@@ -5,10 +5,10 @@ import BackButton from "./BackButton";
 import "../css/UserSettings.css";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/navigation"
-import checkSessionCookie from '../../../../helpers/hooks/checkSessionCookie';
+import CheckSessionCookie from '../../../../helpers/hooks/CheckSessionCookie';
 
 export default function SettingsPage() {
-    const isLoading = checkSessionCookie();
+    const isLoading = CheckSessionCookie();
     const [showModal, setShowModal] = useState(false);
     const [imageURL, setImageURL] = useState('');
     const [user, setUser] = useState(null);

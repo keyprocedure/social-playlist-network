@@ -3,10 +3,10 @@ import React from 'react';
 import Image from "next/image";
 import Navbar from "../components/navbar";
 import CreatePost from '../components/CreatePost';
-import checkSessionCookie from '../../../helpers/hooks/checkSessionCookie';
+import CheckSessionCookie from '../../../helpers/hooks/CheckSessionCookie';
 
 export default function CreatePostPage() {
-    const isLoading = checkSessionCookie();
+    const isLoading = CheckSessionCookie();
     return (
         <>
             <Navbar />

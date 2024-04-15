@@ -1,11 +1,11 @@
-// hooks/checkSessionCookie.js
+// hooks/CheckSessionCookie.js
 
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
-export default function checkSessionCookie() {
+export default function CheckSessionCookie() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
