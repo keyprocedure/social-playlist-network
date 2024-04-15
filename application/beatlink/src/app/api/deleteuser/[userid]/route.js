@@ -1,6 +1,6 @@
 // api/deleteuser/[userid].js
-import { findUserById } from '../../../../../helpers/database/controllers/userController';
-import { deleteUser } from '../../../../../helpers/database/controllers/userController';
+import { findUserById } from '../../../../../helpers/database/controllers/UserController';
+import { deleteUser } from '../../../../../helpers/database/controllers/UserController';
 
 export const dynamic = "force-dynamic";
 export async function DELETE(request, { params }) {

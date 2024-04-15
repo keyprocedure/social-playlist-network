@@ -1,6 +1,6 @@
 // app/api/updateuser/[userid].js
-import { updateUser } from '../../../../../helpers/database/controllers/userController';
-import { findUserById } from '../../../../../helpers/database/controllers/userController';
+import { updateUser } from '../../../../../helpers/database/controllers/UserController';
+import { findUserById } from '../../../../../helpers/database/controllers/UserController';
 
 export const dynamic = "force-dynamic";
 

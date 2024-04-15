@@ -1,6 +1,6 @@
 // app/api/updateuserimage/[userid].js
-import { updateUserImage } from '../../../../../helpers/database/controllers/userController';
-import { findUserById } from '../../../../../helpers/database/controllers/userController';
+import { updateUserImage } from '../../../../../helpers/database/controllers/UserController';
+import { findUserById } from '../../../../../helpers/database/controllersUserController';
 
 export const dynamic = "force-dynamic";
 export async function POST(request, { params }) {

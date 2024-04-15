@@ -1,5 +1,5 @@
 // app/api/getuserbyid/[userid].js
-import { findUserById } from "../../../../../helpers/database/controllers/userController";
+import { findUserById } from "../../../../../helpers/database/controllers/UserController";
 
 export const dynamic = "force-dynamic";
 export async function GET(request, { params }) {
