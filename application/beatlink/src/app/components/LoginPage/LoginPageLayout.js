@@ -32,7 +32,15 @@ export default function LoginPageLayout() {
       const response = await fetchLoginResponse(username, password);
 
       if (response.ok) {
-        Cookies.set("session", "token");
+        const getUserResponse = await fetch(`../../api/getuser/${username}`);
+
+        if (!getUserResponse.ok) {
+          throw new Error("Failed to fetch user");
+        }
+
+        const userData = await getUserResponse.json();
+        Cookies.set('userid', userData._id);
+
         router.push("/"); // Redirect to home page on successful login
       }
     } catch (error) {

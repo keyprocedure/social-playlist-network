@@ -10,7 +10,7 @@ export default function checkSessionCookie() {
   const router = useRouter();
 
   useEffect(() => {
-    const sessionCookie = Cookies.get('session');
+    const sessionCookie = Cookies.get('userid');
     
     if (!sessionCookie) {
       // If the session cookie is not set, redirect
