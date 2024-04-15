@@ -8,6 +8,7 @@ export default function PostPage({ params }) {
 
   const [playlist, setPlaylist] = useState(null);
   const [post, setPost] = useState(null);
+  const [author, setAuthor] = useState(null);
 
   useEffect(() => {
     fetchPlaylistFromPostId(postId).then((playlist) => {
@@ -15,14 +16,17 @@ export default function PostPage({ params }) {
     });
     fetchPostFromPostId(postId).then((post) => {
       setPost(post);
+      fetchUser(post.user_id).then((author) => {
+        setAuthor(author);
+      });
     });
   }, [postId]);
 
   return (
     <div>
       <Navbar />
-      {playlist && post ? (
-        <PostPageLayout playlist={playlist} post={post} />
+      {playlist && post && author ? (
+        <PostPageLayout playlist={playlist} post={post} author={author} />
       ) : (
         <p>Loading...</p>
       )}
@@ -45,6 +49,24 @@ async function fetchPostFromPostId(postId) {
 
   if (!response.ok) {
     throw new Error("Failed to fetch post");
+  }
+
+  return response.json();
+}
+
+async function fetchUser(userId) {
+  const response = await fetch("/api/getuser", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(data.error);
   }
 
   return response.json();

@@ -8,22 +8,16 @@ import { LikeButton } from "./LikeButton";
 import { CommentSubmit } from "./CommentSubmit";
 import { VerticalLine } from "./VerticalLine";
 import { CustomButton } from "../CustomButton";
-import Cookies from "js-cookie";
 import "../css/PostPageLayout.css";
 import { CommentCard } from "./CommentCard";
 import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
 
 //FIX: Change user ID with username, add a way to convert the ID to a username
-export default function PostPageLayout({ playlist, post }) {
+export default function PostPageLayout({ playlist, post, author }) {
   const [comments, setComments] = useState(post.comments);
   const [follow, setFollow] = useState("Follow");
-  const [user, setUser] = useState(null);
 
   const isLoggedIn = CheckSessionCookie();
-
-  useEffect(() => {
-    fetchUser(Cookies.get("userid")).then((user) => setUser(user));
-  }, []);
 
   async function handleFollow() {
     if (follow === "Followed") {
@@ -50,7 +44,7 @@ export default function PostPageLayout({ playlist, post }) {
             <ProfileCard
               primaryText={"Posted by:"}
               primaryTextColor={"grey"}
-              secondaryText={post.user_id}
+              secondaryText={author.username}
               secondaryTextColor={"grey"}
             />
           </div>
@@ -108,28 +102,4 @@ export default function PostPageLayout({ playlist, post }) {
       )}
     </>
   );
-}
-
-async function fetchUser(userId) {
-  try {
-    const response = await fetch("/api/getuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error);
-    }
-
-    return { success: true, data };
-  } catch (error) {
-    throw { success: false, error: error.message };
-  }
 }
