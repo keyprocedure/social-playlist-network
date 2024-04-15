@@ -46,7 +46,6 @@ export default function RegisterPageLayout() {
       // Redirect to login page on successful register
       setError(response.error);
     } catch (error) {
-      console.log("Entered here, error is: ", error);
       setError(error.error);
     }
   }
