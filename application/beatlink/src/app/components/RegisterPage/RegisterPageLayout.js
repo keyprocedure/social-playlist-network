@@ -42,6 +42,7 @@ export default function RegisterPageLayout() {
       if (response.success) {
         return router.push("/login");
       }
+
       // Redirect to login page on successful register
       setError(response.error);
     } catch (error) {
@@ -155,10 +156,10 @@ async function fetchSignUpResponse(email, username, password, birthday) {
       }),
     });
 
-    if (!response.ok) {
-      throw new Error("Register Failed");
-    }
     const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error);
+    }
 
     return { success: true, data };
   } catch (error) {
