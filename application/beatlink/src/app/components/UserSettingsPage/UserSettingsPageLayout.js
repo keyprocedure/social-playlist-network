@@ -24,7 +24,7 @@ export default function SettingsPage() {
             return;
         }
 
-        const fetchUser = async () => {
+        (async () => {
             try {
                 const response = await fetch(`/api/getuserbyid/${userid}`);
 
@@ -39,9 +39,7 @@ export default function SettingsPage() {
             } catch (error) {
                 console.error("Error fetching user:", error);
             }
-        };
-
-        fetchUser();
+        })();
     }, []);
 
     const handleBioChange = (event) => {
