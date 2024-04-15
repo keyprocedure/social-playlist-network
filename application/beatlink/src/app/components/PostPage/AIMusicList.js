@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 
 export function AIMusicList({ playlist }) {
@@ -12,7 +12,7 @@ export function AIMusicList({ playlist }) {
 					setRecommendations(recommendations.songRecommendations);
 				})
 				.catch((error) => {
-					setError(error);
+					console.log(error);
 				});
 		}
 		return setLoading(false);

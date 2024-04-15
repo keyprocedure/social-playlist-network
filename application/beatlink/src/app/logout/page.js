@@ -1,16 +1,16 @@
 "use client";
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function Logout() {
-    const router = useRouter();
+	const router = useRouter();
 
-    useEffect(() => {
-        Cookies.remove('session');
-        console.log('Logged out');
-        router.push('/');
-    }, [router]);
+	useEffect(() => {
+		Cookies.remove("session");
+		console.log("Logged out");
+		router.push("/");
+	}, [router]);
 
-    return null;
+	return null;
 }

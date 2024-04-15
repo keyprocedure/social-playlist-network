@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState } from "react";
 import { IconButton } from "../IconButton";
 import Modal from "react-bootstrap/Modal";
 import { CustomButton } from "../CustomButton";
 import { AIMusicList } from "./AIMusicList";
-import { Spinner } from "react-bootstrap";
 
 export function AIRecommendation({ playlist, width, height }) {
 	const [show, setShow] = useState(false);

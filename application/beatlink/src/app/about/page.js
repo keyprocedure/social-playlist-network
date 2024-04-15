@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import "../../../public/css/about.css";
 import checkSessionCookie from '../../../helpers/hooks/checkSessionCookie';
 

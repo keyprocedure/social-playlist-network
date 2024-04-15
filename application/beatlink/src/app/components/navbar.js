@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Cookies from "js-cookie";
 
 export default function Navbar() {
@@ -22,7 +21,6 @@ export default function Navbar() {
           style={{ width: "100px", height: "auto" }}
         />
       </a>
-
       <div>
         <ul id="navbar">
           <li>
@@ -58,4 +56,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
 
