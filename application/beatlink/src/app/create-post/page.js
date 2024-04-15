@@ -14,8 +14,7 @@ export default function CreatePostPage() {
                 <div></div>
             ) : (
                 <div style={{ margin: "20px", backgroundColor: "rgba(255, 255, 255, 0.75)", padding: "20px" }}>
-                        <h1>Create New Post</h1>
-                        <CreatePost />
+                    <CreatePost />
                 </div>
             )}
         </>

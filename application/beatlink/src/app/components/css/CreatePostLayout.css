@@ -1,0 +1,57 @@
+
+.post-grid-container {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 0.8fr 1.3fr 0.9fr;
+    grid-template-rows: 0.5fr 2fr;
+    grid-template-areas:
+        ". post-title ."
+        ". post-form .";
+    justify-items: stretch;
+    height: 50vh;
+}
+
+.post-title {
+    grid-area: post-title;
+    padding-top: 3%;
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.post-form {
+    grid-area: post-form;
+}
+
+.form-container {
+    width: 20rem;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* Ensures flex items are stacked vertically */
+    justify-content: center;
+    border-radius: 3%;
+    box-shadow: 0px 10px 17px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    outline: solid rgba(0, 0, 0, 0.1);
+}
+
+.flex-column {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group {
+    width: 75%;
+    margin-bottom: 15px;
+}
+
+.form-control {
+    border-color: rgb(171, 171, 171);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+
