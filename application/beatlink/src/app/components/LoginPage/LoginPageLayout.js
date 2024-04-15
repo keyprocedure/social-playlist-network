@@ -39,7 +39,7 @@ export default function LoginPageLayout() {
         }
 
         const userData = await getUserResponse.json();
-        Cookies.set('userid', userData._id);
+        Cookies.set("userid", userData._id);
 
         router.push("/"); // Redirect to home page on successful login
       }
@@ -56,42 +56,45 @@ export default function LoginPageLayout() {
 
         <div className="login-form d-flex justify-content-center">
           <div className="form-container">
-            <div className="d-flex flex-column">
-              <div className="input-group mb-3">
-                <CustomInput
-                  type={"text"}
-                  placeholderText={"Username"}
-                  className={"form-control"}
-                  onChange={handleUsernameChange}
-                ></CustomInput>
+            <form onSubmit={handleSubmit}>
+              <div className="d-flex flex-column">
+                <div className="input-group mb-3">
+                  <CustomInput
+                    type={"text"}
+                    placeholderText={"Username"}
+                    name={"username"}
+                    className={"form-control"}
+                    onChange={handleUsernameChange}
+                  ></CustomInput>
+                </div>
+
+                <div className="input-group mb-3">
+                  <CustomInput
+                    type={"password"}
+                    placeholderText={"Password"}
+                    name={"password"}
+                    className={"form-control"}
+                    onChange={handlePasswordChange}
+                  ></CustomInput>
+                </div>
+
+                <CustomTextWithLink
+                  labelText={"Don't have an account yet? "}
+                  href={"/register"}
+                  linkText={"Register!"}
+                ></CustomTextWithLink>
+
+                <CustomButton
+                  type={"submit"}
+                  text={"Login"}
+                  className={"btn btn-dark login-btn"}
+                ></CustomButton>
+
+                {error && (
+                  <CustomAlert text={error} type={"danger"} className="mt-3" />
+                )}
               </div>
-
-              <div className="input-group mb-3">
-                <CustomInput
-                  type={"password"}
-                  placeholderText={"Password"}
-                  className={"form-control"}
-                  onChange={handlePasswordChange}
-                ></CustomInput>
-              </div>
-
-              <CustomTextWithLink
-                labelText={"Don't have an account yet? "}
-                href={"/register"}
-                linkText={"Register!"}
-              ></CustomTextWithLink>
-
-              {/* TODO: Add onChange prop for CustomButton that makes API request */}
-              <CustomButton
-                text={"Login"}
-                className={"btn btn-dark login-btn"}
-                onClick={handleSubmit}
-              ></CustomButton>
-
-              {error && (
-                <CustomAlert text={error} type={"danger"} className="mt-3" />
-              )}
-            </div>
+            </form>
           </div>
         </div>
       </div>
