@@ -75,65 +75,75 @@ export default function RegisterPageLayout() {
 
         <div className="register-form d-flex justify-content-center">
           <div className="form-container">
-            <div className="d-flex flex-column">
-              <div className="input-group mb-3">
-                <CustomInput
-                  type={"email"}
-                  placeholderText={"Email"}
-                  className={"form-control"}
-                  onChange={handleEmailChange}
-                ></CustomInput>
+            <form onSubmit={handleSubmit}>
+              <div className="d-flex flex-column">
+                <div className="input-group mb-3">
+                  <CustomInput
+                    type={"email"}
+                    placeholderText={"Email"}
+                    name={"email"}
+                    className={"form-control"}
+                    onChange={handleEmailChange}
+                  ></CustomInput>
+                </div>
+
+                <div className="input-group mb-3">
+                  <CustomInput
+                    type={"text"}
+                    placeholderText={"Username"}
+                    name="username"
+                    className={"form-control"}
+                    onChange={handleUsernameChange}
+                  ></CustomInput>
+                </div>
+
+                <div className="input-group mb-3">
+                  <CustomInput
+                    type={"password"}
+                    placeholderText={"Password"}
+                    name="password"
+                    className={"form-control"}
+                    onChange={handlePasswordChange}
+                  ></CustomInput>
+                </div>
+
+                <div className="input-group mb-3">
+                  <CustomInput
+                    type={"date"}
+                    placeholderText={"Birthday"}
+                    name="birthday"
+                    className={"form-control"}
+                    onChange={handleBirthdayChange}
+                  ></CustomInput>
+                </div>
+
+                <CustomTextWithLink
+                  labelText={"Already have an account? "}
+                  href={"/login"}
+                  linkText={"Login!"}
+                ></CustomTextWithLink>
+
+                <CustomButton
+                  type={"submit"}
+                  text={"Register"}
+                  className={"btn btn-dark register-btn"}
+                ></CustomButton>
+
+                {/* */}
+                {error && (
+                  <CustomAlert
+                    text={error}
+                    type={"danger"}
+                    className={"mt-3"}
+                  />
+                )}
               </div>
-
-              <div className="input-group mb-3">
-                <CustomInput
-                  type={"text"}
-                  placeholderText={"Username"}
-                  className={"form-control"}
-                  onChange={handleUsernameChange}
-                ></CustomInput>
-              </div>
-
-              <div className="input-group mb-3">
-                <CustomInput
-                  type={"password"}
-                  placeholderText={"Password"}
-                  className={"form-control"}
-                  onChange={handlePasswordChange}
-                ></CustomInput>
-              </div>
-
-              <div className="input-group mb-3">
-                <CustomInput
-                  type={"date"}
-                  placeholderText={"Birthday"}
-                  className={"form-control"}
-                  onChange={handleBirthdayChange}
-                ></CustomInput>
-              </div>
-
-              <CustomTextWithLink
-                labelText={"Already have an account? "}
-                href={"/login"}
-                linkText={"Login!"}
-              ></CustomTextWithLink>
-
-              <CustomButton
-                text={"Register"}
-                className={"btn btn-dark register-btn"}
-                onClick={handleSubmit}
-              ></CustomButton>
-
-              {/* */}
-              {error && (
-                <CustomAlert text={error} type={"danger"} className={"mt-3"} />
-              )}
-              {/* <CustomAlert
+            </form>
+            {/* <CustomAlert
                 text={"Test"}
                 type={"danger"}
                 className={"mt-3"}
               ></CustomAlert> */}
-            </div>
           </div>
         </div>
       </div>
