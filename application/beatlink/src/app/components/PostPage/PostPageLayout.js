@@ -31,7 +31,6 @@ export default function PostPageLayout({ playlist, post }) {
 
   return (
     <>
-      <Navbar />
       <div className="page-grid-container">
         <div className="back-button">
           <BackButton width={"40px"} height={"40px"} />
