@@ -12,7 +12,6 @@ import "../css/PostPageLayout.css";
 import { CommentCard } from "./CommentCard";
 import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
 
-//FIX: Change user ID with username, add a way to convert the ID to a username
 export default function PostPageLayout({ playlist, post, author }) {
   const [comments, setComments] = useState(post.comments);
   const [follow, setFollow] = useState("Follow");
@@ -46,6 +45,7 @@ export default function PostPageLayout({ playlist, post, author }) {
               primaryTextColor={"grey"}
               secondaryText={author.username}
               secondaryTextColor={"grey"}
+              imageSrc={author.userImage}
             />
           </div>
           <div className="post-area">
