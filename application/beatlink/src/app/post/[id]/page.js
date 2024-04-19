@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import PostPageLayout from "../../components/PostPage/PostPageLayout";
 import Navbar from "../../components/navbar";
+import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
 
 export default function PostPage({ params }) {
   const postId = params.id;
@@ -9,23 +10,31 @@ export default function PostPage({ params }) {
   const [playlist, setPlaylist] = useState(null);
   const [post, setPost] = useState(null);
   const [author, setAuthor] = useState(null);
+  const [user, setUser] = useState(null);
+
+  const noSessionCookieSet = CheckSessionCookie();
 
   useEffect(() => {
-    fetchPlaylistFromPostId(postId).then((playlist) => {
-      setPlaylist(playlist);
-    });
-    fetchPostFromPostId(postId).then((post) => {
-      setPost(post);
-      fetchUser(post.user_id).then((author) => {
-        setAuthor(author);
+    // If session cookie exists, (noSessionCookieSet = false) then render the page and make requests
+    if (!noSessionCookieSet) {
+      fetchPlaylistFromPostId(postId).then((playlist) => {
+        setPlaylist(playlist);
       });
-    });
-  }, [postId]);
+      fetchPostFromPostId(postId).then((post) => {
+        setPost(post);
+        fetchUser(post.user_id).then((author) => {
+          setAuthor(author);
+        });
+      });
+
+      fetchUser(Cookies.get("userid")).then((user) => setUser(user));
+    }
+  }, [postId, noSessionCookieSet]);
 
   return (
     <div>
       <Navbar />
-      {playlist && post && author ? (
+      {playlist && post && author && user ? (
         <PostPageLayout playlist={playlist} post={post} author={author} />
       ) : (
         <p>Loading...</p>
