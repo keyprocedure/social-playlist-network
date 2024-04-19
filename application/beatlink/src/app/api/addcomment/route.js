@@ -4,16 +4,16 @@ import parseJSON from "../../../../helpers/parseJSON";
 
 export const dynamic = "force-dynamic";
 export async function POST(request) {
-    try {
-        const body = await parseJSON(request);
+  try {
+    const body = await parseJSON(request);
 
-        const { postId, userId, comment } = body;
+    const { postId, userId, username, comment } = body;
 
-        // Add comment to post
-        await addComment({ postId, userId, comment });
+    // Add comment to post
+    await addComment({ postId, userId, username, comment });
 
-        return Response.json({ message: "Comment Added" });
-    } catch (e) {
-        return Response.json({ error: e.message }, { status: 500 });
-    }
+    return Response.json({ message: "Comment Added" });
+  } catch (e) {
+    return Response.json({ error: e.message }, { status: 500 });
+  }
 }
