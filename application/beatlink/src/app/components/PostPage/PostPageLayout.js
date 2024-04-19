@@ -11,7 +11,7 @@ import { CustomButton } from "../CustomButton";
 import "../css/PostPageLayout.css";
 import { CommentCard } from "./CommentCard";
 
-export default function PostPageLayout({ playlist, post, author }) {
+export default function PostPageLayout({ playlist, post, author, user }) {
   const [comments, setComments] = useState(post.comments);
   const [follow, setFollow] = useState("Follow");
 
@@ -79,8 +79,9 @@ export default function PostPageLayout({ playlist, post, author }) {
             return (
               <div key={id}>
                 <CommentCard
-                  username={comment.userId}
+                  username={comment.username}
                   comment={comment.comment}
+                  imageSrc={comment.userImage}
                 />
               </div>
             );
@@ -90,6 +91,7 @@ export default function PostPageLayout({ playlist, post, author }) {
           <CommentSubmit
             post={post}
             handleCommentSubmission={handleCommentSubmission}
+            user={user}
           />
         </div>
       </div>

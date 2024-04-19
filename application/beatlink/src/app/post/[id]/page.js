@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PostPageLayout from "../../components/PostPage/PostPageLayout";
 import Navbar from "../../components/navbar";
 import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
-
+import Cookies from "js-cookie";
 export default function PostPage({ params }) {
   const postId = params.id;
 
@@ -35,7 +35,12 @@ export default function PostPage({ params }) {
     <div>
       <Navbar />
       {playlist && post && author && user ? (
-        <PostPageLayout playlist={playlist} post={post} author={author} />
+        <PostPageLayout
+          playlist={playlist}
+          post={post}
+          author={author}
+          user={user}
+        />
       ) : (
         <p>Loading...</p>
       )}

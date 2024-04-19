@@ -1,15 +1,12 @@
 import React from "react";
 import { ProfileCard } from "../PostPage/ProfileCard";
-import '../css/CommentCard.css';
+import "../css/CommentCard.css";
 
-
-export function CommentCard({ username, comment }) {
+export function CommentCard({ username, comment, imageSrc }) {
   return (
     <div>
       <ProfileCard
-        imageSrc={
-          "https://image.tmdb.org/t/p/original/52SNpDJJCgBVfZtibLuXN1ZrliC.jpg"
-        }
+        imageSrc={imageSrc}
         primaryText={username}
         secondaryText={comment}
         primaryTextColor={"grey"}

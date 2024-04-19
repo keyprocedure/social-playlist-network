@@ -7,10 +7,9 @@ export async function POST(request) {
   try {
     const body = await parseJSON(request);
 
-    const { postId, userId, username, comment } = body;
-
+    const { postId, userId, username, userImage, comment } = body;
     // Add comment to post
-    await addComment({ postId, userId, username, comment });
+    await addComment({ postId, userId, username, userImage, comment });
 
     return Response.json({ message: "Comment Added" });
   } catch (e) {
