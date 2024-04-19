@@ -107,7 +107,13 @@ export const removeLike = async (postId) => {
   }
 };
 
-export const addComment = async ({ postId, userId, comment }) => {
+export const addComment = async ({
+  postId,
+  userId,
+  username,
+  userImage,
+  comment,
+}) => {
   try {
     await connect();
 
@@ -117,7 +123,7 @@ export const addComment = async ({ postId, userId, comment }) => {
 
     await Post.updateOne(
       { id: postId },
-      { $push: { comments: { userId, comment } } },
+      { $push: { comments: { userId, username, userImage, comment } } },
     );
     signale.success("Comment Added");
   } catch (error) {
