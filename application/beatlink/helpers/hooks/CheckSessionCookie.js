@@ -1,16 +1,16 @@
-// hooks/checkSessionCookie.js
+// hooks/CheckSessionCookie.js
 
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
-export default function checkSessionCookie() {
+export default function CheckSessionCookie() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    const sessionCookie = Cookies.get('session');
+    const sessionCookie = Cookies.get('userid');
     
     if (!sessionCookie) {
       // If the session cookie is not set, redirect

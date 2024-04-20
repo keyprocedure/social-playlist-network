@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import checkSessionCookie from "../../helpers/hooks/checkSessionCookie";
+import CheckSessionCookie from "../../helpers/hooks/CheckSessionCookie";
 import Navbar from "./components/navbar.js";
 
 export default function Home() {
-  const isLoading = checkSessionCookie();
+  const isLoading = CheckSessionCookie();
 
   return (
     <>
