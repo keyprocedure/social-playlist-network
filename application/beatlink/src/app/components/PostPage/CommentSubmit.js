@@ -9,24 +9,26 @@ export function CommentSubmit({ post, handleCommentSubmission, user }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const postId = post.id;
-    const userId = user._id;
-    const username = user.username;
-    const userImage = user.userImage;
+    if (comment) {
+      const postId = post.id;
+      const userId = user._id;
+      const username = user.username;
+      const userImage = user.userImage;
 
-    const commentObject = { postId, userId, username, userImage, comment };
+      const commentObject = { postId, userId, username, userImage, comment };
 
-    // Sample API Request
-    await fetch("/api/addcomment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(commentObject),
-    });
+      // Sample API Request
+      await fetch("/api/addcomment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentObject),
+      });
 
-    setComment("");
-    handleCommentSubmission(commentObject); // re-renders page
+      setComment("");
+      handleCommentSubmission(commentObject); // re-renders page
+    }
   }
 
   function handleChange(event) {
