@@ -1,9 +1,9 @@
 "use client";
 import "../../../public/css/about.css";
-import checkSessionCookie from '../../../helpers/hooks/checkSessionCookie';
+import CheckSessionCookie from '../../../helpers/hooks/CheckSessionCookie';
 
 export default function About() {
-    const isLoading = checkSessionCookie();
+    const isLoading = CheckSessionCookie();
 
     if (isLoading) {
         return <div></div>;

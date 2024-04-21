@@ -10,11 +10,13 @@ export const createPost = async (postObject) => {
     const postTitle = postObject.postTitle;
     const playlistId = postObject.playlist_id;
 
-    if (await postExists(postTitle, playlistId)) {
+    if (await postExists(postTitle)) {
       throw new Error("Post already exists");
     } else {
+      const postId = uniqid();
+
       const newPost = new Post({
-        id: uniqid(),
+        id: postId,
         postTitle,
         user_id: postObject.user_id,
         playlist_id: playlistId,
@@ -23,6 +25,8 @@ export const createPost = async (postObject) => {
       });
       await newPost.save();
       signale.success("Post Created");
+
+      return { postId, postTitle, playlistId };
     }
   } catch (error) {
     throw error;
@@ -37,7 +41,7 @@ export const getPost = async (postId) => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 const postExists = async (postId) => {
   try {
@@ -103,7 +107,13 @@ export const removeLike = async (postId) => {
   }
 };
 
-export const addComment = async ({ postId, userId, comment }) => {
+export const addComment = async ({
+  postId,
+  userId,
+  username,
+  userImage,
+  comment,
+}) => {
   try {
     await connect();
 
@@ -113,7 +123,7 @@ export const addComment = async ({ postId, userId, comment }) => {
 
     await Post.updateOne(
       { id: postId },
-      { $push: { comments: { userId, comment } } },
+      { $push: { comments: { userId, username, userImage, comment } } },
     );
     signale.success("Comment Added");
   } catch (error) {
@@ -151,4 +161,3 @@ export const getPlaylistFromPost = async (postId) => {
     throw error;
   }
 };
-
