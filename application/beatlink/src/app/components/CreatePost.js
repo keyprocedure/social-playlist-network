@@ -15,8 +15,7 @@ export default function CreatePost() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  //TODO: Fix this when auth is done
-  const userId = Cookies.get("userid"); // hard-coded values for now since our app can't distinguish who's logged in yet
+  const userId = Cookies.get("userid");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
