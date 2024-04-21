@@ -1,9 +1,13 @@
+const nextJest = require("next/jest");
 /**
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
 
 /** @type {import('jest').Config} */
+const createJestConfig = nextJest({
+  dir: "./",
+});
 const config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -195,4 +199,4 @@ const config = {
   // watchman: true,
 };
 
-export default config;
+export default createJestConfig(config);
