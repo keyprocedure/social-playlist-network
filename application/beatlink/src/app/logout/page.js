@@ -6,11 +6,11 @@ import Cookies from "js-cookie";
 export default function Logout() {
 	const router = useRouter();
 
-	useEffect(() => {
-		Cookies.remove("session");
-		console.log("Logged out");
-		router.push("/");
-	}, [router]);
+    useEffect(() => {
+        Cookies.remove('userid');
+        //console.log('Logged out');
+        router.push('/');
+    }, [router]);
 
 	return null;
 }
