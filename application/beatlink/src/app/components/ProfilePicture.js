@@ -5,10 +5,17 @@ import Image from "next/image";
 export function ProfilePicture({ src, width, height, className }) {
   if (src) {
     return (
-      <Image className={className} src={src} alt={"Profile Picture"} width={width} height={height} />
+      <Image
+        className={className}
+        src={src}
+        alt={"Profile Picture"}
+        width={width}
+        height={height}
+        style={{ borderRadius: "50%", marginRight: "10px" }}
+      />
     );
   } else {
-    return <DefaultProfilePicture width={width} height={height} />;
+    return <DefaultProfilePicture width={width} height={height} style={{ borderRadius: "50%", marginRight: "10px" }} />;
   }
 }
 

@@ -4,23 +4,23 @@ import BackButton from "../PostPage/BackButton";
 import Link from "next/link";
 import apiClient from "../../../../helpers/libs/app";
 import { useRouter } from "next/navigation";
-import { Spinner } from '@chakra-ui/react'
-
+import { Spinner } from "@chakra-ui/react";
+import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
+import Cookies from "js-cookie";
 
 const ProfilePageLayout = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const isLoading = CheckSessionCookie();
   const [userData, setUserData] = useState(null);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [playlistImages, setPlaylistImages] = useState([]);
   const router = useRouter();
-
-  const userId = "661b473939b29ce703b92d93";
 
   const getData = async () => {
     try {
+      const userId = await Cookies.get("userid");
       const response = await apiClient.post("/getuser", { userId });
-      console.log("data of all", response);
-      setUserData(response);
-      setIsLoading(false);
+
+      setUserData(response.user);
+      setPlaylistImages(response.posts);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -30,25 +30,28 @@ const ProfilePageLayout = () => {
     getData();
   }, []);
 
-  const handleImageClick = () => {
-    router.push("/post/jfjhasfbhasbf")
-  }
+  const handleImageClick = (id) => {
+    router.push(`/post/${id}`);
+  };
 
   return (
     <>
       {isLoading ? (
         // <div>Loading...</div>
         <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
         />
       ) : (
         <div className={styles.profileMainDiv}>
           <div className={styles.profileContainer}>
-            <div className="back-button" style={{justifyContent: "flex-start"}}>
+            <div
+              className="back-button"
+              style={{ justifyContent: "flex-start" }}
+            >
               <BackButton width={"40px"} height={"40px"} />
             </div>
 
@@ -57,49 +60,39 @@ const ProfilePageLayout = () => {
                 {userData && (
                   <div className={styles.profileTopLeft}>
                     <div className={styles.profileTopLeftImg}>
-                      <img src={userData.userImage} alt="PROFILE" />
+                      <img src={userData?.userImage} alt="PROFILE" />
                     </div>
                     <div className={styles.profileTopLeftText}>
-                      <h2>{userData.username}</h2>
-                      <p>{userData.email}</p>
+                      <h2>{userData?.username}</h2>
+                      <p>{userData?.email}</p>
                     </div>
                   </div>
                 )}
-                <div style={{ width: "50%" }}>
-                  This is a simple generator that you can use to make fonts for
-                  Instagram. Simply put your normal text in the first box and
-                  fonts for Instagram bio/captions/etc.
-                </div>
+                <div style={{ width: "50%" }}>{userData?.bio}</div>
               </div>
               <div className={styles.profileTopRightMain}>
                 <div className={styles.profileTopRight}>
                   <div>
-                    <h2>
-                      {(userData.playlists && userData.playlists.length) || 0}
-                    </h2>
+                    <h2>{(playlistImages && playlistImages?.length) || 0}</h2>
                     <p>Posts</p>
                   </div>
                   <div>
                     <h2>
-                      {(userData.followers && userData.followers.length) || 0}
+                      {(userData?.followers && userData?.followers.length) || 0}
                     </h2>
                     <p>Followers</p>
                   </div>
                   <div>
                     <h2>
-                      {(userData.following && userData.following.length) || 0}
+                      {(userData?.following && userData?.following.length) || 0}
                     </h2>
                     <p>Following</p>
                   </div>
                 </div>
                 <div className={styles.profileFollow}>
                   <div className={styles.profileCenterOpt}>
-                    <Link href="">
-                      <p
-                       
-                      >
-                        Edit Profile
-                      </p>
+                    <Link href="/usersettings">
+                      <p>Edit Profile</p>
                     </Link>
                   </div>
                 </div>
@@ -111,9 +104,18 @@ const ProfilePageLayout = () => {
                 className={styles.profileImagesPlay}
                 style={{ display: "flex", gap: "10px" }}
               >
-                <div className={styles.profilePlaylistImg}>
+                {/* <div className={styles.profilePlaylistImg}>
                   <img src="/play.png" alt="image" onClick={handleImageClick} />
-                </div>
+                </div> */}
+                {playlistImages.map((posts, index) => (
+                  <div key={index} className={styles.profilePlaylistImg}>
+                    <img
+                      src={posts.image}
+                      alt={`Playlist ${index}`}
+                      onClick={() => handleImageClick(posts.postId)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
