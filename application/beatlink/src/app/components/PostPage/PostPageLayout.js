@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AIRecommendation } from "./AIRecommendation";
 import PostImage from "./PostImage";
 import ShareButton from "./ShareButton";
@@ -8,12 +8,10 @@ import { LikeButton } from "./LikeButton";
 import { CommentSubmit } from "./CommentSubmit";
 import { VerticalLine } from "./VerticalLine";
 import { CustomButton } from "../CustomButton";
-import Navbar from "../navbar";
 import "../css/PostPageLayout.css";
 import { CommentCard } from "./CommentCard";
 
-//FIX: Change user ID with username, add a way to convert the ID to a username
-export default function PostPageLayout({ playlist, post }) {
+export default function PostPageLayout({ playlist, post, author, user }) {
   const [comments, setComments] = useState(post.comments);
   const [follow, setFollow] = useState("Follow");
 
@@ -31,7 +29,6 @@ export default function PostPageLayout({ playlist, post }) {
 
   return (
     <>
-      <Navbar />
       <div className="page-grid-container">
         <div className="back-button">
           <BackButton width={"40px"} height={"40px"} />
@@ -40,8 +37,9 @@ export default function PostPageLayout({ playlist, post }) {
           <ProfileCard
             primaryText={"Posted by:"}
             primaryTextColor={"grey"}
-            secondaryText={post.user_id}
+            secondaryText={author.username}
             secondaryTextColor={"grey"}
+            imageSrc={author.userImage}
           />
         </div>
         <div className="post-area">
@@ -81,8 +79,9 @@ export default function PostPageLayout({ playlist, post }) {
             return (
               <div key={id}>
                 <CommentCard
-                  username={comment.userId}
+                  username={comment.username}
                   comment={comment.comment}
+                  imageSrc={comment.userImage}
                 />
               </div>
             );
@@ -92,6 +91,7 @@ export default function PostPageLayout({ playlist, post }) {
           <CommentSubmit
             post={post}
             handleCommentSubmission={handleCommentSubmission}
+            user={user}
           />
         </div>
       </div>
