@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CustomInput } from "./CustomInput";
@@ -6,7 +6,7 @@ import { CustomButton } from "./CustomButton.js";
 import CustomAlert from "./CustomAlert";
 import "../components/css/CreatePostLayout.css";
 
-import Head from "next/head";
+import Cookies from "js-cookie";
 
 export default function CreatePost() {
   const router = useRouter();
@@ -16,12 +16,10 @@ export default function CreatePost() {
   const [isLoading, setIsLoading] = useState(false);
 
   //TODO: Fix this when auth is done
-  const userId = "6616e868a3e695cd57e3a223"; // hard-coded values for now since our app can't distinguish who's logged in yet
+  const userId = Cookies.get("userid"); // hard-coded values for now since our app can't distinguish who's logged in yet
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
 
     if (!postTitle || !spotifyLink) {
       return setError("All fields are necessary to create a post.");
