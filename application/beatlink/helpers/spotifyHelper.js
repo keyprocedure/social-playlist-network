@@ -41,13 +41,13 @@ async function getAccessToken() {
   }
 }
 
-async function getTrackURL(trackName, artistName) {
+export async function getTrackURL(trackName, artistName) {
   signale.info("Getting Track URL...");
 
   accessToken = await getAccessToken();
 
   const params = {
-    q: `artist:${artistName}&track:${trackName}`,
+    q: `artist=${artistName}&track=${trackName}`,
     type: "track",
   };
 
