@@ -4,6 +4,8 @@ import PostPageLayout from "../../components/PostPage/PostPageLayout";
 import Navbar from "../../components/navbar";
 import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+
 export default function PostPage({ params }) {
   const postId = params.id;
 
@@ -12,24 +14,36 @@ export default function PostPage({ params }) {
   const [author, setAuthor] = useState(null);
   const [user, setUser] = useState(null);
 
+  const router = useRouter();
   const noSessionCookieSet = CheckSessionCookie();
 
   useEffect(() => {
     // If session cookie exists, (noSessionCookieSet = false) then render the page and make requests
     if (!noSessionCookieSet) {
-      fetchPlaylistFromPostId(postId).then((playlist) => {
-        setPlaylist(playlist);
-      });
-      fetchPostFromPostId(postId).then((post) => {
-        setPost(post);
-        fetchUser(post.user_id).then((author) => {
-          setAuthor(author);
-        });
-      });
+      // This code redirects to the homepage if the post ID doesn't exist
+      new Promise((resolve, reject) => {
+        Promise.all([
+          fetchPlaylistFromPostId(postId),
+          fetchPostFromPostId(postId),
+          fetchUser(Cookies.get("userid")),
+        ])
+          .then(([playlist, post, user]) => {
+            setPlaylist(playlist);
+            setPost(post);
+            setUser(user);
 
-      fetchUser(Cookies.get("userid")).then((user) => setUser(user));
+            return fetchUser(post.user_id);
+          })
+          .then((author) => {
+            setAuthor(author);
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }).catch(() => router.push("/"));
     }
-  }, [postId, noSessionCookieSet]);
+  }, [postId, noSessionCookieSet, router]);
 
   return (
     <div>
