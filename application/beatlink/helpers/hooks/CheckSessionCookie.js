@@ -10,16 +10,16 @@ export default function CheckSessionCookie() {
   const router = useRouter();
 
   useEffect(() => {
-    const sessionCookie = Cookies.get('userid');
-    
-    if (!sessionCookie) {
-      // If the session cookie is not set, redirect
-      router.push('/login');
-    } else {
-      // Allow rendering the component if the cookie is set
-      setIsLoading(false);
+    if (router.pathname !== '/login' && router.pathname !== '/register') {
+      const sessionCookie = Cookies.get('userid');
+      if (!sessionCookie) {
+        router.push('/login');
+      } else {
+        setIsLoading(false);
+      }
     }
-  });
+  }, [router]);
 
   return isLoading;
 }
+
