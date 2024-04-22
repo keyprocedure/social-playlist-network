@@ -10,6 +10,10 @@ async function getAccessToken() {
   try {
     signale.pending("Getting Access Token...");
 
+    if (accessToken) {
+      return accessToken;
+    }
+
     const data = qs.stringify({
       grant_type: "client_credentials",
       client_id,
@@ -26,14 +30,35 @@ async function getAccessToken() {
     };
 
     const response = await axios(config);
-    const accessToken = response.data.access_token;
+    accessToken = response.data.access_token;
 
     signale.success("Access Token Received!");
+
     return accessToken;
   } catch (error) {
     signale.error(error);
     throw error;
   }
+}
+
+export async function getTrackURL(trackName, artistName) {
+  signale.info("Getting Track URL...");
+
+  accessToken = await getAccessToken();
+
+  const params = {
+    q: `artist=${artistName}&track=${trackName}`,
+    type: "track",
+  };
+
+  const response = await axios.get("http://api.spotify.com/v1/search", {
+    params,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
+
+  return response.data.tracks.items[0].external_urls.spotify;
 }
 
 async function getPlaylistID(playlistURL) {
