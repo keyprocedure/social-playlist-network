@@ -1,10 +1,10 @@
-"use client";
-import React from "react";
-import CheckSessionCookie from "../../helpers/hooks/CheckSessionCookie";
-import Navbar from "./components/navbar.js";
+'use client'
+import React from 'react'
+import CheckSessionCookie from '../../helpers/hooks/CheckSessionCookie'
+import Navbar from './components/navbar.js'
 
-export default function Home() {
-  const isLoading = CheckSessionCookie();
+export default function Home () {
+  const isLoading = CheckSessionCookie()
 
   return (
     <>
@@ -14,9 +14,9 @@ export default function Home() {
       ) : (
         <div
           style={{
-            margin: "20px",
-            backgroundColor: "rgba(255, 255, 255, 0.75)",
-            padding: "20px",
+            margin: '20px',
+            backgroundColor: 'rgba(255, 255, 255, 0.75)',
+            padding: '20px'
           }}
         >
           <h1>Homepage is under construction.</h1>
@@ -24,5 +24,5 @@ export default function Home() {
         </div>
       )}
     </>
-  );
+  )
 }
