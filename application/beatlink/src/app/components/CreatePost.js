@@ -87,8 +87,8 @@ async function CreatePostApi(postTitle, spotifyLink, userId, playlistId) {
       body: JSON.stringify({
         postTitle,
         spotifyLink,
-        user_id: userId,
-        playlist_id: playlistId,
+        userId,
+        playlistId,
       }),
     })
 

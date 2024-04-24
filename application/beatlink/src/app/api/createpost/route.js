@@ -15,18 +15,22 @@ export async function POST(request) {
   try {
     const body = await parseJSON(request)
 
-    const { postTitle, user_id, playlist_id } = body
+    const { postTitle, userId, playlistId } = body
 
-    const playlist = await getPlaylist(playlist_id)
+    const playlist = await getPlaylist(playlistId)
 
     // Create new playlist if doesn't exist in DB already
     if (!playlist) {
-      const playlistURL = await buildPlaylistURL(playlist_id)
+      const playlistURL = await buildPlaylistURL(playlistId)
       const playlistObject = await buildPlaylistObject(playlistURL)
       await createPlaylist(playlistObject)
     }
     // Add post to DB
-    const newPost = await createPost({ postTitle, user_id, playlist_id })
+    const newPost = await createPost({
+      postTitle,
+      user_id: userId,
+      playlist_id: playlistId,
+    })
 
     return Response.json({
       message: 'Post Created',
