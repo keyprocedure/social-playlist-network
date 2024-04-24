@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { CustomInput } from "../CustomInput";
-import "../css/RegisterPageLayout.css";
-import CustomTextWithLink from "../CustomTextWithLink.js";
-import { CustomButton } from "../CustomButton.js";
-import { useRouter } from "next/navigation";
-import CustomAlert from "../CustomAlert.js";
+import React, { useState } from 'react'
+import { CustomInput } from '../CustomInput'
+import '../css/RegisterPageLayout.css'
+import CustomTextWithLink from '../CustomTextWithLink.js'
+import { CustomButton } from '../CustomButton.js'
+import { useRouter } from 'next/navigation'
+import CustomAlert from '../CustomAlert.js'
 
 export default function RegisterPageLayout() {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [birthday, setBirthday] = useState('')
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('')
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     if (
       !username.trim() ||
@@ -24,11 +24,11 @@ export default function RegisterPageLayout() {
       !password.trim() ||
       !birthday.trim()
     ) {
-      return setError("All fields are necessary.");
+      return setError('All fields are necessary.')
     }
 
     if (!(await isValidBirthDate(birthday))) {
-      return setError("Must be 13 years or older.");
+      return setError('Must be 13 years or older.')
     }
 
     try {
@@ -37,33 +37,33 @@ export default function RegisterPageLayout() {
         username,
         password,
         birthday,
-      );
+      )
 
       if (response.success) {
-        return router.push("/login");
+        return router.push('/login')
       }
 
       // Redirect to login page on successful register
-      setError(response.error);
+      setError(response.error)
     } catch (error) {
-      setError(error.error);
+      setError(error.message)
     }
   }
 
   function handleEmailChange(event) {
-    setEmail(event.target.value);
+    setEmail(event.target.value)
   }
 
   function handleUsernameChange(event) {
-    setUsername(event.target.value);
+    setUsername(event.target.value)
   }
 
   function handlePasswordChange(event) {
-    setPassword(event.target.value);
+    setPassword(event.target.value)
   }
 
   function handleBirthdayChange(event) {
-    setBirthday(event.target.value);
+    setBirthday(event.target.value)
   }
 
   return (
@@ -79,62 +79,62 @@ export default function RegisterPageLayout() {
               <div className="d-flex flex-column">
                 <div className="input-group mb-3">
                   <CustomInput
-                    type={"email"}
-                    placeholderText={"Email"}
-                    name={"email"}
-                    className={"form-control"}
+                    type={'email'}
+                    placeholderText={'Email'}
+                    name={'email'}
+                    className={'form-control'}
                     onChange={handleEmailChange}
                   ></CustomInput>
                 </div>
 
                 <div className="input-group mb-3">
                   <CustomInput
-                    type={"text"}
-                    placeholderText={"Username"}
+                    type={'text'}
+                    placeholderText={'Username'}
                     name="username"
-                    className={"form-control"}
+                    className={'form-control'}
                     onChange={handleUsernameChange}
                   ></CustomInput>
                 </div>
 
                 <div className="input-group mb-3">
                   <CustomInput
-                    type={"password"}
-                    placeholderText={"Password"}
+                    type={'password'}
+                    placeholderText={'Password'}
                     name="password"
-                    className={"form-control"}
+                    className={'form-control'}
                     onChange={handlePasswordChange}
                   ></CustomInput>
                 </div>
 
                 <div className="input-group mb-3">
                   <CustomInput
-                    type={"date"}
-                    placeholderText={"Birthday"}
+                    type={'date'}
+                    placeholderText={'Birthday'}
                     name="birthday"
-                    className={"form-control"}
+                    className={'form-control'}
                     onChange={handleBirthdayChange}
                   ></CustomInput>
                 </div>
 
                 <CustomTextWithLink
-                  labelText={"Already have an account? "}
-                  href={"/login"}
-                  linkText={"Login!"}
+                  labelText={'Already have an account? '}
+                  href={'/login'}
+                  linkText={'Login!'}
                 ></CustomTextWithLink>
 
                 <CustomButton
-                  type={"submit"}
-                  text={"Register"}
-                  className={"btn btn-dark register-btn"}
+                  type={'submit'}
+                  text={'Register'}
+                  className={'btn btn-dark register-btn'}
                 ></CustomButton>
 
                 {/* */}
                 {error && (
                   <CustomAlert
                     text={error}
-                    type={"danger"}
-                    className={"mt-3"}
+                    type={'danger'}
+                    className={'mt-3'}
                   />
                 )}
               </div>
@@ -148,15 +148,15 @@ export default function RegisterPageLayout() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 async function fetchSignUpResponse(email, username, password, birthday) {
   try {
-    const response = await fetch("/api/registration", {
-      method: "POST",
+    const response = await fetch('/api/registration', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email,
@@ -164,35 +164,35 @@ async function fetchSignUpResponse(email, username, password, birthday) {
         password,
         birthday,
       }),
-    });
+    })
 
-    const data = await response.json();
+    const data = await response.json()
     if (!response.ok) {
-      throw new Error(data.error);
+      throw new Error(data.error)
     }
 
-    return { success: true, data };
+    return { success: true, data }
   } catch (error) {
-    throw { success: false, error: error.message };
+    throw new Error(error.message)
   }
 }
 
 async function isValidBirthDate(birthday) {
   // Check if birthday is less than 13 years ago
-  const birthDate = new Date(birthday + "T00:00:00"); // This sets the time part to midnight
-  const timezoneOffset = birthDate.getTimezoneOffset() * 60000; // Convert offset to milliseconds
-  const adjustedBirthDate = new Date(birthDate.getTime() - timezoneOffset);
+  const birthDate = new Date(birthday + 'T00:00:00') // This sets the time part to midnight
+  const timezoneOffset = birthDate.getTimezoneOffset() * 60000 // Convert offset to milliseconds
+  const adjustedBirthDate = new Date(birthDate.getTime() - timezoneOffset)
 
-  const currentDate = new Date();
+  const currentDate = new Date()
   // Default time to midnight to ignore time comparison
   const adjustedCurrentDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth(),
     currentDate.getDate(),
-  );
+  )
 
-  let age = adjustedCurrentDate.getFullYear() - adjustedBirthDate.getFullYear();
-  const m = adjustedCurrentDate.getMonth() - adjustedBirthDate.getMonth();
+  let age = adjustedCurrentDate.getFullYear() - adjustedBirthDate.getFullYear()
+  const m = adjustedCurrentDate.getMonth() - adjustedBirthDate.getMonth()
 
   // if the current month is before the birth month or
   // if the current month is the same as the birth month and the current day is before the birth day
@@ -201,12 +201,12 @@ async function isValidBirthDate(birthday) {
     m < 0 ||
     (m === 0 && adjustedCurrentDate.getDate() < adjustedBirthDate.getDate() + 1)
   ) {
-    age--;
+    age--
   }
 
   if (age < 13) {
-    return false;
+    return false
   }
 
-  return true;
+  return true
 }

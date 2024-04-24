@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-export default function CustomTextWithLink({ labelText, href, linkText }) {
+export default function CustomTextWithLink ({ labelText, href, linkText }) {
   return (
     <>
       <span>
@@ -8,5 +8,5 @@ export default function CustomTextWithLink({ labelText, href, linkText }) {
         <a href={href}>{linkText}</a>
       </span>
     </>
-  );
+  )
 }

@@ -9,8 +9,8 @@
   grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "profile-picture primary-text"
-    "profile-picture secondary-text";
+    'profile-picture primary-text'
+    'profile-picture secondary-text';
 }
 
 .profile-picture {

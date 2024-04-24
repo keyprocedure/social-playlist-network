@@ -1,12 +1,12 @@
-import React from "react";
-import "./css/CustomInput.css";
+import React from 'react'
+import './css/CustomInput.css'
 
-export function CustomInput({
+export function CustomInput ({
   placeholderText,
   type,
   name,
   className,
-  onChange,
+  onChange
 }) {
   return (
     <input
@@ -18,5 +18,5 @@ export function CustomInput({
       aria-describedby={`${placeholderText}-input`}
       onChange={onChange}
     ></input>
-  );
+  )
 }

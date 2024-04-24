@@ -1,33 +1,38 @@
-import React from "react";
-import { ProfilePicture } from "../ProfilePicture";
-import "../css/ProfileCard.css";
+import React from 'react'
+import { ProfilePicture } from '../ProfilePicture'
+import '../css/ProfileCard.css'
 
-export function ProfileCard({
+export function ProfileCard ({
   imageSrc,
   primaryText,
   secondaryText,
   primaryTextColor,
   secondaryTextColor,
-  className,
+  className
 }) {
   return (
-    <div className="grid-container">
-      <div className="profile-picture">
-        <ProfilePicture className={className} width={50} height={50} src={imageSrc} />
+    <div className='grid-container'>
+      <div className='profile-picture'>
+        <ProfilePicture
+          className={className}
+          width={50}
+          height={50}
+          src={imageSrc}
+        />
       </div>
-    
+
       <div
-        className="primary-text small-text"
+        className='primary-text small-text'
         style={{ color: primaryTextColor }}
       >
         {primaryText}
       </div>
       <div
-        className="secondary-text small-text"
+        className='secondary-text small-text'
         style={{ color: secondaryTextColor }}
       >
         {secondaryText}
       </div>
     </div>
-  );
+  )
 }
