@@ -115,7 +115,8 @@ async function CreatePostApi(postTitle, spotifyLink, userId, playlistId) {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error("Create Post failed. Try again");
+      const errorMessage = data.error;
+      throw new Error(errorMessage);
     }
 
     return { success: true, data };
