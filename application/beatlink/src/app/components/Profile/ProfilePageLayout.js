@@ -60,7 +60,12 @@ const ProfilePageLayout = () => {
                 {userData && (
                   <div className={styles.profileTopLeft}>
                     <div className={styles.profileTopLeftImg}>
-                      <img src={userData?.userImage} alt="PROFILE" />
+                      {/* <img src={userData?.userImage} alt="PROFILE" /> */}
+                      {userData.userImage ? (
+                        <img src={userData.userImage} alt="PROFILE" />
+                      ) : (
+                        <img src="/default.jpg" alt="Default Profile" />
+                      )}
                     </div>
                     <div className={styles.profileTopLeftText}>
                       <h2>{userData?.username}</h2>
@@ -69,6 +74,7 @@ const ProfilePageLayout = () => {
                   </div>
                 )}
                 <div style={{ width: "50%" }}>{userData?.bio}</div>
+                <div style={{ width: "50%" }}>{userData?.status}</div>
               </div>
               <div className={styles.profileTopRightMain}>
                 <div className={styles.profileTopRight}>
@@ -102,7 +108,11 @@ const ProfilePageLayout = () => {
             <div className={styles.profileBottomMain}>
               <div
                 className={styles.profileImagesPlay}
-                style={{ display: "flex", gap: "10px" }}
+                style={{
+                  display: "grid",
+                  gap: "10px",
+                  gridTemplateColumns: "repeat(5,1fr)",
+                }}
               >
                 {/* <div className={styles.profilePlaylistImg}>
                   <img src="/play.png" alt="image" onClick={handleImageClick} />
