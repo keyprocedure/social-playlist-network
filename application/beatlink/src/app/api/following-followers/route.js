@@ -1,6 +1,5 @@
 // import mongoose from "mongoose";
 import { User } from "../../../../helpers/database/models/user";
-const mongoose = require('mongoose')
 
 export const dynamic = "force-dynamic";
 export async function POST(req) {
@@ -13,12 +12,12 @@ export async function POST(req) {
         }
 
         let followData;
-        if (body.follow == 'following') {
+        if (body.follow === 'following') {
             followData = await User.find({ _id: { $in: user.following } })
-                .select('username userImage -_id');
+                .select('username userImage _id');
         } else {
             followData = await User.find({ _id: { $in: user.followers } })
-                .select('username userImage -_id');
+                .select('username userImage _id');
         }
 
         return Response.json(followData);

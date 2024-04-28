@@ -26,7 +26,7 @@ const ProfilePageLayout = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({userId}),
+        body: JSON.stringify({ userId }),
       });
       if (response) {
         const responseData = await response.json();
@@ -49,9 +49,9 @@ const ProfilePageLayout = () => {
     try {
       const userId = await Cookies.get("userid");
       const follow = get ? "followers" : "following";
-      {
-        get ? seTitle(true) : seTitle(false);
-      }
+
+      get ? seTitle(true) : seTitle(false)
+
       const input = {
         follow: follow,
         userId: userId,
@@ -188,34 +188,34 @@ const ProfilePageLayout = () => {
             {getfollower.length === 0
               ? `${title ? "Followers" : "Following"} Not Exist`
               : getfollower.map((follower, index) => (
-                  <div key={index}>
-                    <ListGroup.Item>
-                      {follower.userImage ? (
-                        <img
-                          src={follower.userImage}
-                          alt="PROFILE"
-                          style={{
-                            width: "30px",
-                            height: "30px",
-                            marginRight: "1%",
-                          }}
-                        />
-                      ) : (
-                        <img
-                          src="/default.jpg"
-                          alt="Default Profile"
-                          style={{
-                            width: "30px",
-                            height: "30px",
-                            marginRight: "1%",
-                          }}
-                        />
-                      )}
+                <div key={index} onClick={() => router.push(`/otheruser/${follower?._id}`)} style={{cursor:'pointer'}}>
+                  <ListGroup.Item>
+                    {follower.userImage ? (
+                      <img
+                        src={follower.userImage}
+                        alt="PROFILE"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginRight: "1%",
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src="/default.jpg"
+                        alt="Default Profile"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginRight: "1%",
+                        }}
+                      />
+                    )}
 
-                      {follower.username}
-                    </ListGroup.Item>
-                  </div>
-                ))}
+                    {follower.username}
+                  </ListGroup.Item>
+                </div>
+              ))}
           </ListGroup>
         </Modal.Body>
         <Modal.Footer>
