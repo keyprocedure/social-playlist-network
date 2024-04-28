@@ -34,13 +34,13 @@ const ProfilePageLayout = () => {
         setPlaylistImages(responseData.posts);
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error('Error fetching user data:', error)
     }
-  };
+  }
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData()
+  }, [])
 
   const handleImageClick = (id) => {
     router.push(`/post/${id}`);
@@ -223,7 +223,7 @@ const ProfilePageLayout = () => {
         </Modal.Footer>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ProfilePageLayout;
+export default ProfilePageLayout

@@ -46,7 +46,7 @@ const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId
       <div className={styles.profileMainDiv}>
         <div className={styles.profileContainer}>
           <div className="back-button">
-            <BackButton width={"40px"} height={"40px"} />
+            <BackButton width={'40px'} height={'40px'} />
           </div>
           <div className={styles.profileTopMain}>
             <div className={styles.profileLeftMain}>
@@ -120,7 +120,7 @@ const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default OtherUserPageLayout;
+export default OtherUserPageLayout

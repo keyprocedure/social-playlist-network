@@ -5,8 +5,8 @@
   grid-template-rows: 0.5fr 1.9fr;
   /* gap: 1em 0px; */
   grid-template-areas:
-    ". login-title ."
-    ". login-form .";
+    '. login-title .'
+    '. login-form .';
   justify-items: stretch;
   height: 70vh;
 }

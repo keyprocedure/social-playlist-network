@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
@@ -34,15 +35,25 @@
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^15.0.2",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.4",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
+    "prettier-standard": "^16.4.1",
     "tailwindcss": "^3.4.1"
   },
   "signale": {
     "displayTimestamp": true,
     "displayFilename": true
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
   }
 }
