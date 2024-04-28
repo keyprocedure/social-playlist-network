@@ -14,7 +14,7 @@ const ProfilePageLayout = () => {
   const [userData, setUserData] = useState(null);
   const [playlistImages, setPlaylistImages] = useState([]);
   const [title, seTitle] = useState(false);
-  const [getfollower, setGetfollower] = useState([])
+  const [getfollower, setGetfollower] = useState([]);
   const [show, setShow] = useState(false);
   const router = useRouter();
 
@@ -48,12 +48,14 @@ const ProfilePageLayout = () => {
   async function followData(get) {
     try {
       const userId = await Cookies.get("userid");
-      const follow = get ? 'followers' : "following";
-      { get ? seTitle(true) : seTitle(false) }
+      const follow = get ? "followers" : "following";
+      {
+        get ? seTitle(true) : seTitle(false);
+      }
       const input = {
         follow: follow,
         userId: userId,
-      }
+      };
       const response = await fetch("/api/following-followers", {
         method: "POST",
         headers: {
@@ -118,13 +120,23 @@ const ProfilePageLayout = () => {
                     <h2>{(playlistImages && playlistImages?.length) || 0}</h2>
                     <p>Posts</p>
                   </div>
-                  <div style={{ cursor: 'pointer' }} onClick={() => { followData(true); }} >
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      followData(true);
+                    }}
+                  >
                     <h2>
                       {(userData?.followers && userData?.followers.length) || 0}
                     </h2>
                     <p>Followers</p>
                   </div>
-                  <div style={{ cursor: 'pointer' }} onClick={() => { followData(false); }}>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      followData(false);
+                    }}
+                  >
                     <h2>
                       {(userData?.following && userData?.following.length) || 0}
                     </h2>
@@ -169,27 +181,41 @@ const ProfilePageLayout = () => {
       )}
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>{title ? 'Followers' : "Following"}</Modal.Title>
+          <Modal.Title>{title ? "Followers" : "Following"}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal-body">
           <ListGroup>
-            {getfollower.length === 0 ? `${title ? 'Followers' : "Following"} Not Exist` : getfollower.map((follower, index) => (
-              <div key={index}>
-                <ListGroup.Item style={{ display: 'flex' }}>
-                  <div>
-                    {follower.username}
-                  </div>
-                  <div style={{ width: "100%", textAlign: 'right' }}>
-                    {follower.userImage ? (
-                      <img src={follower.userImage} alt="PROFILE" style={{ width: '30px', height: '30px', marginRight: '5%' }} />
-                    ) : (
-                      <img src="/default.jpg" alt="Default Profile" style={{ width: '30px', height: '30px' }} />
-                    )}
-                  </div>
-                </ListGroup.Item>
-              </div>
-            ))}
+            {getfollower.length === 0
+              ? `${title ? "Followers" : "Following"} Not Exist`
+              : getfollower.map((follower, index) => (
+                  <div key={index}>
+                    <ListGroup.Item>
+                      {follower.userImage ? (
+                        <img
+                          src={follower.userImage}
+                          alt="PROFILE"
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            marginRight: "1%",
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src="/default.jpg"
+                          alt="Default Profile"
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            marginRight: "1%",
+                          }}
+                        />
+                      )}
 
+                      {follower.username}
+                    </ListGroup.Item>
+                  </div>
+                ))}
           </ListGroup>
         </Modal.Body>
         <Modal.Footer>

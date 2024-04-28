@@ -17,7 +17,7 @@ export async function POST(req) {
             followData = await User.find({ _id: { $in: user.following } })
                 .select('username userImage -_id');
         } else {
-            followData = await User.find({ _id: { $in: user.followrs } })
+            followData = await User.find({ _id: { $in: user.followers } })
                 .select('username userImage -_id');
         }
 
