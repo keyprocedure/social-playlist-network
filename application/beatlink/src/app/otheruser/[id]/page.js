@@ -25,7 +25,7 @@ export default function OtherUserProfile({ params }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userId),
+        body: JSON.stringify({userId}),
       });
       if (response) {
         const responseData = await response.json();

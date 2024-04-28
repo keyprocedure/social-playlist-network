@@ -52,7 +52,7 @@ export default function PostPage({ params }) {
         <PostPageLayout
           playlist={playlist}
           post={post}
-          author={author?.user}
+          author={author}
           user={user}
         />
       ) : (
