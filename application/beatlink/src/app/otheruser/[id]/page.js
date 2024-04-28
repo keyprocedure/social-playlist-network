@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 // import OtherUserPageLayout from "../../components/OtherUser/OtherUserLayout";
 import dynamic from "next/dynamic";
-import apiClient from "../../../../helpers/libs/app.js";
 import Cookies from "js-cookie";
 import ProfilePageLayout from "../../components/Profile/ProfilePageLayout.js";
 import Navbar from "../../components/navbar.js";
@@ -21,10 +20,18 @@ export default function OtherUserProfile({ params }) {
     try {
       const userid = await Cookies.get("userid");
       setUser(userid)
-      const response = await apiClient.post("/getuser", { userId });
-
-      setUserData(response.user);
-      setPlaylistImages(response.posts);
+      const response = await fetch("/api/getuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userId),
+      });
+      if (response) {
+        const responseData = await response.json();
+        setUserData(responseData.user);
+        setPlaylistImages(responseData.posts);
+      }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -36,7 +43,7 @@ export default function OtherUserProfile({ params }) {
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       {userData ? (
         userData?._id == user ? <ProfilePageLayout /> : <OtherUserPageLayout
           userData={userData}

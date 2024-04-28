@@ -2,25 +2,37 @@ import React, { useState, useEffect } from "react";
 import styles from "../css/profile.module.scss";
 import BackButton from "../PostPage/BackButton";
 import Link from "next/link";
-import apiClient from "../../../../helpers/libs/app";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@chakra-ui/react";
 import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
 import Cookies from "js-cookie";
+import { ListGroup, Modal } from "react-bootstrap";
+import { CustomButton } from "../CustomButton";
 
 const ProfilePageLayout = () => {
   const isLoading = CheckSessionCookie();
   const [userData, setUserData] = useState(null);
   const [playlistImages, setPlaylistImages] = useState([]);
+  const [title, seTitle] = useState(false);
+  const [getfollower, setGetfollower] = useState([])
+  const [show, setShow] = useState(false);
   const router = useRouter();
 
   const getData = async () => {
     try {
       const userId = await Cookies.get("userid");
-      const response = await apiClient.post("/getuser", { userId });
-
-      setUserData(response.user);
-      setPlaylistImages(response.posts);
+      const response = await fetch("/api/getuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userId),
+      });
+      if (response) {
+        const responseData = await response.json();
+        setUserData(responseData.user);
+        setPlaylistImages(responseData.posts);
+      }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -33,11 +45,35 @@ const ProfilePageLayout = () => {
   const handleImageClick = (id) => {
     router.push(`/post/${id}`);
   };
-
+  async function followData(get) {
+    try {
+      const userId = await Cookies.get("userid");
+      const follow = get ? 'followers' : "following";
+      { get ? seTitle(true) : seTitle(false) }
+      const input = {
+        follow: follow,
+        userId: userId,
+      }
+      const response = await fetch("/api/following-followers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      });
+      if (response) {
+        const responseData = await response.json();
+        setGetfollower(responseData);
+        setShow(true);
+      }
+    } catch (error) {
+      console.error("An error occurred during the follow process", error);
+      return { success: false, error: error.message };
+    }
+  }
   return (
     <>
       {isLoading ? (
-        // <div>Loading...</div>
         <Spinner
           thickness="4px"
           speed="0.65s"
@@ -82,13 +118,13 @@ const ProfilePageLayout = () => {
                     <h2>{(playlistImages && playlistImages?.length) || 0}</h2>
                     <p>Posts</p>
                   </div>
-                  <div>
+                  <div style={{ cursor: 'pointer' }} onClick={() => { followData(true); }} >
                     <h2>
                       {(userData?.followers && userData?.followers.length) || 0}
                     </h2>
                     <p>Followers</p>
                   </div>
-                  <div>
+                  <div style={{ cursor: 'pointer' }} onClick={() => { followData(false); }}>
                     <h2>
                       {(userData?.following && userData?.following.length) || 0}
                     </h2>
@@ -131,6 +167,35 @@ const ProfilePageLayout = () => {
           </div>
         </div>
       )}
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{title ? 'Followers' : "Following"}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modal-body">
+          <ListGroup>
+            {getfollower.length === 0 ? `${title ? 'Followers' : "Following"} Not Exist` : getfollower.map((follower, index) => (
+              <div key={index}>
+                <ListGroup.Item style={{ display: 'flex' }}>
+                  <div>
+                    {follower.username}
+                  </div>
+                  <div style={{ width: "100%", textAlign: 'right' }}>
+                    {follower.userImage ? (
+                      <img src={follower.userImage} alt="PROFILE" style={{ width: '30px', height: '30px', marginRight: '5%' }} />
+                    ) : (
+                      <img src="/default.jpg" alt="Default Profile" style={{ width: '30px', height: '30px' }} />
+                    )}
+                  </div>
+                </ListGroup.Item>
+              </div>
+            ))}
+
+          </ListGroup>
+        </Modal.Body>
+        <Modal.Footer>
+          <CustomButton text={"Close"} onClick={() => setShow(false)} />
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

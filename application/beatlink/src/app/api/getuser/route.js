@@ -5,7 +5,7 @@ import { Post } from "../../../../helpers/database/models/Post";
 export async function POST(req) {
   try {
     const userId = await req.json();
-    const user = await findUserById(userId.userId);
+    const user = await findUserById(userId);
     if (!user) {
       return Response.json({ error: "User not found" }, { status: 400 });
     }
