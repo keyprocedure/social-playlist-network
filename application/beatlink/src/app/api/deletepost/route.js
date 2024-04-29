@@ -1,18 +1,18 @@
-import { deletePost } from "../../../../helpers/database/controllers/postController";
-import parseJSON from "../../../../helpers/parseJSON";
+import { deletePost } from '../../../../helpers/database/controllers/postController'
+import parseJSON from '../../../../helpers/parseJSON'
 
-export const dynamic = "force-dynamic";
-export async function DELETE(request) {
-    try {
-        const body = await parseJSON(request);
+export const dynamic = 'force-dynamic'
+export async function DELETE (request) {
+  try {
+    const body = await parseJSON(request)
 
-        const { postId } = body;
+    const { postId } = body
 
-        // Delete post from DB
-        await deletePost(postId);
+    // Delete post from DB
+    await deletePost(postId)
 
-        return Response.json({ message: "Post Deleted" });
-    } catch (e) {
-        return Response.json({ error: e.message }, { status: 500 });
-    }
+    return Response.json({ message: 'Post Deleted' })
+  } catch (e) {
+    return Response.json({ error: e.message }, { status: 500 })
+  }
 }
