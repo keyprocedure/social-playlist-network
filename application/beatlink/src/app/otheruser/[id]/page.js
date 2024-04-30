@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
-import styles from "../css/profile.module.scss";
-import BackButton from "../PostPage/BackButton";
+//import styles from "../css/profile.module.scss";
+import BackButton from "../../components/PostPage/BackButton";
 import { useRouter } from "next/navigation";
 
 const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) => {
