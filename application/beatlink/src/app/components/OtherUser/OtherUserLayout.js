@@ -91,7 +91,7 @@ const OtherUserPageLayout = async ({
                 </div>
               </div>
               <div className={styles.profileFollow}>
-                <p onClick={follow}>{false ? 'Following' : 'Follow'}</p>
+                <p onClick={follow}>{user ? 'Following' : 'Follow'}</p>
                 {/* <p>Message</p> */}
               </div>
             </div>
