@@ -3,8 +3,6 @@ import styles from "../css/profile.module.scss";
 import BackButton from "../PostPage/BackButton";
 import { useRouter } from "next/navigation";
 
-
-
 const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId }) => {
   const user = userData.followers.includes(userId);
   const [isFollowing, setIsFollowing] = useState(user);
