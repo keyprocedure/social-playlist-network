@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../css/profile.module.scss";
 import BackButton from "../PostPage/BackButton";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Spinner } from "@chakra-ui/react";
-import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
+
 
 
 const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId }) => {

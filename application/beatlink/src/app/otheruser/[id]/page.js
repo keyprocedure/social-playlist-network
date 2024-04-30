@@ -45,7 +45,7 @@ export default function OtherUserProfile({ params }) {
     <div>
       <Navbar />
       {userData ? (
-        userData?._id == user ? <ProfilePageLayout /> : <OtherUserPageLayout
+        userData?._id === user ? <ProfilePageLayout /> : <OtherUserPageLayout
           userData={userData}
           playlistImages={playlistImages}
           fetchData={fetchData}
