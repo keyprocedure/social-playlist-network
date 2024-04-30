@@ -12,7 +12,7 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
     router.push(`/post/${id}`);
   };
 
-  async function follow() {
+  const follow = async () => {
     try {
       const input = {
         userId: userId,
@@ -29,14 +29,16 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
       if (!response.ok) {
         throw new Error("Follow user failed. Try again");
       }
-      fetchData && fetchData();
+      if (fetchData) {
+        await fetchData();
+      }
       setIsFollowing(!isFollowing);
       return { success: true };
     } catch (error) {
       console.error("An error occurred during the follow process", error);
       return { success: false, error: error.message };
     }
-  }
+  };
   return (
     <>
       <div className={styles.profileMainDiv}>
@@ -116,4 +118,4 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
   )
 }
 
-export default OtherUserPageLayout
+export default OtherUserPageLayout;
