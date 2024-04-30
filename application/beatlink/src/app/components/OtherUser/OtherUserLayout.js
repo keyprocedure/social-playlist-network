@@ -31,7 +31,7 @@ const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId
       if (!response.ok) {
         throw new Error("Follow user failed. Try again");
       }
-      fetchData && await fetchData();
+      fetchData && await fetchData(); 
       isFollowing ? setIsFollowing(false) : setIsFollowing(true)
       return { success: true };
     } catch (error) {
