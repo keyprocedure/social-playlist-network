@@ -32,8 +32,8 @@ const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId
         throw new Error("Follow user failed. Try again");
       }
       fetchData && await fetchData();
-      setIsFollowing(!isFollowing);
-      
+     // { isFollowing ? setIsFollowing(false) : setIsFollowing(true) }
+
       return { success: true };
     } catch (error) {
       console.error("An error occurred during the follow process", error);
@@ -89,7 +89,7 @@ const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId
               </div>
               <div className={styles.profileFollow}>
                 <p onClick={follow}>
-                  {isFollowing ? "Following" : "Follow"}
+                  {false ? "Following" : "Follow"}
                 </p>
                 {/* <p>Message</p> */}
               </div>
