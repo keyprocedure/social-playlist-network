@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from 'react'
 import OtherUserPageLayout from '../../components/OtherUser/OtherUserLayout'
 import Cookies from 'js-cookie'
-import ProfilePageLayout from '../../components/Profile/ProfilePageLayout.js'
 import Navbar from '../../components/navbar.js'
+import { useRouter } from 'next/navigation.js'
 
 export default function OtherUserProfile({ params }) {
   const userId = params.id
   const [userData, setUserData] = useState(null)
   const [playlistImages, setPlaylistImages] = useState([])
   const [user, setUser] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     const userid = Cookies.get('userid')
@@ -24,9 +25,9 @@ export default function OtherUserProfile({ params }) {
   return (
     <div>
       <Navbar />
-      {userData ? (
+      {userData && playlistImages ? (
         userData?._id === user ? (
-          <ProfilePageLayout />
+          router.push('/profile')
         ) : (
           <OtherUserPageLayout
             userData={userData}
