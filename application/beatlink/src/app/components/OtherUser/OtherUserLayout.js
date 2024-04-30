@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../css/profile.module.scss";
 import BackButton from "../PostPage/BackButton";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Spinner } from "@chakra-ui/react";
+import CheckSessionCookie from "../../../../helpers/hooks/CheckSessionCookie";
 
-const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) => {
+
+const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId }) => {
   const user = userData.followers.includes(userId);
   const [isFollowing, setIsFollowing] = useState(user);
   const router = useRouter();
@@ -12,7 +16,7 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
     router.push(`/post/${id}`);
   };
 
-  const follow = async () => {
+  async function follow() {
     try {
       const input = {
         userId: userId,
@@ -29,16 +33,14 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
       if (!response.ok) {
         throw new Error("Follow user failed. Try again");
       }
-      if (fetchData) {
-        await fetchData();
-      }
-      setIsFollowing(!isFollowing);
+      fetchData && await fetchData();
+      { isFollowing ? setIsFollowing(false) : setIsFollowing(true) }
       return { success: true };
     } catch (error) {
       console.error("An error occurred during the follow process", error);
       return { success: false, error: error.message };
     }
-  };
+  }
   return (
     <>
       <div className={styles.profileMainDiv}>
@@ -72,7 +74,9 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
                   <p>Posts</p>
                 </div>
                 <div>
+                  {/* <h2>{followersCount}</h2> */}
                   <h2>
+                    {" "}
                     {(userData?.followers && userData?.followers.length) || 0}
                   </h2>
                   <p>Followers</p>
@@ -88,6 +92,7 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
                 <p onClick={follow}>
                   {isFollowing ? "Following" : "Follow"}
                 </p>
+                {/* <p>Message</p> */}
               </div>
             </div>
           </div>
@@ -118,4 +123,4 @@ const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) =>
   )
 }
 
-export default OtherUserPageLayout;
+export default OtherUserPageLayout

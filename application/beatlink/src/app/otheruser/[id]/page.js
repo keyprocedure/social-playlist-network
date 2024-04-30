@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import OtherUserPageLayout from "../../components/OtherUser/OtherUserLayout";
 import dynamic from "next/dynamic";
 import Cookies from "js-cookie";
 import ProfilePageLayout from "../../components/Profile/ProfilePageLayout.js";
@@ -26,7 +27,7 @@ export default function OtherUserProfile({ params }) {
         },
         body: JSON.stringify({userId}),
       });
-      if (response.ok) {
+      if (response) {
         const responseData = await response.json();
         setUserData(responseData.user);
         setPlaylistImages(responseData.posts);
@@ -36,7 +37,7 @@ export default function OtherUserProfile({ params }) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
   }, [userId]);
 
@@ -44,16 +45,13 @@ export default function OtherUserProfile({ params }) {
     <div>
       <Navbar />
       {userData ? (
-        userData._id === user ? (
-        <ProfilePageLayout />
-        ) : (
-        <OtherUserPageLayout
+        userData?._id == user ? <ProfilePageLayout /> : <OtherUserPageLayout
           userData={userData}
           playlistImages={playlistImages}
           fetchData={fetchData}
           userId={user}
         />
-      )
+
 
       ) : (
         <p>Loading...</p>
