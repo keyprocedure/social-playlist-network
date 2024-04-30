@@ -16,30 +16,35 @@ const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId
 
   async function follow() {
     try {
-      const input = {
-        userId: userId,
-        followId: userData._id
-      }
+        const input = {
+            userId: userId,
+            followId: userData._id,
+        };
 
-      const response = await fetch("/api/follow", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(input),
-      });
-      if (!response.ok) {
-        throw new Error("Follow user failed. Try again");
-      }
-      fetchData && await fetchData();
-     // { isFollowing ? setIsFollowing(false) : setIsFollowing(true) }
+        const response = await fetch("/api/follow", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(input),
+        });
 
-      return { success: true };
+        if (!response.ok) {
+            throw new Error("Follow user failed. Try again");
+        }
+
+        if (fetchData) {
+            await fetchData();
+        }
+
+        setIsFollowing(!isFollowing);
+        return { success: true };
     } catch (error) {
-      console.error("An error occurred during the follow process", error);
-      return { success: false, error: error.message };
+        console.error("An error occurred during the follow process", error);
+        return { success: false, error: error.message };
     }
-  }
+}
+
   return (
     <>
       <div className={styles.profileMainDiv}>
@@ -89,7 +94,7 @@ const OtherUserPageLayout = async ({ userData, playlistImages, fetchData, userId
               </div>
               <div className={styles.profileFollow}>
                 <p onClick={follow}>
-                  {false ? "Following" : "Follow"}
+                  {isFollowing ? "Following" : "Follow"}
                 </p>
                 {/* <p>Message</p> */}
               </div>
