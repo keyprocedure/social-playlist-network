@@ -79,7 +79,6 @@ export default function CreatePost() {
 
               <CustomButton
                 text={isLoading ? "Creating Post..." : "Create Post"}
-                //text={"Create Post"}
                 className={"btn btn-dark post-btn"}
                 onClick={handleSubmit}
                 disabled={isLoading}
