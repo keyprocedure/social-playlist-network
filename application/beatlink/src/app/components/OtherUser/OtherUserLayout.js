@@ -1,17 +1,12 @@
-import React, { useState } from 'react'
-import styles from '../css/profile.module.scss'
-import BackButton from '../PostPage/BackButton'
-import { useRouter } from 'next/navigation'
+import React, { useState } from "react";
+import styles from "../css/profile.module.scss";
+import BackButton from "../PostPage/BackButton";
+import { useRouter } from "next/navigation";
 
-export const OtherUserPageLayout = async ({
-  userData,
-  playlistImages,
-  fetchData,
-  userId,
-}) => {
-  const user = userData.followers.includes(userId)
-  const [isFollowing, setIsFollowing] = useState(user)
-  const router = useRouter()
+const OtherUserPageLayout = ({ userData, playlistImages, fetchData, userId }) => {
+  const user = userData.followers.includes(userId);
+  const [isFollowing, setIsFollowing] = useState(user);
+  const router = useRouter();
 
   const handleImageClick = (id) => {
     router.push(`/post/${id}`);
@@ -34,9 +29,8 @@ export const OtherUserPageLayout = async ({
       if (!response.ok) {
         throw new Error("Follow user failed. Try again");
       }
-      fetchData && await fetchData();
-     // { isFollowing ? setIsFollowing(false) : setIsFollowing(true) }
-
+      fetchData && fetchData();
+      setIsFollowing(!isFollowing);
       return { success: true };
     } catch (error) {
       console.error("An error occurred during the follow process", error);
@@ -76,9 +70,7 @@ export const OtherUserPageLayout = async ({
                   <p>Posts</p>
                 </div>
                 <div>
-                  {/* <h2>{followersCount}</h2> */}
                   <h2>
-                    {" "}
                     {(userData?.followers && userData?.followers.length) || 0}
                   </h2>
                   <p>Followers</p>
@@ -92,9 +84,8 @@ export const OtherUserPageLayout = async ({
               </div>
               <div className={styles.profileFollow}>
                 <p onClick={follow}>
-                  {false ? "Following" : "Follow"}
+                  {isFollowing ? "Following" : "Follow"}
                 </p>
-                {/* <p>Message</p> */}
               </div>
             </div>
           </div>
@@ -125,4 +116,4 @@ export const OtherUserPageLayout = async ({
   )
 }
 
-export default OtherUserPageLayout;
+export default OtherUserPageLayout
