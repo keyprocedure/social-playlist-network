@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from '../css/profile.module.scss'
 import BackButton from '../PostPage/BackButton'
 import Link from 'next/link'
@@ -15,7 +15,6 @@ const ProfilePageLayout = ({ userData, playlistImages }) => {
 
   const userId = Cookies.get('userid')
 
-  useEffect(() => console.log('playlistImages:', playlistImages))
   const handleImageClick = (id) => {
     router.push(`/post/${id}`)
   }
@@ -148,7 +147,7 @@ const ProfilePageLayout = ({ userData, playlistImages }) => {
         <Modal.Body className="modal-body">
           <ListGroup>
             {getfollower.length === 0
-              ? `${title ? 'Followers' : 'Following'} Not Exist`
+              ? `No ${title ? 'Followers' : 'Following'}`
               : getfollower.map((follower, index) => (
                   <div
                     key={index}

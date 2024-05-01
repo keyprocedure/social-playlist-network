@@ -7,56 +7,34 @@ import { useRouter } from 'next/navigation.js'
 
 export default function OtherUserProfile({ params }) {
   const userId = params.id
-  const [userData, setUserData] = useState(null)
-  const [playlistImages, setPlaylistImages] = useState([])
-  const [user, setUser] = useState(null)
+  const loggedInUserId = Cookies.get('userid')
+  // const [userData, setUserData] = useState(null) // user data of the person's profile
+  // const [playlistImages, setPlaylistImages] = useState([]) // stores all post/playlist images
   const router = useRouter()
 
-  useEffect(() => {
-    const userid = Cookies.get('userid')
-    setUser(userid)
-
-    fetchData(userid).then((responseData) => {
-      setUserData(responseData.user)
-      setPlaylistImages(responseData.posts)
-    })
-  }, [userId])
+  // useEffect(() => {
+  //   fetchData(userId).then((responseData) => {
+  //     setUserData(responseData.user)
+  //     setPlaylistImages(
+  //       responseData.posts.filter((item) => {
+  //         if (item === null) {
+  //           return false
+  //         }
+  //         return true
+  //       }),
+  //     )
+  //   })
+  // }, [userId])
 
   return (
     <div>
+      {' '}
       <Navbar />
-      {userData && playlistImages ? (
-        userData?._id === user ? (
-          router.push('/profile')
-        ) : (
-          <OtherUserPageLayout
-            userData={userData}
-            playlistImages={playlistImages}
-            fetchData={fetchData}
-            userId={user}
-          />
-        )
+      {loggedInUserId === userId ? (
+        router.push('/profile')
       ) : (
-        <p>Loading...</p>
+        <OtherUserPageLayout userId={userId} loggedInUserId={loggedInUserId} />
       )}
     </div>
   )
-}
-
-const fetchData = async (userId) => {
-  try {
-    const response = await fetch('/api/getuser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId }),
-    })
-    if (response) {
-      const responseData = await response.json()
-      return responseData
-    }
-  } catch (error) {
-    console.error('Error fetching user data:', error)
-  }
 }

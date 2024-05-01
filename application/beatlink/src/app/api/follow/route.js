@@ -1,39 +1,27 @@
-import { User } from "../../../../helpers/database/models/user";
+import {
+  findUserById,
+  followUser,
+  unfollowUser,
+  doesFollowUser,
+} from '../../../../helpers/database/controllers/UserController'
 
 export async function POST(req) {
-    try {
-        const body = await req.json();
+  try {
+    const { userId, followId } = await req.json()
 
-        const user = await User.findOne({ _id: body.userId });
-        if (!user) {
-            return Response.json({ error: "User not found" }, { status: 400 });
-        }
+    const fromUser = await findUserById(userId)
 
-        const isAlreadyFollowing = user.following.includes(body.followId);
+    const isFollowing = await doesFollowUser(fromUser, followId)
 
-        if (isAlreadyFollowing) {
-            await User.updateOne(
-                { _id: body.userId },
-                { $pull: { following: body.followId } }
-            );
-            await User.updateOne(
-                { _id: body.followId },
-                { $pull: { followers: body.userId } }
-            );
-        } else {
-            await User.updateOne(
-                { _id: body.userId },
-                { $addToSet: { following: body.followId } }
-            );
-            await User.updateOne(
-                { _id: body.followId },
-                { $addToSet: { followers: body.userId } }
-            );
-        }
+    if (isFollowing) {
+      await unfollowUser(fromUser, followId)
 
-        return Response.json({ message: "successfulLy updated" }, { status: 200 });
-    } catch (e) {
-        console.log(e)
-        return Response.json({ error: e.message }, { status: 500 });
+      return Response.json({ message: 'Unfollowed User!' })
     }
+    await followUser(fromUser, followId)
+
+    return Response.json({ message: 'Followed User!' })
+  } catch (error) {
+    return Response.json({ error: error.message }, { status: 500 })
+  }
 }
