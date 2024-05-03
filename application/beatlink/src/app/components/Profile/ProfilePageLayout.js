@@ -124,9 +124,6 @@ const ProfilePageLayout = ({ userData, playlistImages }) => {
                 gridTemplateColumns: 'repeat(5,1fr)',
               }}
             >
-              <div className={styles.profilePlaylistImg}>
-                <img src="/play.png" alt="image" onClick={handleImageClick} />
-              </div>
               {playlistImages.map((post) => (
                 <div key={post.postId} className={styles.profilePlaylistImg}>
                   <img
