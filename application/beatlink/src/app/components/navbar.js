@@ -41,9 +41,7 @@ export default function Navbar() {
             </li>
           )}
           {isLoggedIn && (
-            <li>
-              <a href="/usersettings">SETTINGS</a>
-            </li>
+            <li><a href="/profile">Profile</a></li>
           )}
           <li>
             {isLoggedIn ? (

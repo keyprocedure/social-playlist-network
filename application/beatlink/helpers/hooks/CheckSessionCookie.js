@@ -1,19 +1,19 @@
 // hooks/CheckSessionCookie.js
 
 "use client";
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function CheckSessionCookie() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    if (router.pathname !== '/login' && router.pathname !== '/register') {
-      const sessionCookie = Cookies.get('userid');
+    if (router.pathname !== "/login" && router.pathname !== "/register") {
+      const sessionCookie = Cookies.get("userid");
       if (!sessionCookie) {
-        router.push('/login');
+        router.push("/login");
       } else {
         setIsLoading(false);
       }
@@ -22,4 +22,3 @@ export default function CheckSessionCookie() {
 
   return isLoading;
 }
-

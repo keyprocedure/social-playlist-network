@@ -1,120 +1,189 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from '../css/profile.module.scss'
 import BackButton from '../PostPage/BackButton'
 import Link from 'next/link'
-import apiClient from '../../../../helpers/libs/app'
 import { useRouter } from 'next/navigation'
-import { Spinner } from '@chakra-ui/react'
+import Cookies from 'js-cookie'
+import { ListGroup, Modal } from 'react-bootstrap'
+import { CustomButton } from '../CustomButton'
 
-const ProfilePageLayout = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [userData, setUserData] = useState(null)
+const ProfilePageLayout = ({ userData, playlistImages }) => {
+  const [title, seTitle] = useState(false)
+  const [getfollower, setGetfollower] = useState([])
+  const [show, setShow] = useState(false)
   const router = useRouter()
 
-  const userId = '661b473939b29ce703b92d93'
+  const userId = Cookies.get('userid')
 
-  const getData = async () => {
-    try {
-      const response = await apiClient.post('/getuser', { userId })
-      console.log('data of all', response)
-      setUserData(response)
-      setIsLoading(false)
-    } catch (error) {
-      console.error('Error fetching user data:', error)
-    }
+  const handleImageClick = (id) => {
+    router.push(`/post/${id}`)
   }
 
-  useEffect(() => {
-    getData()
-  }, [])
+  async function followData(get) {
+    try {
+      const follow = get ? 'followers' : 'following'
 
-  const handleImageClick = () => {
-    router.push('/post/jfjhasfbhasbf')
+      get ? seTitle(true) : seTitle(false)
+
+      const input = {
+        follow,
+        userId,
+      }
+      const response = await fetch('/api/following-followers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(input),
+      })
+      if (response) {
+        const responseData = await response.json()
+        setGetfollower(responseData)
+        setShow(true)
+      }
+    } catch (error) {
+      console.error('An error occurred during the follow process', error)
+      return { success: false, error: error.message }
+    }
   }
 
   return (
     <>
-      {isLoading ? (
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      ) : (
-        <div className={styles.profileMainDiv}>
-          <div className={styles.profileContainer}>
-            <div
-              className="back-button"
-              style={{ justifyContent: 'flex-start' }}
-            >
-              <BackButton width={'40px'} height={'40px'} />
-            </div>
+      <div className={styles.profileMainDiv}>
+        <div className={styles.profileContainer}>
+          <div className="back-button" style={{ justifyContent: 'flex-start' }}>
+            <BackButton width={'40px'} height={'40px'} />
+          </div>
 
-            <div className={styles.profileTopMain}>
-              <div className={styles.profileLeftMain}>
-                {userData && (
-                  <div className={styles.profileTopLeft}>
-                    <div className={styles.profileTopLeftImg}>
+          <div className={styles.profileTopMain}>
+            <div className={styles.profileLeftMain}>
+              {userData && (
+                <div className={styles.profileTopLeft}>
+                  <div className={styles.profileTopLeftImg}>
+                    {/* <img src={userData?.userImage} alt="PROFILE" /> */}
+                    {userData.userImage ? (
                       <img src={userData.userImage} alt="PROFILE" />
-                    </div>
-                    <div className={styles.profileTopLeftText}>
-                      <h2>{userData.username}</h2>
-                      <p>{userData.email}</p>
-                    </div>
+                    ) : (
+                      <img src="/default.jpg" alt="Default Profile" />
+                    )}
                   </div>
-                )}
-                <div style={{ width: '50%' }}>
-                  This is a simple generator that you can use to make fonts for
-                  Instagram. Simply put your normal text in the first box and
-                  fonts for Instagram bio/captions/etc.
-                </div>
-              </div>
-              <div className={styles.profileTopRightMain}>
-                <div className={styles.profileTopRight}>
-                  <div>
-                    <h2>
-                      {(userData.playlists && userData.playlists.length) || 0}
-                    </h2>
-                    <p>Posts</p>
-                  </div>
-                  <div>
-                    <h2>
-                      {(userData.followers && userData.followers.length) || 0}
-                    </h2>
-                    <p>Followers</p>
-                  </div>
-                  <div>
-                    <h2>
-                      {(userData.following && userData.following.length) || 0}
-                    </h2>
-                    <p>Following</p>
+                  <div className={styles.profileTopLeftText}>
+                    <h2>{userData?.username}</h2>
+                    <p>{userData?.email}</p>
                   </div>
                 </div>
-                <div className={styles.profileFollow}>
-                  <div className={styles.profileCenterOpt}>
-                    <Link href="">
-                      <p>Edit Profile</p>
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              )}
+              <div style={{ width: '50%' }}>{userData?.bio}</div>
+              <div style={{ width: '50%' }}>{userData?.status}</div>
             </div>
-            <div className={styles.profileCenterMain}></div>
-            <div className={styles.profileBottomMain}>
-              <div
-                className={styles.profileImagesPlay}
-                style={{ display: 'flex', gap: '10px' }}
-              >
-                <div className={styles.profilePlaylistImg}>
-                  <img src="/play.png" alt="image" onClick={handleImageClick} />
+            <div className={styles.profileTopRightMain}>
+              <div className={styles.profileTopRight}>
+                <div>
+                  <h2>{(playlistImages && playlistImages?.length) || 0}</h2>
+                  <p>Posts</p>
+                </div>
+                <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    followData(true)
+                  }}
+                >
+                  <h2>
+                    {(userData?.followers && userData?.followers.length) || 0}
+                  </h2>
+                  <p>Followers</p>
+                </div>
+                <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    followData(false)
+                  }}
+                >
+                  <h2>
+                    {(userData?.following && userData?.following.length) || 0}
+                  </h2>
+                  <p>Following</p>
+                </div>
+              </div>
+              <div className={styles.profileFollow}>
+                <div className={styles.profileCenterOpt}>
+                  <Link href="/usersettings">
+                    <p>Edit Profile</p>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
+          <div className={styles.profileCenterMain}></div>
+          <div className={styles.profileBottomMain}>
+            <div
+              className={styles.profileImagesPlay}
+              style={{
+                display: 'grid',
+                gap: '10px',
+                gridTemplateColumns: 'repeat(5,1fr)',
+              }}
+            >
+              {playlistImages.map((post) => (
+                <div key={post.postId} className={styles.profilePlaylistImg}>
+                  <img
+                    src={post.image}
+                    alt={`Playlist ${post.postId}`}
+                    onClick={() => handleImageClick(post.postId)}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      )}
+      </div>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{title ? 'Followers' : 'Following'}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modal-body">
+          <ListGroup>
+            {getfollower.length === 0
+              ? `No ${title ? 'Followers' : 'Following'}`
+              : getfollower.map((follower, index) => (
+                  <div
+                    key={index}
+                    onClick={() => router.push(`/otheruser/${follower?._id}`)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <ListGroup.Item>
+                      {follower.userImage ? (
+                        <img
+                          src={follower.userImage}
+                          alt="PROFILE"
+                          style={{
+                            width: '30px',
+                            height: '30px',
+                            marginRight: '1%',
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src="/default.jpg"
+                          alt="Default Profile"
+                          style={{
+                            width: '30px',
+                            height: '30px',
+                            marginRight: '1%',
+                          }}
+                        />
+                      )}
+
+                      {follower.username}
+                    </ListGroup.Item>
+                  </div>
+                ))}
+          </ListGroup>
+        </Modal.Body>
+        <Modal.Footer>
+          <CustomButton text={'Close'} onClick={() => setShow(false)} />
+        </Modal.Footer>
+      </Modal>
     </>
   )
 }

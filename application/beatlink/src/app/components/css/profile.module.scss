@@ -105,10 +105,11 @@
   }
 }
 .profilePlaylistImg {
-  max-width: 250px;
-  height: 250px;
+  max-width: 200px;
+  height: 200px;
   position: relative;
   cursor: pointer;
+  border-radius: 12px;
   transition: transform 1s ease-in-out;
   overflow: hidden;
   margin: 10px;
