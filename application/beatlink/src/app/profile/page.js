@@ -15,7 +15,6 @@ export default function ProfilePage() {
   useEffect(() => {
     getData(userId).then((responseData) => {
       setUserData(responseData.user)
-      console.log("00000000", responseData);
       setPlaylistImages(
         responseData.posts.filter((item) => {
           if (item === null) {
