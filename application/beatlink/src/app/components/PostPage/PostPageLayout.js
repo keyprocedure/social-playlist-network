@@ -45,11 +45,13 @@ export default function PostPageLayout({ playlist, post, author, user }) {
         <div className="post-area">
           <div className="post-title">
             {post.postTitle}
-            <CustomButton
-              className={'btn btn-dark follow-btn'}
-              text={follow}
-              onClick={handleFollow}
-            />
+            {author._id !== user._id && (
+              <CustomButton
+                className={'btn btn-dark follow-btn'}
+                text={follow}
+                onClick={handleFollow}
+              />
+            )}
           </div>
           <div className="post-content">
             <PostImage playlist={playlist} />

@@ -1,14 +1,21 @@
-'use client'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { CustomInput } from "./CustomInput";
+import { CustomButton } from "./CustomButton.js";
+import CustomAlert from "./CustomAlert";
+import "../components/css/CreatePostLayout.css";
+
+import Cookies from "js-cookie";
 
 export default function CreatePost() {
-  const router = useRouter()
-  const [postTitle, setPostTitle] = useState('')
-  const [spotifyLink, setSpotifyLink] = useState('')
-  const [error, setError] = useState('')
+  const router = useRouter();
+  const [postTitle, setPostTitle] = useState("");
+  const [spotifyLink, setSpotifyLink] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const userId = '6616e868a3e695cd57e3a223' // hard-coded values for now since our app can't distinguish who's logged in yet
+  const userId = Cookies.get("userid");
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -23,6 +30,8 @@ export default function CreatePost() {
 
     const playlistId = spotifyLink.split('/playlist/')[1].split('?')[0]
 
+    setIsLoading(true);
+
     const response = await CreatePostApi(
       postTitle,
       spotifyLink,
@@ -35,43 +44,52 @@ export default function CreatePost() {
     } else {
       setError(response.error || 'Creating Post failed. Try again.')
     }
-  }
+
+    setIsLoading(false);
+  };
 
   return (
     <>
-      <div
-        style={{
-          margin: '20px',
-          backgroundColor: 'rgba(255, 255, 255, .75)',
-          padding: '20px',
-          textAlign: 'center',
-        }}
-      >
-        <form onSubmit={handleSubmit}>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <div>
-            <label htmlFor="postTitle">Title: </label>
-            <input
-              type="text"
-              id="postTitle"
-              value={postTitle}
-              onChange={(e) => setPostTitle(e.target.value)}
-            />
+      <div className="post-grid-container">
+        <div className="post-title d-flex justify-content-center align-items-start">
+          <h1>Create Post</h1>
+        </div>
+        <div className="post-form d-flex justify-content-center">
+          <div className="form-container">
+            <div className="d-flex flex-column">
+              <div className="input-group mb-3">
+                <CustomInput
+                  type={"text"}
+                  placeholderText={"Post Title"}
+                  className={"form-control"}
+                  value={postTitle}
+                  onChange={(e) => setPostTitle(e.target.value)}
+                ></CustomInput>
+              </div>
+
+              <div className="input-group mb-3">
+                <CustomInput
+                  type={"url"}
+                  placeholderText={"Spotify Playlist Link"}
+                  className={"form-control"}
+                  value={spotifyLink}
+                  onChange={(e) => setSpotifyLink(e.target.value)}
+                ></CustomInput>
+              </div>
+
+              <CustomButton
+                text={isLoading ? "Creating Post..." : "Create Post"}
+                className={"btn btn-dark post-btn"}
+                onClick={handleSubmit}
+                disabled={isLoading}
+              ></CustomButton>
+
+              {error && (
+                <CustomAlert text={error} type={"danger"} className={"mt-3"} />
+              )}
+            </div>
           </div>
-          <br />
-          <div>
-            <label htmlFor="spotifyLink">Spotify Link: </label>
-            <input
-              type="url"
-              id="spotifyLink"
-              value={spotifyLink}
-              onChange={(e) => setSpotifyLink(e.target.value)}
-            />
-          </div>
-          <br />
-          <br />
-          <button type="submit">Create Post</button>
-        </form>
+        </div>
       </div>
     </>
   )
@@ -95,7 +113,8 @@ async function CreatePostApi(postTitle, spotifyLink, userId, playlistId) {
     const data = await response.json()
 
     if (!response.ok) {
-      throw new Error('Create Post failed. Try again')
+      const errorMessage = data.error;
+      throw new Error(errorMessage);
     }
 
     return { success: true, data }
