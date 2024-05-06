@@ -32,8 +32,6 @@ describe('CreatePost Component', () => {
     const linkInput = getByPlaceholderText('Spotify Playlist Link');
     const createButton = getByRole('button', { name: 'Create Post' });
     
-
-
     fireEvent.change(titleInput, { target: { value: 'My New Post' } });
     fireEvent.change(linkInput, { target: { value: 'https://open.spotify.com/playlist/123456' } });
     fireEvent.click(createButton);
@@ -51,6 +49,5 @@ describe('CreatePost Component', () => {
         playlistId: '123456',
       }),
     });
-    
   });
 });
