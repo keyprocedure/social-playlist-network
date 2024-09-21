@@ -11,9 +11,9 @@
 ## Team Information  
 | Student Name       | 
 |--------------------|
-| Zuby Afzal         |       
-| Anna Felipe        |
-| Guillermo Alcantara|
-| Warisha Vahidy     |
-| Anthony Benjamin   |
-| Yash Bhadiyadra    |
+| Zuby A.            |       
+| Anthony B.         |
+| Anna F.            |
+| Guillermo A.       |
+| Warisha V.         |
+| Yash B.            |
