@@ -8,12 +8,13 @@
 - **Playlist Sharing**: Allows others to import your playlists into their music services.
 
 
-## Team Information  
-| Student Name       | 
-|--------------------|
-| Zuby A.            |       
-| Anthony B.         |
-| Anna F.            |
-| Guillermo A.       |
-| Warisha V.         |
-| Yash B.            |
+## Team Members
+
+<table>
+  <tr><td>Zuby A.</td></tr>
+  <tr><td>Anthony B.</td></tr>
+  <tr><td>Anna F.</td></tr>
+  <tr><td>Guillermo A.</td></tr>
+  <tr><td>Warisha V.</td></tr>
+  <tr><td>Yash B.</td></tr>
+</table>
