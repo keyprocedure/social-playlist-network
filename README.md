@@ -27,6 +27,12 @@ Featuring AI-powered music recommendations, social interaction, and playlist cro
 
 ---
 
+## Hosting Status
+
+This project is not currently deployed.  
+
+---
+
 ## Development Highlights
 
 - Co-developed an application integrating Spotify and OpenAI APIs for personalized playlist recommendations  
