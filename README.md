@@ -5,6 +5,14 @@ Featuring AI-powered music recommendations, social interaction, and playlist cro
 
 ---
 
+## UI Preview
+
+User profile page with imported playlists from Spotify:
+
+![Homepage Screenshot](images/homepage.png)
+
+---
+
 ## Key Features
 
 - Import playlists from Spotify
