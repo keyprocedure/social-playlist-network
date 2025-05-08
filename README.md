@@ -1,6 +1,7 @@
 # Social Playlist Network
 
-A full-stack web app that allows users to import, share, and discover playlists from Spotify. Featuring AI-powered music recommendations, social interaction, and playlist cross-sharing.
+A full-stack web app that allows users to import, share, and discover playlists from Spotify.  
+Featuring AI-powered music recommendations, social interaction, and playlist cross-sharing.
 
 ---
 
